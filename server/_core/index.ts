@@ -8,6 +8,7 @@ import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { webhookRouter } from "../webhook";
+import { getDb } from "../db";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -29,6 +30,10 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 }
 
 async function startServer() {
+  // Inicializa o banco ANTES de receber requests (roda DDL/migrations)
+  await getDb();
+  console.log("[Startup] Banco inicializado");
+
   const app = express();
   const server = createServer(app);
   // Configure body parser with larger size limit for file uploads

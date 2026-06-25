@@ -1,0 +1,9 @@
+{
+  "query": "INSERT INTO authorized_emails (email, name, productName, isActive, addedBy, createdAt, updatedAt) VALUES ('teste@teste.com', 'Usuário Teste', 'Frequência de Deus', 1, 'manual', NOW(), NOW()) ON DUPLICATE KEY UPDATE isActive = 1;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4Wm2YyB2yUU8RrY.115a92b1427d --database 95MGNYzvAba8QbdACWzwHX --execute INSERT INTO authorized_emails (email, name, productName, isActive, addedBy, createdAt, updatedAt) VALUES ('teste@teste.com', 'Usuário Teste', 'Frequência de Deus', 1, 'manual', NOW(), NOW()) ON DUPLICATE KEY UPDATE isActive = 1;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1398
+}

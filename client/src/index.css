@@ -1,0 +1,986 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Custom Gold Colors */
+  --color-gold: oklch(0.75 0.12 85);
+  --color-gold-light: oklch(0.82 0.14 85);
+  --color-gold-dark: oklch(0.65 0.10 85);
+}
+
+:root {
+  /* ===== O CÓDICE — paleta dossiê/despertar (v2: BUNKER / preto absoluto) ===== */
+  --cdc-gold: #c0922f;
+  --cdc-gold2: #d4a93f;
+  --cdc-red: #b81d13;
+  --cdc-ink: #000000;        /* preto ABSOLUTO (v2) */
+  --cdc-ink-soft: #070605;   /* legado: quase-preto p/ painéis muito sutis */
+  --cdc-panel: #0a0805;
+  --cdc-line: #241d12;
+  --cdc-line-dim: #1a150c;
+  --cdc-txt: #c7bca0;
+  --cdc-white: #f4efe4;
+  --cdc-dim: #6f6147;
+
+  /* Gold Theme (legado) */
+  --gold: #C5A059;
+  --gold-light: #D4AF37;
+  --gold-dark: #AA8A39;
+  --off-black: #050505;
+  --off-white: #EAEAEA;
+  --blood-red: #8B0000;
+  
+  --primary: oklch(0.75 0.12 85);
+  --primary-foreground: oklch(0.1 0 0);
+  --sidebar-primary: oklch(0.75 0.12 85);
+  --sidebar-primary-foreground: oklch(0.1 0 0);
+  --chart-1: oklch(0.75 0.12 85);
+  --chart-2: oklch(0.70 0.11 85);
+  --chart-3: oklch(0.65 0.10 85);
+  --chart-4: oklch(0.60 0.09 85);
+  --chart-5: oklch(0.55 0.08 85);
+  --radius: 0.5rem;
+  --background: oklch(0.05 0 0);
+  --foreground: oklch(0.92 0 0);
+  --card: oklch(0.08 0 0);
+  --card-foreground: oklch(0.92 0 0);
+  --popover: oklch(0.08 0 0);
+  --popover-foreground: oklch(0.92 0 0);
+  --secondary: oklch(0.15 0 0);
+  --secondary-foreground: oklch(0.92 0 0);
+  --muted: oklch(0.2 0 0);
+  --muted-foreground: oklch(0.6 0 0);
+  --accent: oklch(0.75 0.12 85);
+  --accent-foreground: oklch(0.05 0 0);
+  --destructive: oklch(0.45 0.2 25);
+  --destructive-foreground: oklch(0.92 0 0);
+  --border: oklch(0.25 0.02 85);
+  --input: oklch(0.15 0 0);
+  --ring: oklch(0.75 0.12 85);
+  --sidebar: oklch(0.08 0 0);
+  --sidebar-foreground: oklch(0.92 0 0);
+  --sidebar-accent: oklch(0.15 0 0);
+  --sidebar-accent-foreground: oklch(0.92 0 0);
+  --sidebar-border: oklch(0.25 0.02 85);
+  --sidebar-ring: oklch(0.75 0.12 85);
+}
+
+.dark {
+  --primary: oklch(0.75 0.12 85);
+  --primary-foreground: oklch(0.1 0 0);
+  --sidebar-primary: oklch(0.75 0.12 85);
+  --sidebar-primary-foreground: oklch(0.1 0 0);
+  --background: oklch(0.05 0 0);
+  --foreground: oklch(0.92 0 0);
+  --card: oklch(0.08 0 0);
+  --card-foreground: oklch(0.92 0 0);
+  --popover: oklch(0.08 0 0);
+  --popover-foreground: oklch(0.92 0 0);
+  --secondary: oklch(0.15 0 0);
+  --secondary-foreground: oklch(0.92 0 0);
+  --muted: oklch(0.2 0 0);
+  --muted-foreground: oklch(0.6 0 0);
+  --accent: oklch(0.75 0.12 85);
+  --accent-foreground: oklch(0.05 0 0);
+  --destructive: oklch(0.45 0.2 25);
+  --destructive-foreground: oklch(0.92 0 0);
+  --border: oklch(0.25 0.02 85);
+  --input: oklch(0.15 0 0);
+  --ring: oklch(0.75 0.12 85);
+  --chart-1: oklch(0.75 0.12 85);
+  --chart-2: oklch(0.70 0.11 85);
+  --chart-3: oklch(0.65 0.10 85);
+  --chart-4: oklch(0.60 0.09 85);
+  --chart-5: oklch(0.55 0.08 85);
+  --sidebar: oklch(0.08 0 0);
+  --sidebar-foreground: oklch(0.92 0 0);
+  --sidebar-accent: oklch(0.15 0 0);
+  --sidebar-accent-foreground: oklch(0.92 0 0);
+  --sidebar-border: oklch(0.25 0.02 85);
+  --sidebar-ring: oklch(0.75 0.12 85);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    background: var(--cdc-ink);
+    color: var(--cdc-txt);
+    font-family: 'PT Serif', Georgia, serif;
+    line-height: 1.5;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+  
+  /* Gold Gradient Text */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #D4AF37 0%, #C5A059 50%, #AA8A39 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Gold Glow Effect */
+  .gold-glow {
+    text-shadow: 0 0 20px rgba(197, 160, 89, 0.5), 0 0 40px rgba(197, 160, 89, 0.3);
+  }
+  
+  /* Gold Button */
+  .btn-gold {
+    background: linear-gradient(135deg, #D4AF37 0%, #C5A059 50%, #AA8A39 100%);
+    color: #050505;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-gold:hover {
+    background: linear-gradient(135deg, #E5C048 0%, #D6B16A 50%, #BB9B4A 100%);
+    box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+  }
+  
+  /* Card with gold border */
+  .card-gold {
+    border: 1px solid #333333;
+    background: rgba(8, 8, 8, 0.8);
+    backdrop-filter: blur(10px);
+  }
+  
+  .card-gold:hover {
+    border-color: #C5A059;
+  }
+  
+  /* Audio Player Custom Styles */
+  .audio-player {
+    background: linear-gradient(135deg, #0a0a0a 0%, #151515 100%);
+    border: 1px solid #C5A059;
+    border-radius: 50px;
+  }
+  
+  .audio-player::-webkit-slider-thumb {
+    background: #C5A059;
+  }
+  
+  .audio-player::-webkit-slider-runnable-track {
+    background: linear-gradient(90deg, #C5A059 0%, #333 100%);
+  }
+}
+
+/* =========================================================================
+ * O CÓDICE DO DESPERTAR — design dossiê/despertar (do protótipo).
+ * Mobile-first, max-width 430px central, textura sutil, cantos de pasta.
+ * ========================================================================= */
+
+.cdc-phone {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  background:
+    radial-gradient(120% 55% at 50% 0%, rgba(192, 146, 47, 0.05), transparent 62%),
+    var(--cdc-ink);
+  padding-bottom: 78px;
+  overflow: hidden;
+}
+.cdc-phone::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  max-width: 430px;
+  margin: 0 auto;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cdc-screen {
+  position: relative;
+  z-index: 1;
+  padding: 24px 20px 80px;
+  animation: cdc-fade 0.35s ease;
+}
+@keyframes cdc-fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* topo / marca */
+.cdc-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+.cdc-logo {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: 0.18em;
+  color: var(--cdc-gold2);
+  text-transform: uppercase;
+}
+.cdc-logo span { color: var(--cdc-dim); font-weight: 600; }
+.cdc-eye {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--cdc-line);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cdc-gold);
+  font-size: 15px;
+}
+
+.cdc-kicker {
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--cdc-dim);
+  margin-bottom: 8px;
+}
+.cdc-h {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1.1;
+  color: var(--cdc-white);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.cdc-h .g { color: var(--cdc-gold2); }
+
+/* dossiê/arquivo card */
+.cdc-file {
+  position: relative;
+  background: linear-gradient(180deg, #151009, #0e0b07);
+  border: 1px solid var(--cdc-line);
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+.cdc-file::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(135deg, var(--cdc-gold) 50%, transparent 50%);
+  opacity: 0.16;
+}
+.cdc-stamp {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--cdc-red);
+  border: 1px solid var(--cdc-red);
+  border-radius: 3px;
+  padding: 3px 7px;
+  text-transform: uppercase;
+  transform: rotate(4deg);
+  opacity: 0.8;
+}
+
+/* HERO progress ring */
+.cdc-daywrap { text-align: center; padding: 8px 0 14px; }
+.cdc-ring { width: 188px; height: 188px; margin: 0 auto 14px; position: relative; }
+.cdc-ring svg { transform: rotate(-90deg); }
+.cdc-ring .num {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.cdc-ring .num b {
+  font-family: 'Cinzel', serif;
+  font-size: 52px;
+  color: var(--cdc-gold2);
+  line-height: 1;
+}
+.cdc-ring .num small {
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.18em;
+  font-size: 12px;
+  color: var(--cdc-dim);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.cdc-phase {
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cdc-gold);
+  margin-bottom: 2px;
+}
+.cdc-streak {
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px;
+  color: var(--cdc-txt);
+  margin-top: 4px;
+}
+.cdc-streak b { color: var(--cdc-gold2); }
+
+/* missão hoje */
+.cdc-today {
+  background: linear-gradient(180deg, #17110a, #0d0a07);
+  border: 1px solid var(--cdc-gold);
+  border-radius: 6px;
+  padding: 20px;
+  margin: 16px 0 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(212, 169, 63, 0.2);
+}
+.cdc-today .lab {
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--cdc-gold);
+  margin-bottom: 8px;
+}
+.cdc-today h3 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--cdc-white);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+.cdc-today p { font-size: 15px; color: var(--cdc-txt); margin-bottom: 16px; }
+
+.cdc-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(180deg, #d4a93f, #b8841f);
+  color: #1a1408;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(192, 146, 47, 0.35);
+}
+.cdc-btn:active { filter: brightness(1.1); }
+.cdc-btn:disabled { opacity: 0.6; cursor: default; }
+.cdc-btn.ghost {
+  background: transparent;
+  border: 1px solid var(--cdc-line);
+  color: var(--cdc-gold2);
+  box-shadow: none;
+}
+
+/* 3 chaves */
+.cdc-keys {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin: 14px 0;
+}
+.cdc-key {
+  background: var(--cdc-panel);
+  border: 1px solid var(--cdc-line);
+  border-radius: 5px;
+  padding: 14px 8px;
+  text-align: center;
+}
+.cdc-key .ic { font-size: 22px; margin-bottom: 6px; }
+.cdc-key b {
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cdc-white);
+}
+.cdc-key small {
+  font-size: 10px;
+  color: var(--cdc-dim);
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.04em;
+}
+.cdc-key .bar {
+  height: 3px;
+  background: var(--cdc-line);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.cdc-key .bar i { display: block; height: 100%; background: var(--cdc-gold); }
+
+/* timeline 30 dias */
+.cdc-tl {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 7px;
+  margin: 6px 0 18px;
+}
+.cdc-dot {
+  aspect-ratio: 1;
+  border-radius: 5px;
+  border: 1px solid var(--cdc-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  color: var(--cdc-dim);
+  background: #0c0a07;
+}
+.cdc-dot.done {
+  background: linear-gradient(180deg, #3a2c12, #241a0c);
+  border-color: var(--cdc-gold);
+  color: var(--cdc-gold2);
+}
+.cdc-dot.now {
+  border-color: var(--cdc-gold2);
+  color: var(--cdc-white);
+  box-shadow: 0 0 0 2px rgba(212, 169, 63, 0.25);
+  animation: cdc-pulse 2s infinite;
+}
+@keyframes cdc-pulse {
+  50% { box-shadow: 0 0 0 5px rgba(212, 169, 63, 0.08); }
+}
+
+/* leitura */
+.cdc-chapnum {
+  font-family: 'Cinzel', serif;
+  color: var(--cdc-dim);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.cdc-chaptitle {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 23px;
+  color: var(--cdc-white);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 18px;
+  line-height: 1.1;
+}
+.cdc-read { font-size: 16px; line-height: 1.7; color: #d3c9b2; }
+.cdc-read .drop {
+  float: left;
+  font-family: 'Cinzel', serif;
+  font-size: 52px;
+  line-height: 0.8;
+  color: var(--cdc-gold2);
+  margin: 4px 10px 0 0;
+}
+.cdc-read p { margin-bottom: 14px; }
+.cdc-read b { color: var(--cdc-white); }
+.cdc-audiobar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--cdc-panel);
+  border: 1px solid var(--cdc-line);
+  border-radius: 40px;
+  padding: 10px 16px;
+  margin: 18px 0;
+}
+.cdc-audiobar .pl {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #d4a93f, #b8841f);
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a1408;
+  font-size: 14px;
+}
+.cdc-audiobar .pr {
+  flex: 1;
+  height: 3px;
+  background: var(--cdc-line);
+  border-radius: 2px;
+  position: relative;
+}
+.cdc-audiobar .pr i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 32%;
+  background: var(--cdc-gold);
+  border-radius: 2px;
+}
+.cdc-audiobar small { font-family: 'Oswald', sans-serif; font-size: 11px; color: var(--cdc-dim); }
+
+/* sinais */
+.cdc-signal {
+  background: var(--cdc-panel);
+  border: 1px solid var(--cdc-line);
+  border-left: 3px solid var(--cdc-gold);
+  border-radius: 5px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.cdc-signal .meta {
+  font-family: 'Oswald', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cdc-red);
+  margin-bottom: 7px;
+  display: flex;
+  justify-content: space-between;
+}
+.cdc-signal .meta span { color: var(--cdc-dim); }
+.cdc-signal h4 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--cdc-white);
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+.cdc-signal p { font-size: 14px; color: var(--cdc-txt); }
+.cdc-signal .react {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  color: var(--cdc-dim);
+}
+.cdc-signal .react b { color: var(--cdc-gold2); }
+
+/* provas */
+.cdc-prova {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: var(--cdc-panel);
+  border: 1px solid var(--cdc-line);
+  border-radius: 5px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.cdc-prova .ic {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--cdc-gold);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cdc-gold2);
+  flex: none;
+  font-size: 18px;
+}
+.cdc-prova b {
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+  color: var(--cdc-white);
+  text-transform: uppercase;
+}
+.cdc-prova small { font-size: 12px; color: var(--cdc-dim); }
+.cdc-prova .lock { margin-left: auto; color: var(--cdc-dim); font-size: 14px; }
+
+.cdc-back {
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cdc-gold);
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 14px;
+  padding: 0;
+}
+
+/* tabbar — SEMPRE fixa no rodapé (corrigido do protótipo) */
+.cdc-tabs {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 430px;
+  margin: 0 auto;
+  background: rgba(8, 7, 5, 0.94);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--cdc-line);
+  display: flex;
+  z-index: 20;
+}
+.cdc-tab {
+  flex: 1;
+  text-align: center;
+  padding: 11px 0 13px;
+  cursor: pointer;
+  color: var(--cdc-dim);
+  font-family: 'Oswald', sans-serif;
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+}
+.cdc-tab .ic { display: block; font-size: 19px; margin-bottom: 3px; filter: grayscale(1) opacity(0.6); }
+.cdc-tab.active { color: var(--cdc-gold2); }
+.cdc-tab.active .ic { filter: none; }
+
+.cdc-note {
+  text-align: center;
+  font-size: 11px;
+  color: var(--cdc-dim);
+  font-style: italic;
+  padding: 18px 10px 6px;
+}
+
+/* =========================================================================
+ * ███  DESIGN SYSTEM v2 — "BUNKER / DOSSIÊ VIVO"  ███
+ * Front-end-spec-v2: preto absoluto, dourado com parcimônia, vermelho só
+ * alerta, tipografia imponente, cantos retos, linhas finas, respiro grande.
+ * Brasa (partículas douradas subindo) + grão sutil. Classes .cdc-* prontas
+ * pra Wave 2 (botão-arquivo, selo 𓂀, divisor, título). NÃO altera o legado.
+ * ========================================================================= */
+
+/* ---- Container bunker full-bleed (preto absoluto, grão + brasa) ---- */
+.cdc-v2 {
+  position: relative;
+  min-height: 100vh;
+  background: #000;
+  color: var(--cdc-txt);
+  font-family: 'PT Serif', Georgia, serif;
+  overflow: hidden;
+  isolation: isolate;
+}
+/* topo: respiro radial dourado MUITO sutil (profundidade sem cor) */
+.cdc-v2::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(110% 50% at 50% 0%, rgba(192, 146, 47, 0.05), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+/* grão sutil sobre tudo (radial dots) */
+.cdc-v2::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+}
+.cdc-v2 > * { position: relative; z-index: 1; }
+
+/* ---- BRASA: partículas douradas subindo (CSS leve, sem JS) ---- */
+.cdc-embers {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.cdc-ember {
+  position: absolute;
+  bottom: -12px;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: var(--cdc-gold2);
+  opacity: 0;
+  box-shadow: 0 0 6px 1px rgba(212, 169, 63, 0.5);
+  animation: cdc-rise linear infinite;
+}
+@keyframes cdc-rise {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.7; }
+  85% { opacity: 0.45; }
+  100% { transform: translateY(-104vh) translateX(14px); opacity: 0; }
+}
+/* 12 brasas — posições/tempos determinísticos (Wave 2 só renderiza .cdc-ember) */
+.cdc-ember:nth-child(1)  { left: 8%;  animation-duration: 11s; animation-delay: 0s;   }
+.cdc-ember:nth-child(2)  { left: 18%; animation-duration: 14s; animation-delay: 2s;   width: 3px; height: 3px; }
+.cdc-ember:nth-child(3)  { left: 27%; animation-duration: 9s;  animation-delay: 1.5s; }
+.cdc-ember:nth-child(4)  { left: 36%; animation-duration: 13s; animation-delay: 4s;   }
+.cdc-ember:nth-child(5)  { left: 45%; animation-duration: 16s; animation-delay: 0.8s; }
+.cdc-ember:nth-child(6)  { left: 53%; animation-duration: 10s; animation-delay: 3s;   width: 3px; height: 3px; }
+.cdc-ember:nth-child(7)  { left: 62%; animation-duration: 12s; animation-delay: 5s;   }
+.cdc-ember:nth-child(8)  { left: 70%; animation-duration: 15s; animation-delay: 1s;   }
+.cdc-ember:nth-child(9)  { left: 78%; animation-duration: 9.5s;animation-delay: 6s;   }
+.cdc-ember:nth-child(10) { left: 85%; animation-duration: 13.5s;animation-delay: 2.5s; width: 3px; height: 3px; }
+.cdc-ember:nth-child(11) { left: 92%; animation-duration: 11.5s;animation-delay: 4.5s; }
+.cdc-ember:nth-child(12) { left: 97%; animation-duration: 14.5s;animation-delay: 7s;  }
+@media (prefers-reduced-motion: reduce) {
+  .cdc-ember { animation: none; opacity: 0.18; }
+}
+
+/* ---- TIPOGRAFIA imponente ---- */
+.cdc-title {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: clamp(30px, 9vw, 46px);
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--cdc-white);
+}
+.cdc-title .g { color: var(--cdc-gold2); }
+.cdc-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--cdc-dim);
+}
+.cdc-numeral {
+  font-family: 'Cinzel', serif;
+  color: var(--cdc-gold2);
+  letter-spacing: 0.06em;
+}
+.cdc-body { font-family: 'PT Serif', Georgia, serif; color: var(--cdc-txt); line-height: 1.7; }
+
+/* ---- SELO 𓂀 (olho de Hórus) ---- */
+.cdc-seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--cdc-line);
+  color: var(--cdc-gold2);
+  font-size: 20px;
+  line-height: 1;
+}
+.cdc-seal--pulse { animation: cdc-seal-pulse 2.6s ease-in-out infinite; }
+@keyframes cdc-seal-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 169, 63, 0.18); border-color: var(--cdc-line); }
+  50% { box-shadow: 0 0 0 4px rgba(212, 169, 63, 0.05); border-color: var(--cdc-gold); }
+}
+/* carimbo "intransferível / confidencial" */
+.cdc-mark {
+  display: inline-block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cdc-red);
+  border: 1px solid var(--cdc-red);
+  padding: 3px 8px;
+  transform: rotate(-3deg);
+  opacity: 0.85;
+}
+
+/* ---- DIVISOR fino dourado ---- */
+.cdc-divider {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cdc-line) 12%, var(--cdc-line) 88%, transparent);
+  margin: 28px 0;
+}
+.cdc-divider--gold {
+  background: linear-gradient(90deg, transparent, var(--cdc-gold) 50%, transparent);
+  opacity: 0.5;
+}
+
+/* ---- BOTÃO-ARQUIVO (opção do quiz / ação): linha fina, canto reto ---- */
+.cdc-archive-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid var(--cdc-line);
+  color: var(--cdc-txt);
+  font-family: 'PT Serif', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.4;
+  padding: 16px 18px;
+  margin: 0 0 12px;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+.cdc-archive-btn:hover { border-color: var(--cdc-gold); color: var(--cdc-white); }
+.cdc-archive-btn.is-selected {
+  border-color: var(--cdc-gold2);
+  background: linear-gradient(180deg, rgba(192, 146, 47, 0.12), rgba(192, 146, 47, 0.04));
+  color: var(--cdc-white);
+  box-shadow: inset 0 0 0 1px rgba(212, 169, 63, 0.25);
+}
+/* marcação de dossiê (checkbox multi-seleção Q5) */
+.cdc-archive-btn.is-checkbox { padding-left: 46px; position: relative; }
+.cdc-archive-btn.is-checkbox::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--cdc-line);
+}
+.cdc-archive-btn.is-checkbox.is-selected::before {
+  border-color: var(--cdc-gold2);
+  background: var(--cdc-gold2);
+  box-shadow: inset 0 0 0 2px #000;
+}
+
+/* ---- BOTÃO primário "selar" (ação ritual, canto reto) ---- */
+.cdc-action {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(180deg, #d4a93f, #b8841f);
+  color: #120d04;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 16px;
+  border: none;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+.cdc-action:hover { filter: brightness(1.08); }
+.cdc-action:active { filter: brightness(0.95); }
+.cdc-action:disabled { opacity: 0.45; cursor: default; }
+.cdc-action--ghost {
+  background: transparent;
+  border: 1px solid var(--cdc-gold);
+  color: var(--cdc-gold2);
+}
+.cdc-action--ghost:hover { background: rgba(192, 146, 47, 0.07); filter: none; }
+
+/* ---- PAINEL "dossiê" v2: canto reto, linha fina, SEM card arredondado ---- */
+.cdc-panel-v2 {
+  background: linear-gradient(180deg, rgba(20, 15, 8, 0.6), rgba(7, 5, 3, 0.6));
+  border: 1px solid var(--cdc-line);
+  padding: 22px 20px;
+  position: relative;
+}
+.cdc-panel-v2--accent { border-color: var(--cdc-gold); }
+
+/* ---- Progresso "01 / 07" (quiz) ---- */
+.cdc-step {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--cdc-dim);
+}
+.cdc-step b { color: var(--cdc-gold2); }
+
+/* ---- Animação de "decodificação" / scan (calibração) ---- */
+.cdc-scan {
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cdc-gold);
+  opacity: 0;
+  animation: cdc-scan-in 0.5s ease forwards;
+}
+@keyframes cdc-scan-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 0.9; transform: none; }
+}
+
+

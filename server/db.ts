@@ -40,22 +40,24 @@ export async function getDb() {
       if (dir && dir !== "." && !existsSync(dir)) mkdirSync(dir, { recursive: true });
       const sqlite = new Database(dbPath);
       sqlite.pragma("journal_mode = WAL");
-      // Migração leve/idempotente: garante a coluna accessType em bancos
-      // já existentes (Épico 6 — gancho de assinatura). 'lifetime' é o padrão
-      // (compra única R$27,90); 'subscription' fica reservado para o futuro.
+      // Auto-migrate: SQL embutido (idempotente) — garante tabelas em produção
       try {
-        const cols = sqlite
-          .prepare("PRAGMA table_info(authorized_emails)")
-          .all() as Array<{ name: string }>;
-        const hasAccessType = cols.some((c) => c.name === "accessType");
-        if (cols.length > 0 && !hasAccessType) {
-          sqlite.exec(
-            "ALTER TABLE authorized_emails ADD COLUMN accessType TEXT NOT NULL DEFAULT 'lifetime'",
-          );
-          console.log("[Database] Added column authorized_emails.accessType");
+        const DDL = [
+          `CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, openId text NOT NULL UNIQUE, appId text, name text, email text, avatarUrl text, role text DEFAULT 'user' NOT NULL, createdAt integer DEFAULT (unixepoch()) NOT NULL, updatedAt integer DEFAULT (unixepoch()) NOT NULL)`,
+          `CREATE TABLE IF NOT EXISTS authorized_emails (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, email text NOT NULL UNIQUE, accessType text DEFAULT 'lifetime' NOT NULL, createdAt integer DEFAULT (unixepoch()) NOT NULL)`,
+          `CREATE TABLE IF NOT EXISTS webhook_logs (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, eventType text, email text, payload text, status text, createdAt integer DEFAULT (unixepoch()) NOT NULL)`,
+          `CREATE TABLE IF NOT EXISTS visitors (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, email text NOT NULL UNIQUE, firstSeenAt integer DEFAULT (unixepoch()) NOT NULL, lastSeenAt integer DEFAULT (unixepoch()) NOT NULL, visitCount integer DEFAULT 1 NOT NULL, accessType text DEFAULT 'lifetime' NOT NULL)`,
+          `CREATE TABLE IF NOT EXISTS user_progress (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, email text NOT NULL UNIQUE, activeJourneyId text, currentDay integer DEFAULT 1 NOT NULL, streakCount integer DEFAULT 0 NOT NULL, lastSessionDate text, createdAt integer DEFAULT (unixepoch()) NOT NULL, updatedAt integer DEFAULT (unixepoch()) NOT NULL)`,
+          `CREATE TABLE IF NOT EXISTS journey_day_completions (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, email text NOT NULL, journeyId text NOT NULL, dayNumber integer NOT NULL, frequencyId text NOT NULL, completedAt integer DEFAULT (unixepoch()) NOT NULL)`,
+          `CREATE TABLE IF NOT EXISTS frequency_sessions (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, email text NOT NULL, frequencyId text NOT NULL, mode text NOT NULL, durationSeconds integer DEFAULT 0 NOT NULL, startedAt integer DEFAULT (unixepoch()) NOT NULL)`,
+          `CREATE TABLE IF NOT EXISTS user_protocol (email text PRIMARY KEY NOT NULL, seal text NOT NULL, dominantChain text NOT NULL, answersJson text NOT NULL, protocolJson text NOT NULL, createdAt text NOT NULL)`,
+        ];
+        for (const ddl of DDL) {
+          try { sqlite.exec(ddl); } catch(_) {}
         }
+        console.log("[Database] Tabelas garantidas (DDL embutido)");
       } catch (migErr) {
-        console.warn("[Database] accessType migration skipped:", migErr);
+        console.warn("[Database] migrate erro:", migErr);
       }
       _db = drizzle(sqlite);
     } catch (error) {

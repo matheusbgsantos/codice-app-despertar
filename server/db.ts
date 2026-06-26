@@ -628,3 +628,53 @@ export async function createUserProtocol(
   if (!row) throw new Error("[Database] Protocol insert failed");
   return { row, created: true };
 }
+
+/** Analytics agregado do app (uso real). */
+export async function getAnalytics() {
+  const db = await getDb();
+  if (!db) throw new Error("[Database] not available");
+  const protocols = await db.select().from(userProtocol);
+  const progress = await db.select().from(userProgress);
+
+  const total = protocols.length;
+  // Distribuição por corrente dominante
+  const chains: Record<string, number> = {};
+  for (const p of protocols) {
+    chains[p.dominantChain] = (chains[p.dominantChain] || 0) + 1;
+  }
+  // Progresso: dia atual e streak por pessoa
+  const dias = progress.map((p) => p.currentDay || 1);
+  const streaks = progress.map((p) => p.streakCount || 0);
+  const avgDay = dias.length ? (dias.reduce((a, b) => a + b, 0) / dias.length) : 0;
+  const maxDay = dias.length ? Math.max(...dias) : 0;
+  const maxStreak = streaks.length ? Math.max(...streaks) : 0;
+  // Quantos passaram do dia 1 (engajaram de verdade)
+  const passou1 = dias.filter((d) => d > 1).length;
+  const passou7 = dias.filter((d) => d > 7).length;
+  const chegou30 = dias.filter((d) => d >= 30).length;
+  // Lista por e-mail (resumida)
+  const usuarios = protocols.map((p) => {
+    const prog = progress.find((g) => g.email === p.email);
+    return {
+      email: p.email,
+      corrente: p.dominantChain,
+      seal: p.seal,
+      diaAtual: prog?.currentDay || 1,
+      streak: prog?.streakCount || 0,
+      criadoEm: p.createdAt,
+    };
+  });
+
+  return {
+    totalUsuarios: total,
+    porCorrente: chains,
+    diaMedio: Math.round(avgDay * 10) / 10,
+    maiorDia: maxDay,
+    maiorStreak: maxStreak,
+    passaramDia1: passou1,
+    passaramDia7: passou7,
+    chegaramDia30: chegou30,
+    taxaEngajamento: total ? Math.round((passou1 / total) * 100) : 0,
+    usuarios: usuarios.sort((a, b) => (b.diaAtual - a.diaAtual)),
+  };
+}

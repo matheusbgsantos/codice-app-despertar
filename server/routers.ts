@@ -203,6 +203,17 @@ export const appRouter = router({
       .query(async ({ input }) => {
         return await getStats(input.email);
       }),
+
+    // Analytics do app inteiro (protegido por chave simples)
+    analytics: publicProcedure
+      .input(z.object({ key: z.string() }))
+      .query(async ({ input }) => {
+        if (input.key !== "codice2026") {
+          throw new Error("Não autorizado");
+        }
+        const { getAnalytics } = await import("./db");
+        return await getAnalytics();
+      }),
   }),
 
   // Protocolo personalizado de 30 dias (Épico 3 — Códice v2).

@@ -22,6 +22,8 @@ import {
   frequencySessions,
   userProtocol,
   InsertUserProtocol,
+  sales,
+  InsertSale,
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -51,6 +53,7 @@ export async function getDb() {
           `CREATE TABLE IF NOT EXISTS journey_day_completions (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, email text NOT NULL, journeyId text NOT NULL, dayNumber integer NOT NULL, frequencyId text NOT NULL, completedAt integer DEFAULT (unixepoch()) NOT NULL)`,
           `CREATE TABLE IF NOT EXISTS frequency_sessions (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, email text NOT NULL, frequencyId text NOT NULL, mode text NOT NULL, durationSeconds integer DEFAULT 0 NOT NULL, startedAt integer DEFAULT (unixepoch()) NOT NULL)`,
           `CREATE TABLE IF NOT EXISTS user_protocol (email text PRIMARY KEY NOT NULL, seal text NOT NULL, dominantChain text NOT NULL, answersJson text NOT NULL, protocolJson text NOT NULL, createdAt text NOT NULL)`,
+          `CREATE TABLE IF NOT EXISTS sales (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, saleId text, event text NOT NULL, status text, customerEmail text, customerName text, customerPhone text, productName text, paymentMethod text, totalPrice text, bumps text, createdAt integer DEFAULT (unixepoch()) NOT NULL)`,
         ];
         for (const ddl of DDL) {
           try { sqlite.exec(ddl); } catch(_) {}
@@ -676,5 +679,58 @@ export async function getAnalytics() {
     chegaramDia30: chegou30,
     taxaEngajamento: total ? Math.round((passou1 / total) * 100) : 0,
     usuarios: usuarios.sort((a, b) => (b.diaAtual - a.diaAtual)),
+  };
+}
+
+/** Salva uma venda recebida via webhook Kirvano. */
+export async function recordSale(data: InsertSale): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+  try {
+    await db.insert(sales).values(data);
+  } catch (e) {
+    console.error("[Sales] insert error:", e);
+  }
+}
+
+/** Analytics de vendas/conversão (a partir dos webhooks). */
+export async function getSalesAnalytics() {
+  const db = await getDb();
+  if (!db) throw new Error("[Database] not available");
+  const all = await db.select().from(sales);
+  const aprovadas = all.filter((s) => s.event === "SALE_APPROVED");
+
+  // por produto
+  const porProduto: Record<string, { vendas: number; receita: number }> = {};
+  let receitaTotal = 0;
+  for (const s of aprovadas) {
+    const prod = s.productName || "Desconhecido";
+    const preco = parseFloat((s.totalPrice || "0").replace(",", ".")) || 0;
+    if (!porProduto[prod]) porProduto[prod] = { vendas: 0, receita: 0 };
+    porProduto[prod].vendas += 1;
+    porProduto[prod].receita += preco;
+    receitaTotal += preco;
+  }
+
+  // por dia (YYYY-MM-DD)
+  const porDia: Record<string, number> = {};
+  for (const s of aprovadas) {
+    const d = s.createdAt instanceof Date ? s.createdAt : new Date((s.createdAt as unknown as number) * 1000);
+    const key = d.toISOString().slice(0, 10);
+    porDia[key] = (porDia[key] || 0) + 1;
+  }
+
+  const reembolsos = all.filter((s) => s.event === "REFUND" || s.event === "CHARGEBACK").length;
+
+  return {
+    totalEventos: all.length,
+    vendasAprovadas: aprovadas.length,
+    receitaTotal: Math.round(receitaTotal * 100) / 100,
+    ticketMedio: aprovadas.length ? Math.round((receitaTotal / aprovadas.length) * 100) / 100 : 0,
+    reembolsos,
+    porProduto: Object.entries(porProduto)
+      .map(([nome, v]) => ({ produto: nome, vendas: v.vendas, receita: Math.round(v.receita * 100) / 100 }))
+      .sort((a, b) => b.vendas - a.vendas),
+    porDia,
   };
 }

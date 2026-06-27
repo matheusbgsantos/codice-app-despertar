@@ -149,3 +149,23 @@ export const userProtocol = sqliteTable("user_protocol", {
 
 export type UserProtocol = typeof userProtocol.$inferSelect;
 export type InsertUserProtocol = typeof userProtocol.$inferInsert;
+
+/** Vendas recebidas via webhook Kirvano (análise de conversão). */
+export const sales = sqliteTable("sales", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  saleId: text("saleId"),
+  event: text("event").notNull(),
+  status: text("status"),
+  customerEmail: text("customerEmail"),
+  customerName: text("customerName"),
+  customerPhone: text("customerPhone"),
+  productName: text("productName"),
+  paymentMethod: text("paymentMethod"),
+  totalPrice: text("totalPrice"),
+  bumps: text("bumps"),
+  createdAt: integer("createdAt", { mode: "timestamp" }).default(sql`(unixepoch())`).notNull(),
+});
+
+export type Sale = typeof sales.$inferSelect;
+export type InsertSale = typeof sales.$inferInsert;
+

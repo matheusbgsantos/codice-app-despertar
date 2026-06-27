@@ -204,7 +204,7 @@ export const appRouter = router({
         return await getStats(input.email);
       }),
 
-    // Analytics do app inteiro (protegido por chave simples)
+    // Analytics agregado do app (protegido por chave simples)
     analytics: publicProcedure
       .input(z.object({ key: z.string() }))
       .query(async ({ input }) => {
@@ -213,6 +213,17 @@ export const appRouter = router({
         }
         const { getAnalytics } = await import("./db");
         return await getAnalytics();
+      }),
+
+    // Analytics de vendas/conversão (webhook Kirvano)
+    sales: publicProcedure
+      .input(z.object({ key: z.string() }))
+      .query(async ({ input }) => {
+        if (input.key !== "codice2026") {
+          throw new Error("Não autorizado");
+        }
+        const { getSalesAnalytics } = await import("./db");
+        return await getSalesAnalytics();
       }),
   }),
 

@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { addAuthorizedEmail, deactivateEmail, logWebhook } from './db';
+import { addAuthorizedEmail, deactivateEmail, logWebhook, recordSale } from './db';
 
 const webhookRouter = Router();
 
@@ -78,6 +78,24 @@ webhookRouter.post('/kirvano', async (req: Request, res: Response) => {
         errorMessage: 'No customer email in payload',
       });
       return res.status(400).json({ error: 'No customer email provided' });
+    }
+
+    // Salva a venda pra análise de conversão (todos os eventos relevantes)
+    try {
+      await recordSale({
+        saleId: saleId,
+        event: payload.event,
+        status: payload.status,
+        customerEmail: customerEmail,
+        customerName: customerName,
+        customerPhone: payload.customer?.phone_number,
+        productName: productName,
+        paymentMethod: payload.payment_method,
+        totalPrice: payload.total_price,
+        bumps: payload.products?.filter((p) => p.is_order_bump).map((p) => p.name).join(", ") || null,
+      });
+    } catch (e) {
+      console.error("[Webhook] recordSale falhou:", e);
     }
 
     switch (payload.event) {

@@ -100,57 +100,48 @@ webhookRouter.post('/kirvano', async (req: Request, res: Response) => {
 
     switch (payload.event) {
       case 'SALE_APPROVED':
-        // Compra aprovada - adicionar email à lista de autorizados.
-        //
-        // PRODUTO: App de Frequências (produto SEPARADO / order bump R$27,90).
-        // Hoje autorizamos QUALQUER venda aprovada (modelo simples). Quando o
-        // produto do app tiver um ID/nome fixo na Kirvano, basta filtrar aqui:
-        //
-        //   const FREQ_PRODUCT_IDS = ['<id-kirvano-do-app>'];
-        //   const isFreqApp =
-        //     payload.products?.some(
-        //       (p) =>
-        //         FREQ_PRODUCT_IDS.includes(p.id) ||
-        //         /frequ[eê]ncia/i.test(p.name),
-        //     ) ?? false;
-        //   if (!isFreqApp) break; // ignora outros produtos
-        //
-        // accessType: 'lifetime' = compra única vitalícia (modelo atual R$27,90).
-        // GANCHO FUTURO de assinatura: se/quando existir um plano recorrente,
-        // detectar o produto recorrente aqui e passar accessType: 'subscription'
-        // (e tratar eventos de renovação/cancelamento mais abaixo).
-        await addAuthorizedEmail({
-          email: customerEmail,
-          name: customerName,
-          saleId: saleId,
-          productName: productName,
-          accessType: 'lifetime',
-          isActive: true,
-          addedBy: 'webhook',
-        });
-        console.log('[Webhook] Email authorized:', customerEmail);
+        try {
+          await addAuthorizedEmail({
+            email: customerEmail,
+            name: customerName,
+            saleId: saleId,
+            productName: productName,
+            accessType: 'lifetime',
+            isActive: true,
+            addedBy: 'webhook',
+          });
+          console.log('[Webhook] Email authorized:', customerEmail);
+        } catch (authErr) {
+          // NÃO deixa falhar a resposta — a venda já foi salva acima.
+          console.error('[Webhook] addAuthorizedEmail falhou (ignorado):', authErr);
+        }
         break;
 
       case 'REFUND':
       case 'CHARGEBACK':
-        // Reembolso ou chargeback - desativar acesso
-        await deactivateEmail(customerEmail);
-        console.log('[Webhook] Email deactivated:', customerEmail);
+        try {
+          await deactivateEmail(customerEmail);
+          console.log('[Webhook] Email deactivated:', customerEmail);
+        } catch (deErr) {
+          console.error('[Webhook] deactivateEmail falhou (ignorado):', deErr);
+        }
         break;
 
       default:
         console.log('[Webhook] Unhandled event type:', payload.event);
     }
 
-    // Registrar log de sucesso
-    await logWebhook({
-      event: payload.event,
-      payload: JSON.stringify(req.body),
-      customerEmail: customerEmail,
-      saleId: saleId,
-      processed: true,
-      errorMessage: null,
-    });
+    // Log best-effort (não pode quebrar a resposta)
+    try {
+      await logWebhook({
+        event: payload.event,
+        payload: JSON.stringify(req.body),
+        customerEmail: customerEmail,
+        saleId: saleId,
+        processed: true,
+        errorMessage: null,
+      });
+    } catch (_) {}
 
     return res.status(200).json({ success: true, message: 'Webhook processed' });
   } catch (error) {

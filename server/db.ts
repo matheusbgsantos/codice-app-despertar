@@ -48,8 +48,8 @@ export async function getDb() {
       try {
         const DDL = [
           `CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, openId text NOT NULL UNIQUE, appId text, name text, email text, avatarUrl text, role text DEFAULT 'user' NOT NULL, createdAt integer DEFAULT (unixepoch()) NOT NULL, updatedAt integer DEFAULT (unixepoch()) NOT NULL)`,
-          `CREATE TABLE IF NOT EXISTS authorized_emails (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, email text NOT NULL UNIQUE, accessType text DEFAULT 'lifetime' NOT NULL, createdAt integer DEFAULT (unixepoch()) NOT NULL)`,
-          `CREATE TABLE IF NOT EXISTS webhook_logs (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, eventType text, email text, payload text, status text, createdAt integer DEFAULT (unixepoch()) NOT NULL)`,
+          `CREATE TABLE IF NOT EXISTS authorized_emails (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, email text NOT NULL UNIQUE, name text, saleId text, productName text, accessType text DEFAULT 'lifetime' NOT NULL, isActive integer DEFAULT 1 NOT NULL, addedBy text DEFAULT 'manual' NOT NULL, createdAt integer DEFAULT (unixepoch()) NOT NULL, updatedAt integer DEFAULT (unixepoch()) NOT NULL)`,
+          `CREATE TABLE IF NOT EXISTS webhook_logs (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, event text, payload text, customerEmail text, saleId text, processed integer DEFAULT 0, errorMessage text, createdAt integer DEFAULT (unixepoch()) NOT NULL)`,
           `CREATE TABLE IF NOT EXISTS visitors (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, email text NOT NULL UNIQUE, firstSeenAt integer DEFAULT (unixepoch()) NOT NULL, lastSeenAt integer DEFAULT (unixepoch()) NOT NULL, visitCount integer DEFAULT 1 NOT NULL, accessType text DEFAULT 'lifetime' NOT NULL)`,
           `CREATE TABLE IF NOT EXISTS user_progress (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, email text NOT NULL UNIQUE, activeJourneyId text, currentDay integer DEFAULT 1 NOT NULL, streakCount integer DEFAULT 0 NOT NULL, lastSessionDate text, createdAt integer DEFAULT (unixepoch()) NOT NULL, updatedAt integer DEFAULT (unixepoch()) NOT NULL)`,
           `CREATE TABLE IF NOT EXISTS journey_day_completions (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, email text NOT NULL, journeyId text NOT NULL, dayNumber integer NOT NULL, frequencyId text NOT NULL, completedAt integer DEFAULT (unixepoch()) NOT NULL)`,
@@ -60,6 +60,24 @@ export async function getDb() {
         ];
         for (const ddl of DDL) {
           try { sqlite.exec(ddl); } catch(_) {}
+        }
+        // ALTER TABLE idempotente — corrige tabelas antigas no volume persistente
+        const ALTERS = [
+          `ALTER TABLE authorized_emails ADD COLUMN name text`,
+          `ALTER TABLE authorized_emails ADD COLUMN saleId text`,
+          `ALTER TABLE authorized_emails ADD COLUMN productName text`,
+          `ALTER TABLE authorized_emails ADD COLUMN isActive integer DEFAULT 1 NOT NULL`,
+          `ALTER TABLE authorized_emails ADD COLUMN addedBy text DEFAULT 'manual' NOT NULL`,
+          `ALTER TABLE authorized_emails ADD COLUMN updatedAt integer DEFAULT (unixepoch()) NOT NULL`,
+          `ALTER TABLE webhook_logs ADD COLUMN event text`,
+          `ALTER TABLE webhook_logs ADD COLUMN payload text`,
+          `ALTER TABLE webhook_logs ADD COLUMN customerEmail text`,
+          `ALTER TABLE webhook_logs ADD COLUMN saleId text`,
+          `ALTER TABLE webhook_logs ADD COLUMN processed integer DEFAULT 0`,
+          `ALTER TABLE webhook_logs ADD COLUMN errorMessage text`,
+        ];
+        for (const alt of ALTERS) {
+          try { sqlite.exec(alt); } catch(_) { /* coluna já existe */ }
         }
         console.log("[Database] Tabelas garantidas (DDL embutido)");
       } catch (migErr) {

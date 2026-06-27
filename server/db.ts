@@ -741,6 +741,17 @@ export async function getSalesAnalytics() {
 
   const reembolsos = all.filter((s) => s.event === "REFUND" || s.event === "CHARGEBACK").length;
 
+  // Lista leve pra filtro por período no frontend
+  const vendas = aprovadas.map((s) => {
+    const d = s.createdAt instanceof Date ? s.createdAt : new Date((s.createdAt as unknown as number) * 1000);
+    return {
+      data: d.toISOString(),
+      produto: s.productName || "Desconhecido",
+      preco: parseFloat((s.totalPrice || "0").replace(",", ".")) || 0,
+      email: s.customerEmail || null,
+    };
+  });
+
   return {
     totalEventos: all.length,
     vendasAprovadas: aprovadas.length,
@@ -751,5 +762,6 @@ export async function getSalesAnalytics() {
       .map(([nome, v]) => ({ produto: nome, vendas: v.vendas, receita: Math.round(v.receita * 100) / 100 }))
       .sort((a, b) => b.vendas - a.vendas),
     porDia,
+    vendas,
   };
 }

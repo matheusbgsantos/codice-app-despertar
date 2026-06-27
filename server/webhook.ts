@@ -179,11 +179,57 @@ webhookRouter.post('/kirvano', async (req: Request, res: Response) => {
  * GET /api/webhook/test
  */
 webhookRouter.get('/test', (_req: Request, res: Response) => {
-  return res.status(200).json({ 
-    status: 'ok', 
+  return res.status(200).json({
+    status: 'ok',
     message: 'Webhook endpoint is working',
     timestamp: new Date().toISOString()
   });
+});
+
+/**
+ * Importação em massa de vendas históricas (CSV).
+ * POST /api/webhook/import-sales  body: { key, sales: [...] }
+ */
+webhookRouter.post('/import-sales', async (req: Request, res: Response) => {
+  try {
+    if (req.body?.key !== 'codice2026') return res.status(401).json({ error: 'unauthorized' });
+    const arr = Array.isArray(req.body?.sales) ? req.body.sales : [];
+    const { recordSale } = await import('./db');
+    let ok = 0;
+    for (const s of arr) {
+      await recordSale({
+        saleId: s.saleId || null,
+        event: s.event || 'SALE_APPROVED',
+        status: s.status || 'APPROVED',
+        customerEmail: s.customerEmail || null,
+        customerName: s.customerName || null,
+        customerPhone: s.customerPhone || null,
+        productName: s.productName || null,
+        paymentMethod: s.paymentMethod || null,
+        totalPrice: s.totalPrice || '0',
+        bumps: s.bumps || null,
+        createdAt: s.createdAt ? new Date(s.createdAt) : undefined,
+      } as any);
+      ok++;
+    }
+    return res.status(200).json({ imported: ok });
+  } catch (e) {
+    return res.status(500).json({ error: e instanceof Error ? e.message : 'error' });
+  }
+});
+
+/**
+ * Limpa vendas de teste (ou tudo). POST /api/webhook/clear-sales body: { key, mode }
+ */
+webhookRouter.post('/clear-sales', async (req: Request, res: Response) => {
+  try {
+    if (req.body?.key !== 'codice2026') return res.status(401).json({ error: 'unauthorized' });
+    const { clearSales } = await import('./db');
+    const n = await clearSales(req.body?.mode === 'all' ? 'all' : 'test');
+    return res.status(200).json({ deleted: n });
+  } catch (e) {
+    return res.status(500).json({ error: e instanceof Error ? e.message : 'error' });
+  }
 });
 
 export { webhookRouter };

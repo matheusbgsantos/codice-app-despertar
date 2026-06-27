@@ -693,6 +693,25 @@ export async function recordSale(data: InsertSale): Promise<void> {
   }
 }
 
+/** Limpa vendas de teste (mode='test') ou todas (mode='all'). Retorna nº deletado. */
+export async function clearSales(mode: "test" | "all" = "test"): Promise<number> {
+  const db = await getDb();
+  if (!db) return 0;
+  const all = await db.select().from(sales);
+  let deleted = 0;
+  for (const s of all) {
+    const isTest = mode === "all"
+      || s.saleId === "TEST123"
+      || (s.productName || "").includes("Mercado de Ações")
+      || (s.customerEmail || "").includes("teste");
+    if (isTest) {
+      await db.delete(sales).where(eq(sales.id, s.id));
+      deleted++;
+    }
+  }
+  return deleted;
+}
+
 /** Analytics de vendas/conversão (a partir dos webhooks). */
 export async function getSalesAnalytics() {
   const db = await getDb();

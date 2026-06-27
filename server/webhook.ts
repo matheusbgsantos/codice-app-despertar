@@ -265,4 +265,16 @@ webhookRouter.post('/conversion', async (req: Request, res: Response) => {
   }
 });
 
+/** Limpa visitas (test/all). POST /api/webhook/clear-views body:{key,mode} */
+webhookRouter.post('/clear-views', async (req: Request, res: Response) => {
+  try {
+    if (req.body?.key !== 'codice2026') return res.status(401).json({ error: 'unauthorized' });
+    const { clearPageviews } = await import('./db');
+    const n = await clearPageviews(req.body?.mode === 'all' ? 'all' : 'test');
+    return res.status(200).json({ deleted: n });
+  } catch (e) {
+    return res.status(500).json({ error: e instanceof Error ? e.message : 'error' });
+  }
+});
+
 export { webhookRouter };

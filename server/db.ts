@@ -721,6 +721,22 @@ export async function getConversion() {
   };
 }
 
+/** Limpa visitas de teste (visitorId começa com 't' + dígitos) ou todas. */
+export async function clearPageviews(mode: "test" | "all" = "test"): Promise<number> {
+  const db = await getDb();
+  if (!db) return 0;
+  const all = await db.select().from(pageviews);
+  let deleted = 0;
+  for (const v of all) {
+    const isTest = mode === "all" || /^t(este)?\d/i.test(v.visitorId || "") || (v.visitorId || "").startsWith("teste");
+    if (isTest) {
+      await db.delete(pageviews).where(eq(pageviews.id, v.id));
+      deleted++;
+    }
+  }
+  return deleted;
+}
+
 /** Limpa vendas de teste (mode='test') ou todas (mode='all'). Retorna nº deletado. */
 export async function clearSales(mode: "test" | "all" = "test"): Promise<number> {
   const db = await getDb();

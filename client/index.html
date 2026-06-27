@@ -23,6 +23,18 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Heartbeat "online agora" — pinga a cada 60s
+      (function(){
+        try{
+          var v=localStorage.getItem('hb_id');
+          if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('hb_id',v);}
+          function ping(){ fetch("https://codice-app-production.up.railway.app/api/webhook/track?page=app-codice&v="+v,{mode:'no-cors',keepalive:true}).catch(function(){}); }
+          ping();
+          setInterval(ping, 60000);
+        }catch(e){}
+      })();
+    </script>
   </body>
 
 </html>

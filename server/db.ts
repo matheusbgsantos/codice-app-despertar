@@ -1,4 +1,4 @@
-import { eq, and, sql } from "drizzle-orm";
+import { eq, and, gte, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import Database from "better-sqlite3";
 import { existsSync, mkdirSync } from "fs";
@@ -799,6 +799,18 @@ export async function getConversion() {
       visitorId: v.visitorId,
     })),
   };
+}
+
+/** Conta visitantes únicos ativos nos últimos 5 min nos apps (online agora). */
+export async function getOnlineNow() {
+  const db = await getDb();
+  if (!db) return { codice: 0, frequencia: 0 };
+  const cincoMinAtras = new Date(Date.now() - 5 * 60 * 1000);
+  const recentes = await db.select().from(pageviews)
+    .where(gte(pageviews.createdAt, cincoMinAtras));
+  const codice = new Set(recentes.filter(v => v.page === "app-codice").map(v => v.visitorId)).size;
+  const frequencia = new Set(recentes.filter(v => v.page === "app-frequencia").map(v => v.visitorId)).size;
+  return { codice, frequencia };
 }
 
 /** Limpa visitas de teste (visitorId começa com 't' + dígitos) ou todas. */

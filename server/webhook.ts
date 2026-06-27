@@ -269,12 +269,23 @@ webhookRouter.post('/clear-views', async (req: Request, res: Response) => {
 });
 
 /** Tráfego do Clarity (cache 3h). GET /api/webhook/traffic */
+
 webhookRouter.get('/traffic', async (_req: Request, res: Response) => {
   try {
     const { getClarityTraffic } = await import('./db');
     return res.status(200).json(await getClarityTraffic());
   } catch (e) {
     return res.status(200).json({ sessoes: 0, usuarios: 0, atualizadoEm: null, cache: false });
+  }
+});
+
+/** Pessoas online agora nos apps (ativas < 5min). GET /api/webhook/online */
+webhookRouter.get('/online', async (_req: Request, res: Response) => {
+  try {
+    const { getOnlineNow } = await import('./db');
+    return res.status(200).json(await getOnlineNow());
+  } catch (e) {
+    return res.status(200).json({ codice: 0, frequencia: 0 });
   }
 });
 

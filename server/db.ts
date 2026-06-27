@@ -26,6 +26,7 @@ import {
   InsertSale,
   pageviews,
   InsertPageview,
+  appMeta,
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -57,6 +58,7 @@ export async function getDb() {
           `CREATE TABLE IF NOT EXISTS user_protocol (email text PRIMARY KEY NOT NULL, seal text NOT NULL, dominantChain text NOT NULL, answersJson text NOT NULL, protocolJson text NOT NULL, createdAt text NOT NULL)`,
           `CREATE TABLE IF NOT EXISTS sales (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, saleId text, event text NOT NULL, status text, customerEmail text, customerName text, customerPhone text, productName text, paymentMethod text, totalPrice text, bumps text, createdAt integer DEFAULT (unixepoch()) NOT NULL)`,
           `CREATE TABLE IF NOT EXISTS pageviews (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, page text NOT NULL, visitorId text, ref text, createdAt integer DEFAULT (unixepoch()) NOT NULL)`,
+          `CREATE TABLE IF NOT EXISTS app_meta (key text PRIMARY KEY NOT NULL, value text, updatedAt integer DEFAULT (unixepoch()) NOT NULL)`,
         ];
         for (const ddl of DDL) {
           try { sqlite.exec(ddl); } catch(_) {}
@@ -722,6 +724,66 @@ export async function recordPageview(data: InsertPageview): Promise<void> {
     await db.insert(pageviews).values(data);
   } catch (e) {
     console.error("[Pageview] insert error:", e);
+  }
+}
+
+/** Lê um valor do cache app_meta. */
+export async function getMeta(key: string): Promise<{ value: string | null; updatedAt: Date | null }> {
+  const db = await getDb();
+  if (!db) return { value: null, updatedAt: null };
+  const rows = await db.select().from(appMeta).where(eq(appMeta.key, key));
+  if (!rows.length) return { value: null, updatedAt: null };
+  const r = rows[0];
+  return { value: r.value, updatedAt: r.updatedAt instanceof Date ? r.updatedAt : new Date((r.updatedAt as unknown as number) * 1000) };
+}
+
+/** Grava um valor no cache app_meta. */
+export async function setMeta(key: string, value: string): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+  try {
+    await db.insert(appMeta).values({ key, value, updatedAt: new Date() })
+      .onConflictDoUpdate({ target: appMeta.key, set: { value, updatedAt: new Date() } });
+  } catch (e) {
+    console.error("[Meta] set error:", e);
+  }
+}
+
+/**
+ * Retorna o tráfego do Clarity (sessões/usuários hoje), com cache de 3h
+ * pra não estourar o limite de 10 chamadas/dia da API do Clarity.
+ */
+export async function getClarityTraffic(): Promise<{ sessoes: number; usuarios: number; atualizadoEm: string | null; cache: boolean }> {
+  const CACHE_KEY = "clarity_traffic_1d";
+  const cached = await getMeta(CACHE_KEY);
+  const agora = Date.now();
+  const TRES_HORAS = 3 * 60 * 60 * 1000;
+  if (cached.value && cached.updatedAt && (agora - cached.updatedAt.getTime() < TRES_HORAS)) {
+    const parsed = JSON.parse(cached.value);
+    return { ...parsed, atualizadoEm: cached.updatedAt.toISOString(), cache: true };
+  }
+  // chama a API do Clarity
+  const token = process.env.CLARITY_TOKEN;
+  if (!token) {
+    if (cached.value) { const p = JSON.parse(cached.value); return { ...p, atualizadoEm: cached.updatedAt?.toISOString() || null, cache: true }; }
+    return { sessoes: 0, usuarios: 0, atualizadoEm: null, cache: false };
+  }
+  try {
+    const resp = await fetch("https://www.clarity.ms/export-data/api/v1/project-live-insights?numOfDays=1", {
+      headers: { Authorization: "Bearer " + token },
+    });
+    const data: any = await resp.json();
+    const traffic = Array.isArray(data) ? data.find((x: any) => x.metricName === "Traffic") : null;
+    const info = traffic?.information?.[0] || {};
+    const result = {
+      sessoes: parseInt(info.totalSessionCount || "0", 10),
+      usuarios: parseInt(info.distinctUserCount || "0", 10),
+    };
+    await setMeta(CACHE_KEY, JSON.stringify(result));
+    return { ...result, atualizadoEm: new Date().toISOString(), cache: false };
+  } catch (e) {
+    if (cached.value) { const p = JSON.parse(cached.value); return { ...p, atualizadoEm: cached.updatedAt?.toISOString() || null, cache: true }; }
+    return { sessoes: 0, usuarios: 0, atualizadoEm: null, cache: false };
   }
 }
 

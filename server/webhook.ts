@@ -268,4 +268,14 @@ webhookRouter.post('/clear-views', async (req: Request, res: Response) => {
   }
 });
 
+/** Tráfego do Clarity (cache 3h). GET /api/webhook/traffic */
+webhookRouter.get('/traffic', async (_req: Request, res: Response) => {
+  try {
+    const { getClarityTraffic } = await import('./db');
+    return res.status(200).json(await getClarityTraffic());
+  } catch (e) {
+    return res.status(200).json({ sessoes: 0, usuarios: 0, atualizadoEm: null, cache: false });
+  }
+});
+
 export { webhookRouter };

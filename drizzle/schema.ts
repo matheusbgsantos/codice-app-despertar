@@ -181,3 +181,12 @@ export const pageviews = sqliteTable("pageviews", {
 export type Pageview = typeof pageviews.$inferSelect;
 export type InsertPageview = typeof pageviews.$inferInsert;
 
+/** Cache chave-valor (ex: tráfego do Clarity). */
+export const appMeta = sqliteTable("app_meta", {
+  key: text("key").primaryKey(),
+  value: text("value"),
+  updatedAt: integer("updatedAt", { mode: "timestamp" }).default(sql`(unixepoch())`).notNull(),
+});
+
+export type AppMeta = typeof appMeta.$inferSelect;
+

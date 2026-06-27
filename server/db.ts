@@ -24,6 +24,8 @@ import {
   InsertUserProtocol,
   sales,
   InsertSale,
+  pageviews,
+  InsertPageview,
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -54,6 +56,7 @@ export async function getDb() {
           `CREATE TABLE IF NOT EXISTS frequency_sessions (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, email text NOT NULL, frequencyId text NOT NULL, mode text NOT NULL, durationSeconds integer DEFAULT 0 NOT NULL, startedAt integer DEFAULT (unixepoch()) NOT NULL)`,
           `CREATE TABLE IF NOT EXISTS user_protocol (email text PRIMARY KEY NOT NULL, seal text NOT NULL, dominantChain text NOT NULL, answersJson text NOT NULL, protocolJson text NOT NULL, createdAt text NOT NULL)`,
           `CREATE TABLE IF NOT EXISTS sales (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, saleId text, event text NOT NULL, status text, customerEmail text, customerName text, customerPhone text, productName text, paymentMethod text, totalPrice text, bumps text, createdAt integer DEFAULT (unixepoch()) NOT NULL)`,
+          `CREATE TABLE IF NOT EXISTS pageviews (id integer PRIMARY KEY AUTOINCREMENT NOT NULL, page text NOT NULL, visitorId text, ref text, createdAt integer DEFAULT (unixepoch()) NOT NULL)`,
         ];
         for (const ddl of DDL) {
           try { sqlite.exec(ddl); } catch(_) {}
@@ -691,6 +694,31 @@ export async function recordSale(data: InsertSale): Promise<void> {
   } catch (e) {
     console.error("[Sales] insert error:", e);
   }
+}
+
+/** Registra uma visita a uma página de venda. */
+export async function recordPageview(data: InsertPageview): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+  try {
+    await db.insert(pageviews).values(data);
+  } catch (e) {
+    console.error("[Pageview] insert error:", e);
+  }
+}
+
+/** Analytics de conversão: visitas por página × vendas. */
+export async function getConversion() {
+  const db = await getDb();
+  if (!db) throw new Error("[Database] not available");
+  const views = await db.select().from(pageviews);
+  return {
+    visitas: views.map((v) => ({
+      data: (v.createdAt instanceof Date ? v.createdAt : new Date((v.createdAt as unknown as number) * 1000)).toISOString(),
+      page: v.page,
+      visitorId: v.visitorId,
+    })),
+  };
 }
 
 /** Limpa vendas de teste (mode='test') ou todas (mode='all'). Retorna nº deletado. */

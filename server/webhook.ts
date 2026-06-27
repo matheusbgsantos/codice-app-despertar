@@ -232,4 +232,37 @@ webhookRouter.post('/clear-sales', async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * Registra visita a uma página de venda (tracking de conversão).
+ * GET ou POST /api/webhook/track?page=codice  (sem chave — público)
+ */
+webhookRouter.all('/track', async (req: Request, res: Response) => {
+  try {
+    const page = (req.query.page || req.body?.page || 'desconhecida').toString().slice(0, 60);
+    const visitorId = (req.query.v || req.body?.v || '').toString().slice(0, 40) || null;
+    const ref = (req.headers['referer'] || '').toString().slice(0, 200) || null;
+    const { recordPageview } = await import('./db');
+    await recordPageview({ page, visitorId, ref });
+    // pixel transparente 1x1 (pra poder usar via <img> se quiser)
+    res.set('Content-Type', 'image/gif');
+    res.set('Cache-Control', 'no-store');
+    return res.status(200).send(Buffer.from('R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==', 'base64'));
+  } catch (e) {
+    return res.status(200).end();
+  }
+});
+
+/**
+ * Analytics de conversão (visitas). POST /api/webhook/conversion body:{key}
+ */
+webhookRouter.post('/conversion', async (req: Request, res: Response) => {
+  try {
+    if (req.body?.key !== 'codice2026') return res.status(401).json({ error: 'unauthorized' });
+    const { getConversion } = await import('./db');
+    return res.status(200).json(await getConversion());
+  } catch (e) {
+    return res.status(500).json({ error: e instanceof Error ? e.message : 'error' });
+  }
+});
+
 export { webhookRouter };

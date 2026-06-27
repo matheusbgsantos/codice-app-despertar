@@ -169,3 +169,15 @@ export const sales = sqliteTable("sales", {
 export type Sale = typeof sales.$inferSelect;
 export type InsertSale = typeof sales.$inferInsert;
 
+/** Visitas às páginas de venda (conversão). */
+export const pageviews = sqliteTable("pageviews", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  page: text("page").notNull(),
+  visitorId: text("visitorId"),
+  ref: text("ref"),
+  createdAt: integer("createdAt", { mode: "timestamp" }).default(sql`(unixepoch())`).notNull(),
+});
+
+export type Pageview = typeof pageviews.$inferSelect;
+export type InsertPageview = typeof pageviews.$inferInsert;
+

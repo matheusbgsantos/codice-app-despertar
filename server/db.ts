@@ -764,8 +764,12 @@ export async function clearSales(mode: "test" | "all" = "test"): Promise<number>
   for (const s of all) {
     const isTest = mode === "all"
       || s.saleId === "TEST123"
+      || (s.saleId || "").startsWith("DIAG")
+      || (s.saleId || "").startsWith("FIX")
       || (s.productName || "").includes("Mercado de Ações")
-      || (s.customerEmail || "").includes("teste");
+      || (s.customerEmail || "").includes("teste")
+      || (s.customerEmail || "").includes("diag@")
+      || (s.customerEmail || "").includes("fix@");
     if (isTest) {
       await db.delete(sales).where(eq(sales.id, s.id));
       deleted++;

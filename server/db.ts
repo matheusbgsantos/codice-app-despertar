@@ -710,6 +710,14 @@ export async function recordSale(data: InsertSale): Promise<void> {
   const db = await getDb();
   if (!db) return;
   try {
+    // Idempotente por saleId: se já existe, ATUALIZA (não duplica).
+    if (data.saleId) {
+      const existing = await db.select().from(sales).where(eq(sales.saleId, data.saleId));
+      if (existing.length > 0) {
+        await db.update(sales).set(data).where(eq(sales.saleId, data.saleId));
+        return;
+      }
+    }
     await db.insert(sales).values(data);
   } catch (e) {
     console.error("[Sales] insert error:", e);

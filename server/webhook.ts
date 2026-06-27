@@ -81,6 +81,9 @@ webhookRouter.post('/kirvano', async (req: Request, res: Response) => {
     }
 
     // Salva a venda pra análise de conversão (todos os eventos relevantes)
+    // VALOR LÍQUIDO (o que o vendedor recebe) tem prioridade sobre o bruto.
+    const valorLiquido = payload.my_commission ?? payload.commission ?? payload.seller_amount
+      ?? payload.producer_amount ?? payload.net_amount ?? payload.total_price;
     try {
       await recordSale({
         saleId: saleId,
@@ -91,7 +94,7 @@ webhookRouter.post('/kirvano', async (req: Request, res: Response) => {
         customerPhone: payload.customer?.phone_number,
         productName: productName,
         paymentMethod: payload.payment_method,
-        totalPrice: payload.total_price,
+        totalPrice: String(valorLiquido),
         bumps: payload.products?.filter((p) => p.is_order_bump).map((p) => p.name).join(", ") || null,
       });
     } catch (e) {

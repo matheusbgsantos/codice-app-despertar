@@ -799,14 +799,33 @@ export async function getClarityTraffic(): Promise<{ sessoes: number; usuarios: 
 export async function getConversion() {
   const db = await getDb();
   if (!db) throw new Error("[Database] not available");
-  const views = await db.select().from(pageviews);
-  return {
-    visitas: views.map((v) => ({
-      data: (v.createdAt instanceof Date ? v.createdAt : new Date((v.createdAt as unknown as number) * 1000)).toISOString(),
-      page: v.page,
-      visitorId: v.visitorId,
-    })),
-  };
+  // Só últimos 35 dias (limita o volume) e agrega no SERVIDOR pra payload leve.
+  const desde = new Date(Date.now() - 35 * 24 * 60 * 60 * 1000);
+  const views = await db.select().from(pageviews).where(gte(pageviews.createdAt, desde));
+  // visitantes únicos por página por dia (BR = UTC-3) + total único por dia
+  const BR = 3 * 3600 * 1000;
+  const map: Record<string, Record<string, Set<string>>> = {}; // page -> dia -> set
+  const totalMap: Record<string, Set<string>> = {}; // dia -> set (todas páginas de venda)
+  for (const v of views) {
+    const page = v.page || "?";
+    if (page.startsWith("app-")) continue; // heartbeat dos apps, ignora
+    const ts = v.createdAt instanceof Date ? v.createdAt.getTime() : (v.createdAt as unknown as number) * 1000;
+    const dia = new Date(ts - BR).toISOString().slice(0, 10);
+    const vid = v.visitorId || ("a" + ts + Math.random());
+    (map[page] ??= {});
+    (map[page][dia] ??= new Set());
+    map[page][dia].add(vid);
+    (totalMap[dia] ??= new Set());
+    totalMap[dia].add(vid);
+  }
+  const agregado: Record<string, Record<string, number>> = {};
+  for (const page of Object.keys(map)) {
+    agregado[page] = {};
+    for (const dia of Object.keys(map[page])) agregado[page][dia] = map[page][dia].size;
+  }
+  const totalDia: Record<string, number> = {};
+  for (const dia of Object.keys(totalMap)) totalDia[dia] = totalMap[dia].size;
+  return { agregado, totalDia };
 }
 
 /** Conta visitantes únicos ativos nos últimos 5 min nos apps (online agora). */

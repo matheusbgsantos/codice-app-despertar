@@ -140,4 +140,13 @@ function abrirLupa(fig){
 function fecharLupa(){document.getElementById('lupa').classList.remove('aberta')}
 </script>
 <script src="tracking-only.js" defer></script>
+<!-- tracking de visita + clique de DM (campanha via utm_campaign; só conta como dm: se veio da DM) -->
+<script>
+(function(){try{
+var v=localStorage.getItem('aov')||(Date.now().toString(36)+Math.random().toString(36).slice(2,8));localStorage.setItem('aov',v);
+var i=new Image();i.src="https://codice-app-production.up.railway.app/api/webhook/track?page=enoque-express&v="+v+"&t="+Date.now();
+var q=new URLSearchParams(location.search);var c=q.get('utm_campaign');
+if(c&&q.get('utm_source')==='dm'){var j=new Image();j.src="https://codice-app-production.up.railway.app/api/webhook/track?page=dm:"+encodeURIComponent(c)+"&v="+v+"&t="+Date.now();}
+}catch(e){}})();
+</script>
 </body></html>

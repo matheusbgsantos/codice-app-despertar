@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>𓂀 Painel Códice · Tempo Real</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Oswald:wght@300;400;500;600&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --black:#070605;
+    --black2:#0e0c0a;
+    --panel:#141009;
+    --panel2:#1a150d;
+    --gold:#C5A059;
+    --gold-bright:#E8C766;
+    --gold-dim:#8a754a;
+    --line:rgba(197,160,89,.22);
+    --line-soft:rgba(197,160,89,.12);
+    --green:#3ad13a;
+    --green-dim:#2a9b2a;
+    --red:#e0573e;
+    --txt:#efe6d2;
+    --txt-dim:#a99f88;
+    --txt-faint:#6f6753;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--black);color:var(--txt);font-family:'PT Serif',serif}
+  body{
+    background:
+      radial-gradient(1200px 700px at 50% -10%, rgba(197,160,89,.10), transparent 60%),
+      radial-gradient(900px 500px at 110% 10%, rgba(232,199,102,.06), transparent 55%),
+      var(--black);
+    min-height:100vh;
+    padding:18px 14px 60px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+
+  /* ===== HEADER ===== */
+  header.top{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    flex-wrap:wrap;
+    padding:14px 18px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:linear-gradient(180deg, rgba(26,21,13,.85), rgba(10,8,5,.9));
+    box-shadow:0 0 40px rgba(0,0,0,.5), inset 0 1px 0 rgba(232,199,102,.08);
+    margin-bottom:20px;
+  }
+  .brand{display:flex;align-items:center;gap:14px}
+  .eye{
+    font-size:34px;line-height:1;color:var(--gold-bright);
+    text-shadow:0 0 18px rgba(232,199,102,.55);
+    filter:drop-shadow(0 0 6px rgba(197,160,89,.4));
+  }
+  .brand h1{
+    font-family:'Cinzel',serif;font-weight:700;font-size:21px;letter-spacing:3px;
+    color:var(--gold-bright);text-transform:uppercase;line-height:1.1;
+  }
+  .brand .sub{font-family:'Oswald',sans-serif;font-weight:300;font-size:11px;letter-spacing:3px;color:var(--txt-dim);text-transform:uppercase}
+  .live-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+  .live{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Oswald',sans-serif;font-weight:500;font-size:12px;letter-spacing:2px;
+    color:var(--green);text-transform:uppercase;
+    border:1px solid rgba(58,209,58,.35);border-radius:30px;padding:5px 13px;
+    background:rgba(58,209,58,.06);
+  }
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(58,209,58,.7);animation:pulse 1.8s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(58,209,58,.55)}70%{box-shadow:0 0 0 9px rgba(58,209,58,0)}100%{box-shadow:0 0 0 0 rgba(58,209,58,0)}}
+  .updated{font-family:'Oswald',sans-serif;font-weight:300;font-size:10.5px;letter-spacing:1.5px;color:var(--txt-faint);text-transform:uppercase}
+
+  /* ===== SECTION LABEL ===== */
+  .sec-label{
+    font-family:'Oswald',sans-serif;font-weight:500;font-size:12px;letter-spacing:4px;
+    color:var(--gold-dim);text-transform:uppercase;margin:26px 4px 12px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .sec-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+  /* ===== BADGES (source/freshness) ===== */
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'Oswald',sans-serif;font-weight:400;font-size:10px;letter-spacing:1.2px;
+    text-transform:uppercase;color:var(--txt-dim);
+    border:1px solid var(--line-soft);border-radius:20px;padding:3px 9px;
+    background:rgba(0,0,0,.25);white-space:nowrap;
+  }
+  .badge .bdot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:none}
+  .badge.warn{color:var(--red);border-color:rgba(224,87,62,.4)}
+  .badge.warn .bdot{background:var(--red)}
+  .badge.stale{color:var(--gold)}
+  .badge.stale .bdot{background:var(--gold)}
+
+  /* ===== PERIOD FILTER ===== */
+  .periods{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+  .pbtn{
+    font-family:'Oswald',sans-serif;font-weight:400;font-size:12px;letter-spacing:2px;
+    text-transform:uppercase;color:var(--txt-dim);cursor:pointer;
+    border:1px solid var(--line);border-radius:8px;padding:7px 14px;
+    background:rgba(20,16,9,.5);transition:.18s;user-select:none;
+  }
+  .pbtn:hover{border-color:var(--gold);color:var(--gold-bright)}
+  .pbtn.active{background:linear-gradient(180deg,rgba(197,160,89,.22),rgba(197,160,89,.08));border-color:var(--gold);color:var(--gold-bright);box-shadow:0 0 16px rgba(197,160,89,.18)}
+
+  /* ===== KPI GRID ===== */
+  .kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .card{
+    border:1px solid var(--line);border-radius:14px;
+    background:linear-gradient(180deg, rgba(26,21,13,.7), rgba(10,8,5,.75));
+    padding:18px 18px 16px;position:relative;overflow:hidden;
+    box-shadow:inset 0 1px 0 rgba(232,199,102,.06);
+  }
+  .card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5}
+  .card .clabel{font-family:'Oswald',sans-serif;font-weight:400;font-size:11.5px;letter-spacing:2.5px;color:var(--txt-dim);text-transform:uppercase;margin-bottom:8px}
+  .card .cval{font-family:'Cinzel',serif;font-weight:700;font-size:38px;line-height:1;color:var(--gold-bright);letter-spacing:1px}
+  .card .cval.green{color:var(--green)}
+  .card .cunit{font-family:'Oswald',sans-serif;font-weight:300;font-size:13px;letter-spacing:1px;color:var(--txt-faint);margin-top:7px}
+  .card.hero{grid-column:span 1}
+
+  /* ===== LIVE NOW ===== */
+  .livenow-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .livecard{
+    border:1px solid var(--line);border-radius:14px;padding:16px 18px;
+    background:linear-gradient(180deg,rgba(20,30,16,.5),rgba(10,8,5,.7));
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+  }
+  .livecard .ll{font-family:'Oswald',sans-serif;font-weight:400;font-size:12px;letter-spacing:2px;color:var(--txt-dim);text-transform:uppercase}
+  .livecard .lv{font-family:'Cinzel',serif;font-weight:700;font-size:34px;color:var(--green);display:flex;align-items:center;gap:11px}
+  .livecard .lv .dot{width:11px;height:11px}
+
+  /* ===== TABLES ===== */
+  .tablebox{
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    background:linear-gradient(180deg,rgba(20,16,9,.55),rgba(10,8,5,.7));
+  }
+  .tablehead{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    padding:13px 16px;border-bottom:1px solid var(--line-soft);
+  }
+  .tablehead .th-title{font-family:'Cinzel',serif;font-weight:600;font-size:14px;letter-spacing:1.5px;color:var(--gold-bright);text-transform:uppercase}
+  .scroller{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  thead th{
+    font-family:'Oswald',sans-serif;font-weight:500;font-size:10.5px;letter-spacing:1.8px;
+    color:var(--gold-dim);text-transform:uppercase;text-align:left;
+    padding:10px 14px;border-bottom:1px solid var(--line-soft);white-space:nowrap;
+  }
+  thead th.num,tbody td.num{text-align:right}
+  tbody td{padding:11px 14px;border-bottom:1px solid rgba(197,160,89,.06);color:var(--txt);white-space:nowrap}
+  tbody tr:nth-child(even){background:rgba(197,160,89,.025)}
+  tbody tr:last-child td{border-bottom:none}
+  td.green{color:var(--green);font-weight:700}
+  td.time{font-family:'Oswald',sans-serif;font-weight:300;color:var(--txt-dim);letter-spacing:.5px}
+  td.name{max-width:200px;overflow:hidden;text-overflow:ellipsis}
+  .new-badge{
+    display:inline-block;font-family:'Oswald',sans-serif;font-weight:600;font-size:9px;letter-spacing:1.5px;
+    color:var(--black);background:linear-gradient(180deg,var(--gold-bright),var(--gold));
+    border-radius:4px;padding:2px 6px;margin-left:8px;text-transform:uppercase;
+    box-shadow:0 0 10px rgba(232,199,102,.5);vertical-align:middle;
+  }
+
+  /* ===== STATE MESSAGES ===== */
+  .state{padding:26px 16px;text-align:center;font-family:'PT Serif',serif;font-size:14px;color:var(--txt-dim);font-style:italic}
+  .state.err{color:var(--red);font-style:normal;font-family:'Oswald',sans-serif;letter-spacing:1px;font-size:13px}
+  .state.empty{color:var(--txt-faint)}
+
+  .note{font-family:'PT Serif',serif;font-style:italic;font-size:12px;color:var(--txt-faint);padding:10px 16px;border-top:1px solid var(--line-soft);line-height:1.5}
+
+  /* ===== TWO COL BOTTOM ===== */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+  /* ===== FOOTER ===== */
+  footer{
+    margin-top:34px;text-align:center;
+    font-family:'Oswald',sans-serif;font-weight:300;font-size:11.5px;letter-spacing:1.5px;
+    color:var(--txt-faint);text-transform:uppercase;line-height:2;
+  }
+  footer a{color:var(--gold);text-decoration:none;border-bottom:1px solid var(--line)}
+  footer a:hover{color:var(--gold-bright)}
+  .footdiv{margin:0 8px;color:var(--line)}
+
+  /* ===== GATE ===== */
+  .gate{display:flex;align-items:center;justify-content:center;min-height:70vh;flex-direction:column;gap:16px;text-align:center}
+  .gate .eye{font-size:54px}
+  .gate h2{font-family:'Cinzel',serif;color:var(--gold);letter-spacing:2px;font-size:18px}
+  .gate p{color:var(--txt-dim);font-size:13px}
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:760px){
+    body{padding:12px 10px 50px}
+    .kpi-grid{grid-template-columns:1fr}
+    .two-col{grid-template-columns:1fr}
+    .brand h1{font-size:17px;letter-spacing:2px}
+    .eye{font-size:28px}
+    .card .cval{font-size:32px}
+    .live-wrap{align-items:flex-start}
+    header.top{padding:12px 14px}
+    table{font-size:13px}
+    thead th,tbody td{padding:9px 10px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="app" style="display:none">
+
+  <!-- HEADER -->
+  <header class="top">
+    <div class="brand">
+      <span class="eye">𓂀</span>
+      <div>
+        <h1>Painel Códice</h1>
+        <div class="sub">Controle de Vendas · Tempo Real</div>
+      </div>
+    </div>
+    <div class="live-wrap">
+      <span class="live"><span class="dot"></span> Tempo Real</span>
+      <span class="updated" id="lastUpdate">Sincronizando…</span>
+    </div>
+  </header>
+
+  <!-- ===== TOPO: VENDAS ===== -->
+  <div class="sec-label">Vendas</div>
+  <div class="periods" id="periods">
+    <span class="pbtn active" data-p="hoje">Hoje</span>
+    <span class="pbtn" data-p="ontem">Ontem</span>
+    <span class="pbtn" data-p="7d">7 dias</span>
+    <span class="pbtn" data-p="30d">30 dias</span>
+    <span class="pbtn" data-p="tudo">Tudo</span>
+  </div>
+
+  <div style="display:flex;justify-content:flex-end;margin:-6px 4px 12px">
+    <span class="badge" id="salesBadge"><span class="bdot"></span> Kirvano · carregando…</span>
+  </div>
+
+  <div class="kpi-grid" id="salesKpis">
+    <div class="card hero">
+      <div class="clabel" id="kpiPeriodLabel">Vendas Hoje</div>
+      <div class="cval" id="kpiQtd">—</div>
+      <div class="cunit">vendas aprovadas</div>
+    </div>
+    <div class="card">
+      <div class="clabel">Receita</div>
+      <div class="cval green" id="kpiReceita">—</div>
+      <div class="cunit">faturamento do período</div>
+    </div>
+    <div class="card">
+      <div class="clabel">Ticket Médio</div>
+      <div class="cval" id="kpiTicket">—</div>
+      <div class="cunit">por venda</div>
+    </div>
+  </div>
+
+  <!-- ===== AO VIVO AGORA ===== -->
+  <div class="sec-label">Ao Vivo Agora <span class="badge" id="onlineBadge" style="margin-left:auto"><span class="bdot"></span> ativos · últimos 5 min</span></div>
+  <div class="livenow-grid">
+    <div class="livecard">
+      <span class="ll">No App Códice</span>
+      <span class="lv"><span class="dot"></span><span id="onCodice">—</span></span>
+    </div>
+    <div class="livecard">
+      <span class="ll">No App Frequência</span>
+      <span class="lv"><span class="dot"></span><span id="onFreq">—</span></span>
+    </div>
+  </div>
+
+  <!-- ===== LISTA AUDITÁVEL ===== -->
+  <div class="sec-label">Prova · Vendas do Período</div>
+  <div class="tablebox">
+    <div class="tablehead">
+      <span class="th-title">Lista Auditável</span>
+      <span class="badge" id="listBadge"><span class="bdot"></span> Kirvano · linha a linha</span>
+    </div>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr>
+            <th>Horário (BR)</th>
+            <th>Nome / Contato</th>
+            <th>Produto</th>
+            <th class="num">Valor</th>
+          </tr>
+        </thead>
+        <tbody id="salesList">
+          <tr><td colspan="4"><div class="state">Carregando…</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">Cada linha é uma venda aprovada no período. Confira contra o seu painel Kirvano — os totais acima são a soma exata destas linhas. Horários já convertidos para o fuso do Brasil (UTC−3).</div>
+  </div>
+
+  <!-- ===== POR PRODUTO ===== -->
+  <div class="sec-label">Vendas por Produto</div>
+  <div class="tablebox">
+    <div class="tablehead">
+      <span class="th-title">Por Produto</span>
+      <span class="badge" id="prodBadge"><span class="bdot"></span> Kirvano · período</span>
+    </div>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th>Produto</th><th class="num">Vendas</th><th class="num">Receita</th></tr>
+        </thead>
+        <tbody id="prodList">
+          <tr><td colspan="3"><div class="state">Carregando…</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== BAIXO: TRÁFEGO + CONVERSÃO ===== -->
+  <div class="sec-label">Métricas Secundárias</div>
+  <div class="two-col">
+
+    <!-- TRÁFEGO -->
+    <div class="tablebox">
+      <div class="tablehead">
+        <span class="th-title">Tráfego</span>
+        <span class="badge stale" id="trafficBadge"><span class="bdot"></span> Clarity · carregando…</span>
+      </div>
+      <div style="padding:18px 16px;display:flex;gap:26px;flex-wrap:wrap" id="trafficBody">
+        <div>
+          <div class="clabel" style="font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;color:var(--gold-bright);text-transform:uppercase;margin-bottom:6px">Visitantes hoje · ao vivo</div>
+          <div style="font-family:'Cinzel',serif;font-weight:700;font-size:30px;color:var(--gold-bright)" id="trafLive">—</div>
+          <div style="font-family:'Oswald',sans-serif;font-size:9px;letter-spacing:1px;color:var(--txt-dim);text-transform:uppercase;margin-top:2px">pessoas distintas no site</div>
+        </div>
+        <div>
+          <div class="clabel" style="font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;color:var(--txt-dim);text-transform:uppercase;margin-bottom:6px">Visitantes (Clarity)</div>
+          <div style="font-family:'Cinzel',serif;font-weight:700;font-size:30px;color:var(--gold-bright)" id="trafUsers">—</div>
+        </div>
+        <div>
+          <div class="clabel" style="font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;color:var(--txt-dim);text-transform:uppercase;margin-bottom:6px">Sessões (Clarity)</div>
+          <div style="font-family:'Cinzel',serif;font-weight:700;font-size:30px;color:var(--gold-bright)" id="trafSessions">—</div>
+        </div>
+      </div>
+      <div class="note">Fonte: Microsoft Clarity. Atualiza com cache de até 3h — pode haver atraso. Total acumulado reportado pelo Clarity, não filtrado por período.</div>
+    </div>
+
+    <!-- CONVERSÃO -->
+    <div class="tablebox">
+      <div class="tablehead">
+        <span class="th-title">Conversão por Página</span>
+        <span class="badge" id="convBadge"><span class="bdot"></span> Tracking próprio · período</span>
+      </div>
+      <div class="scroller">
+        <table>
+          <thead>
+            <tr><th>Página</th><th class="num">Visit. únicos</th><th class="num">Vendas</th><th class="num">Conv%</th></tr>
+          </thead>
+          <tbody id="convList">
+            <tr><td colspan="4"><div class="state">Carregando…</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">Visitantes únicos do tracking próprio no período (heartbeats dos apps ignorados). Conv% = vendas do produto da página ÷ visitantes únicos. Mapa: Códice → Códice do Despertar · Frequência → Protocolo Ressonância · Biblioteca → (sem produto direto).</div>
+    </div>
+  </div>
+
+  <footer>
+    Atualiza sozinho a cada 30s
+    <span class="footdiv">·</span>
+    <a href="https://clarity.microsoft.com/projects/view/x9h7c74lg1/dashboard" target="_blank" rel="noopener">Ver comportamento (Clarity)</a>
+    <span class="footdiv">·</span>
+    𓂀 Códice Oculto
+  </footer>
+</div>
+
+<!-- GATE -->
+<div class="gate" id="gate" style="display:none">
+  <span class="eye">𓂀</span>
+  <h2>Acesso Restrito</h2>
+  <p>Adicione sua chave à URL para abrir o painel.</p>
+</div>
+
+<script>
+"use strict";
+(function(){
+  /* ===== ACESSO (opcional) ===== */
+  var SECRET = "codice2026";
+  var params = new URLSearchParams(location.search);
+  var key = params.get("k");
+  var ACCESS_OK = (key === null || key === SECRET);
+
+  /* ===== ENDPOINTS ===== */
+  var BASE = "https://codice-app-production.up.railway.app";
+  var K = "codice2026";
+  var URL_SALES = BASE + "/api/trpc/progress.sales?input=" + encodeURIComponent(JSON.stringify({json:{key:K}}));
+  var URL_TRAFFIC = BASE + "/api/webhook/traffic";
+  var URL_ONLINE = BASE + "/api/webhook/online";
+  var URL_CONVERSION = BASE + "/api/webhook/conversion";
+
+  var BR_OFFSET = 3 * 3600 * 1000; // UTC-3
+
+  /* ===== UTILS ===== */
+  function brDate(iso){ return new Date(new Date(iso).getTime() - BR_OFFSET); }
+  function ymd(iso){ return brDate(iso).toISOString().slice(0,10); }
+  function todayBR(){ return new Date(Date.now() - BR_OFFSET).toISOString().slice(0,10); }
+  function yesterdayBR(){ return new Date(Date.now() - BR_OFFSET - 86400000).toISOString().slice(0,10); }
+  function hhmm(iso){
+    var d = brDate(iso);
+    var h = String(d.getUTCHours()).padStart(2,"0");
+    var m = String(d.getUTCMinutes()).padStart(2,"0");
+    return h + ":" + m;
+  }
+  function dayLabel(iso){
+    var d = brDate(iso);
+    return String(d.getUTCDate()).padStart(2,"0") + "/" + String(d.getUTCMonth()+1).padStart(2,"0");
+  }
+  function brl(n){
+    return "R$ " + (Number(n)||0).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+  function minutesAgo(iso){
+    if(!iso) return null;
+    return Math.floor((Date.now() - new Date(iso).getTime())/60000);
+  }
+  function ago(min){
+    if(min===null) return "—";
+    if(min < 1) return "agora";
+    if(min < 60) return "há " + min + "min";
+    var h = Math.floor(min/60);
+    return "há " + h + "h" + (min%60 ? String(min%60).padStart(2,"0") : "");
+  }
+  function nameFrom(v){
+    if(v && v.nome && String(v.nome).trim()) return String(v.nome).trim();
+    if(v && v.email && String(v.email).trim()) return String(v.email).trim();
+    return "—";
+  }
+  function setBadge(id, ok, text, stale){
+    var el = document.getElementById(id);
+    if(!el) return;
+    el.className = "badge" + (ok ? (stale ? " stale" : "") : " warn");
+    el.innerHTML = '<span class="bdot"></span> ' + text;
+  }
+
+  /* ===== STATE ===== */
+  var STATE = {
+    sales: null, salesErr:false, salesFetchedAt:null,
+    traffic: null, trafficErr:false,
+    online: null, onlineErr:false,
+    conversion: null, conversionErr:false,
+    period: "hoje"
+  };
+
+  /* período → predicado de dia BR */
+  function inPeriod(iso){
+    var day = ymd(iso);
+    var p = STATE.period;
+    if(p === "tudo") return true;
+    if(p === "hoje") return day === todayBR();
+    if(p === "ontem") return day === yesterdayBR();
+    var ms = brDate(iso).getTime();
+    var nowBR = new Date(Date.now() - BR_OFFSET).getTime();
+    var days = p === "7d" ? 7 : 30;
+    return ms >= (nowBR - days*86400000);
+  }
+  function periodTitle(){
+    return {hoje:"Vendas Hoje",ontem:"Vendas Ontem","7d":"Vendas · 7 dias","30d":"Vendas · 30 dias",tudo:"Vendas · Tudo"}[STATE.period];
+  }
+  /* período → predicado por dia-string YYYY-MM-DD (BR) — pro agregado de conversão */
+  function diaNoPeriodo(day){
+    var p = STATE.period;
+    if(p === "tudo") return true;
+    if(p === "hoje") return day === todayBR();
+    if(p === "ontem") return day === yesterdayBR();
+    var ms = new Date(day+"T12:00:00Z").getTime();
+    var nowBR = new Date(Date.now() - BR_OFFSET).getTime();
+    var days = p === "7d" ? 7 : 30;
+    return ms >= (nowBR - days*86400000);
+  }
+  /* soma visitantes únicos (aprox) de um mapa dia->contagem dentro do período */
+  function somaAgregado(diaMap){
+    if(!diaMap) return 0;
+    var t=0;
+    Object.keys(diaMap).forEach(function(d){ if(diaNoPeriodo(d)) t += diaMap[d]; });
+    return t;
+  }
+
+  /* ===== FETCHERS ===== */
+  function fetchSales(){
+    return fetch(URL_SALES,{cache:"no-store"}).then(function(r){
+      if(!r.ok) throw new Error("HTTP "+r.status); return r.json();
+    }).then(function(j){
+      var d = j && j.result && j.result.data && j.result.data.json;
+      if(!d) throw new Error("formato inesperado");
+      STATE.sales = d; STATE.salesErr = false; STATE.salesFetchedAt = Date.now();
+    }).catch(function(e){ STATE.salesErr = true; console.warn("sales:",e); });
+  }
+  function fetchTraffic(){
+    return fetch(URL_TRAFFIC,{cache:"no-store"}).then(function(r){
+      if(!r.ok) throw new Error("HTTP "+r.status); return r.json();
+    }).then(function(j){ STATE.traffic = j; STATE.trafficErr = false; })
+     .catch(function(e){ STATE.trafficErr = true; console.warn("traffic:",e); });
+  }
+  function fetchOnline(){
+    return fetch(URL_ONLINE,{cache:"no-store"}).then(function(r){
+      if(!r.ok) throw new Error("HTTP "+r.status); return r.json();
+    }).then(function(j){ STATE.online = j; STATE.onlineErr = false; })
+     .catch(function(e){ STATE.onlineErr = true; console.warn("online:",e); });
+  }
+  function fetchConversion(){
+    return fetch(URL_CONVERSION,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key:K}),cache:"no-store"})
+      .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+      .then(function(j){ STATE.conversion = j; STATE.conversionErr = false; })
+      .catch(function(e){ STATE.conversionErr = true; console.warn("conversion:",e); });
+  }
+
+  /* ===== RENDER ===== */
+  function renderSalesKpis(){
+    document.getElementById("kpiPeriodLabel").textContent = periodTitle();
+    if(STATE.salesErr || !STATE.sales){
+      setBadge("salesBadge", false, "Kirvano · erro ao buscar (tentando de novo)");
+      ["kpiQtd","kpiReceita","kpiTicket"].forEach(function(id){ document.getElementById(id).textContent = STATE.salesErr ? "⚠" : "…"; });
+      return;
+    }
+    var list = Array.isArray(STATE.sales.vendas) ? STATE.sales.vendas.filter(function(v){ return v && v.data && inPeriod(v.data); }) : [];
+    var qtd = list.length;
+    var receita = list.reduce(function(s,v){ return s + (Number(v.preco)||0); }, 0);
+    var ticket = qtd ? receita/qtd : 0;
+    document.getElementById("kpiQtd").textContent = qtd;
+    document.getElementById("kpiReceita").textContent = brl(receita);
+    document.getElementById("kpiTicket").textContent = qtd ? brl(ticket) : "—";
+    var freshness = ago(minutesAgo(new Date(STATE.salesFetchedAt).toISOString()));
+    setBadge("salesBadge", true, "Kirvano · atualizado " + freshness);
+  }
+
+  function renderSalesList(){
+    var tb = document.getElementById("salesList");
+    if(STATE.salesErr || !STATE.sales){
+      tb.innerHTML = '<tr><td colspan="4"><div class="state err">⚠ Erro ao buscar (tentando de novo)</div></td></tr>';
+      setBadge("listBadge", false, "Kirvano · erro");
+      return;
+    }
+    var list = (Array.isArray(STATE.sales.vendas) ? STATE.sales.vendas : [])
+      .filter(function(v){ return v && v.data && inPeriod(v.data); })
+      .sort(function(a,b){ return new Date(b.data) - new Date(a.data); });
+    setBadge("listBadge", true, "Kirvano · " + list.length + " linha" + (list.length===1?"":"s"));
+    if(!list.length){
+      tb.innerHTML = '<tr><td colspan="4"><div class="state empty">Sem vendas nesse período.</div></td></tr>';
+      return;
+    }
+    var rows = list.map(function(v){
+      var isNew = (Date.now() - new Date(v.data).getTime()) <= 5*60*1000;
+      var newB = isNew ? '<span class="new-badge">Nova</span>' : '';
+      var nm = nameFrom(v);
+      return '<tr>' +
+        '<td class="time">' + dayLabel(v.data) + ' · ' + hhmm(v.data) + newB + '</td>' +
+        '<td class="name" title="'+ esc(nm) +'">' + esc(nm) + '</td>' +
+        '<td>' + esc(v.produto || "—") + '</td>' +
+        '<td class="num green">' + brl(v.preco) + '</td>' +
+      '</tr>';
+    }).join("");
+    tb.innerHTML = rows;
+  }
+
+  function renderProducts(){
+    var tb = document.getElementById("prodList");
+    if(STATE.salesErr || !STATE.sales){
+      tb.innerHTML = '<tr><td colspan="3"><div class="state err">⚠ Erro ao buscar (tentando de novo)</div></td></tr>';
+      setBadge("prodBadge", false, "Kirvano · erro");
+      return;
+    }
+    /* Recalcula por produto a partir das vendas do PERÍODO (consistente com os KPIs) */
+    var list = (Array.isArray(STATE.sales.vendas) ? STATE.sales.vendas : []).filter(function(v){ return v && v.data && inPeriod(v.data); });
+    var map = {};
+    list.forEach(function(v){
+      var p = v.produto || "—";
+      if(!map[p]) map[p] = {vendas:0, receita:0};
+      map[p].vendas++; map[p].receita += (Number(v.preco)||0);
+    });
+    var arr = Object.keys(map).map(function(p){ return {produto:p, vendas:map[p].vendas, receita:map[p].receita}; })
+      .sort(function(a,b){ return b.receita - a.receita; });
+    setBadge("prodBadge", true, "Kirvano · período");
+    if(!arr.length){
+      tb.innerHTML = '<tr><td colspan="3"><div class="state empty">Sem vendas nesse período.</div></td></tr>';
+      return;
+    }
+    tb.innerHTML = arr.map(function(p){
+      return '<tr><td>' + esc(p.produto) + '</td><td class="num">' + p.vendas + '</td><td class="num green">' + brl(p.receita) + '</td></tr>';
+    }).join("");
+  }
+
+  function renderOnline(){
+    if(STATE.onlineErr || !STATE.online){
+      setBadge("onlineBadge", false, "erro ao buscar");
+      document.getElementById("onCodice").textContent = STATE.onlineErr ? "⚠" : "…";
+      document.getElementById("onFreq").textContent = STATE.onlineErr ? "⚠" : "…";
+      return;
+    }
+    document.getElementById("onCodice").textContent = Number(STATE.online.codice)||0;
+    document.getElementById("onFreq").textContent = Number(STATE.online.frequencia)||0;
+    setBadge("onlineBadge", true, "ativos · últimos 5 min");
+  }
+
+  function renderTraffic(){
+    /* VISITANTES AO VIVO (nosso tracking, sem cache) — pessoas distintas no período em páginas de venda */
+    var liveEl = document.getElementById("trafLive");
+    if(STATE.conversionErr || !STATE.conversion){
+      liveEl.textContent = STATE.conversionErr ? "⚠" : "…";
+    } else {
+      var total = somaAgregado(STATE.conversion.totalDia);
+      liveEl.textContent = total.toLocaleString("pt-BR");
+    }
+    /* CLARITY (cache 3h) */
+    if(STATE.trafficErr || !STATE.traffic){
+      setBadge("trafficBadge", false, "Clarity · erro ao buscar");
+      document.getElementById("trafUsers").textContent = STATE.trafficErr ? "⚠" : "…";
+      document.getElementById("trafSessions").textContent = STATE.trafficErr ? "⚠" : "…";
+      return;
+    }
+    var t = STATE.traffic;
+    document.getElementById("trafUsers").textContent = (Number(t.usuarios)||0).toLocaleString("pt-BR");
+    document.getElementById("trafSessions").textContent = (Number(t.sessoes)||0).toLocaleString("pt-BR");
+    var when = t.atualizadoEm ? hhmm(t.atualizadoEm) : "—";
+    setBadge("trafficBadge", true, "Clarity · atraso até 3h · às " + when, true);
+  }
+
+  function renderConversion(){
+    var tb = document.getElementById("convList");
+    if(STATE.conversionErr || !STATE.conversion){
+      tb.innerHTML = '<tr><td colspan="4"><div class="state err">⚠ Erro ao buscar (tentando de novo)</div></td></tr>';
+      setBadge("convBadge", false, "Tracking · erro");
+      return;
+    }
+    var agr = (STATE.conversion && STATE.conversion.agregado) ? STATE.conversion.agregado : {};
+    /* páginas de venda (chaves do tracking) */
+    var PAGES = [
+      {key:"codice", label:"Códice", match:function(p){ return /códice|codice/i.test(p); }},
+      {key:"frequencia", label:"Frequência", match:function(p){ return /ressonância|ressonancia|frequ/i.test(p); }},
+      {key:"biblioteca", label:"Biblioteca", match:function(p){ return /biblioteca/i.test(p); }},
+      {key:"enoque", label:"Documentário Enoque", match:function(p){ return /enoque|enoki|eno[qk]/i.test(p); }}
+    ];
+    /* visitantes únicos por página no período (soma dos dias do agregado) */
+    var uniq = {};
+    PAGES.forEach(function(p){ uniq[p.key] = somaAgregado(agr[p.key]); });
+    /* vendas por produto no período (mesma fonte dos KPIs) */
+    var salesList = (STATE.sales && Array.isArray(STATE.sales.vendas)) ? STATE.sales.vendas.filter(function(v){ return v && v.data && inPeriod(v.data); }) : [];
+    function salesForPage(p){
+      return salesList.filter(function(v){ return p.match(v.produto || ""); }).length;
+    }
+    setBadge("convBadge", true, "Tracking próprio · período");
+    var any = false;
+    var rows = PAGES.map(function(p){
+      var vis = uniq[p.key] || 0;
+      var vendas = salesForPage(p);
+      if(vis === 0 && vendas === 0) return ""; // não polui com linhas vazias
+      any = true;
+      var conv = vis ? (vendas/vis*100) : 0;
+      var convTxt = vis ? conv.toFixed(1).replace(".",",") + "%" : "—";
+      return '<tr><td>' + p.label + '</td><td class="num">' + vis + '</td><td class="num">' + vendas + '</td><td class="num" style="color:'+(conv>0?'var(--green)':'var(--txt-dim)')+'">' + convTxt + '</td></tr>';
+    }).join("");
+    if(!any){
+      tb.innerHTML = '<tr><td colspan="4"><div class="state empty">Sem visitas registradas nesse período.</div></td></tr>';
+      return;
+    }
+    tb.innerHTML = rows;
+  }
+
+  function esc(s){
+    return String(s==null?"":s).replace(/[&<>"']/g,function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  function renderAll(){
+    renderSalesKpis();
+    renderSalesList();
+    renderProducts();
+    renderOnline();
+    renderTraffic();
+    renderConversion();
+    var now = new Date(Date.now() - BR_OFFSET);
+    var hh = String(now.getUTCHours()).padStart(2,"0");
+    var mm = String(now.getUTCMinutes()).padStart(2,"0");
+    var ss = String(now.getUTCSeconds()).padStart(2,"0");
+    document.getElementById("lastUpdate").textContent = "Atualizado " + hh + ":" + mm + ":" + ss + " (BR)";
+  }
+
+  function refresh(){
+    return Promise.all([fetchSales(), fetchTraffic(), fetchOnline(), fetchConversion()])
+      .then(renderAll);
+  }
+
+  /* ===== PERÍODO ===== */
+  function bindPeriods(){
+    document.getElementById("periods").addEventListener("click", function(e){
+      var b = e.target.closest(".pbtn");
+      if(!b) return;
+      STATE.period = b.getAttribute("data-p");
+      Array.prototype.forEach.call(document.querySelectorAll(".pbtn"), function(x){ x.classList.remove("active"); });
+      b.classList.add("active");
+      renderAll();
+    });
+  }
+
+  function boot(){
+    bindPeriods();
+    refresh();
+    setInterval(refresh, 30000);
+  }
+
+  /* ===== INÍCIO (depois de tudo definido) ===== */
+  if (ACCESS_OK){
+    document.getElementById("app").style.display = "block";
+    boot();
+  } else {
+    document.getElementById("gate").style.display = "flex";
+  }
+})();
+</script>
+</body>
+</html>

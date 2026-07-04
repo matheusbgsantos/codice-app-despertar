@@ -8,6 +8,7 @@ import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { webhookRouter } from "../webhook";
+import { igMetricsRouter } from "../ig-metrics";
 import { getDb } from "../db";
 
 function isPortAvailable(port: number): Promise<boolean> {
@@ -53,6 +54,9 @@ async function startServer() {
   
   // Webhook routes for Kirvano integration
   app.use("/api/webhook", webhookRouter);
+
+  // Métricas do Instagram pro painel-ig (portado do Netlify em 04/07/2026)
+  app.use("/api/ig-metrics", igMetricsRouter);
   
   // tRPC API
   app.use(

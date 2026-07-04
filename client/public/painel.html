@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painel · Arquivos Ocultos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&family=Source+Sans+3:wght@400;600;700&display=swap');
+:root{--red:#b81d13;--ink:#1a1a1a;--mut:#7a7a7a;--rule:#e6e6e6;--bg:#0f0f10}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#eee;font-family:'Source Sans 3',Arial,sans-serif;min-height:100vh}
+/* gate */
+#gate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#0f0f10;z-index:10;flex-direction:column;gap:12px}
+#gate input{border:1px solid #333;background:#1a1a1a;color:#fff;border-radius:6px;padding:13px 16px;font-size:16px;text-align:center;width:240px}
+#gate button{background:var(--red);color:#fff;border:0;border-radius:6px;padding:12px 28px;font-weight:700;cursor:pointer}
+#gate .t{font-family:'PT Serif',serif;font-size:20px;color:#fff}
+#gate .err{color:var(--red);font-size:13px;height:16px}
+/* dash */
+.wrap{max-width:1000px;margin:0 auto;padding:26px 18px 50px}
+.top{display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--red);padding-bottom:12px;margin-bottom:24px}
+.top h1{font-family:'PT Serif',serif;font-size:22px;color:#fff;margin:0}
+.top h1 span{color:var(--red)}
+.top .upd{font-size:12px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.card{background:#19191b;border:1px solid #2a2a2c;border-radius:12px;padding:20px 22px}
+.card .lbl{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.card .big{font-family:'PT Serif',serif;font-size:48px;color:#fff;line-height:1;margin:8px 0 10px}
+.card .big.red{color:var(--red)}
+.card .sub{font-size:13.5px;color:#bdbdbd;line-height:1.7}
+.card .sub b{color:#fff}
+.foot{margin-top:26px;font-size:12px;color:var(--mut);text-align:center}
+.refresh{background:#19191b;border:1px solid #2a2a2c;color:#ccc;border-radius:6px;padding:8px 16px;font-size:13px;cursor:pointer}
+.soon{opacity:.5}
+.links{margin-top:28px}
+.lbl2{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:12px}
+.lrow{display:flex;flex-wrap:wrap;gap:10px}
+.lbtn{background:#19191b;border:1px solid #2a2a2c;color:#ddd;border-radius:10px;padding:12px 16px;font-size:14px;text-decoration:none;transition:border-color .15s}
+.lbtn:hover{border-color:var(--red);color:#fff}
+.fbwrap{margin-top:28px}
+.fblist{display:flex;flex-direction:column;gap:8px}
+.fbitem{background:#19191b;border:1px solid #2a2a2c;border-radius:8px;padding:11px 14px;font-size:14px;color:#ddd;line-height:1.4}
+.fbitem .fbm{font-size:11px;color:var(--mut);margin-top:4px}
+.meta{background:linear-gradient(135deg,#1a1112,#19191b);border:1px solid #3a2020;border-radius:14px;padding:22px 26px;margin-bottom:18px;box-shadow:0 4px 20px rgba(184,29,19,.12)}
+.meta-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.meta-titulo{font-family:'PT Serif',serif;font-size:17px;font-weight:700;color:#fff;letter-spacing:.04em}
+.meta-dias{font-size:13px;color:#e0a0a0;font-weight:700;background:rgba(184,29,19,.18);padding:5px 12px;border-radius:20px}
+.meta-nums{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.meta-atual{font-family:'PT Serif',serif;font-size:42px;font-weight:700;color:var(--red);line-height:1}
+.meta-de{font-size:15px;color:var(--mut)}
+.meta-alvo{font-family:'PT Serif',serif;font-size:24px;color:#ccc;font-weight:700}
+.meta-bar{position:relative;height:26px;background:#0c0c0d;border-radius:14px;overflow:hidden;border:1px solid #2a2a2c}
+.meta-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#8a1610,#b81d13,#e23b2e);border-radius:14px;transition:width .8s ease}
+.meta-pct{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:13px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.meta-falta{margin-top:12px;font-size:14px;color:#ddd}.meta-falta b{color:#fff}
+.funil-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.funil-lbl{width:130px;font-size:13px;color:#bbb;flex:none}
+.funil-track{flex:1;background:#0c0c0d;border-radius:8px;height:30px;position:relative;overflow:hidden;border:1px solid #2a2a2c}
+.funil-bar{height:100%;background:linear-gradient(90deg,#8a1610,#b81d13);display:flex;align-items:center;padding-left:10px;font-size:13px;font-weight:700;color:#fff;border-radius:8px;min-width:40px;transition:width .8s}
+.funil-conv{width:80px;font-size:12px;color:#e0a0a0;flex:none;text-align:right}
+</style></head>
+<body>
+
+<div class="wrap" id="dash">
+  <div class="top">
+    <h1>ARQUIVOS<span>OCULTOS</span> · Painel</h1>
+    <div><span class="upd" id="upd">carregando...</span> <button class="refresh" onclick="carregar()">atualizar</button></div>
+  </div>
+
+  <div class="meta">
+    <div class="meta-head">
+      <div class="meta-titulo">🎯 META ATÉ 30/06</div>
+      <div class="meta-dias" id="meta_dias">—</div>
+    </div>
+    <div class="meta-nums">
+      <span class="meta-atual" id="meta_atual">R$ —</span>
+      <span class="meta-de">de</span>
+      <span class="meta-alvo">R$ 100.000</span>
+    </div>
+    <div class="meta-bar"><div class="meta-fill" id="meta_fill" style="width:0%"></div><span class="meta-pct" id="meta_pct">0%</span></div>
+    <div class="meta-falta" id="meta_falta">Faltam R$ — · ritmo necessário: R$ —/dia</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="lbl">E-mails cadastrados</div>
+      <div class="big red" id="subs_total">—</div>
+      <div class="sub">Hoje: <b id="subs_hoje">—</b><br>7 dias: <b id="subs_7d">—</b> · 30 dias: <b id="subs_30d">—</b></div>
+    </div>
+    <div class="card">
+      <div class="lbl">Visitas na página</div>
+      <div class="big" id="views_total">—</div>
+      <div class="sub">Hoje: <b id="views_hoje">—</b><br>7 dias: <b id="views_7d">—</b><br><span style="color:var(--mut)">contando a partir de hoje</span></div>
+    </div>
+    <div class="card">
+      <div class="lbl">Conversão (visita → e-mail)</div>
+      <div class="big" id="conv">—</div>
+      <div class="sub">De cada 100 que entram, quantos deixam o e-mail.<br><span style="color:var(--mut)">fica preciso conforme as visitas somam</span></div>
+    </div>
+    <div class="card">
+      <div class="lbl">E-mails enviados</div>
+      <div class="big" id="emails_total">—</div>
+      <div class="sub">Última: <b id="emails_ult">—</b><br><span id="emails_ultq" style="color:var(--mut)"></span></div>
+    </div>
+    <div class="card">
+      <div class="lbl">💰 Vendas (Códice)</div>
+      <div class="big red" id="vendas_total">—</div>
+      <div class="sub">Faturamento: <b id="vendas_fat">—</b><br>Hoje: <b id="vendas_hoje">—</b> venda(s) · <b id="vendas_fathoje">—</b></div>
+    </div>
+  </div>
+  <div class="links">
+    <div class="lbl2">Ferramentas conectadas (abre em nova aba)</div>
+    <div class="lrow">
+      <a class="lbtn" href="https://clarity.microsoft.com/projects/view/x9h7c74lg1/dashboard" target="_blank" rel="noopener">🎥 Clarity · comportamento do lead</a>
+      <a class="lbtn" href="https://supabase.com/dashboard/project/nbizxbdugsmeoudkwtot" target="_blank" rel="noopener">🗄️ Supabase · e-mails/dados</a>
+      <a class="lbtn" href="https://app.kirvano.com" target="_blank" rel="noopener">💰 Kirvano · vendas</a>
+      <a class="lbtn" href="https://app.netlify.com" target="_blank" rel="noopener">⚙️ Netlify · site</a>
+      <a class="lbtn" href="https://app.smtp2go.com" target="_blank" rel="noopener">✉️ SMTP2GO · e-mail</a>
+      <a class="lbtn" href="https://uptimerobot.com/dashboard" target="_blank" rel="noopener">🚨 UptimeRobot · queda</a>
+    </div>
+  </div>
+  <div class="fbwrap">
+    <div class="lbl2">📊 Funil — caminho do lead até a compra</div>
+    <div id="funil">carregando...</div>
+  </div>
+  <div class="fbwrap">
+    <div class="lbl2">Sugestões dos leads (caixinha do site)</div>
+    <div class="fblist" id="fblist">carregando...</div>
+  </div>
+  <div class="foot">Atualiza sozinho a cada 60s · arquivosoculto.com.br</div>
+</div>
+
+<script>
+const SUPABASE_URL = "https://nbizxbdugsmeoudkwtot.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_MITJbApeJTSHm41YW8a50A_DnbYUWPI";
+function set(id,v){ document.getElementById(id).textContent = v; }
+function carregar(){
+  fetch(SUPABASE_URL + "/rest/v1/rpc/painel_stats", {
+    method:"POST",
+    headers:{ "apikey":SUPABASE_ANON_KEY, "Authorization":"Bearer "+SUPABASE_ANON_KEY, "Content-Type":"application/json" },
+    body:"{}"
+  }).then(r=>r.json()).then(function(d){
+    set('subs_total', d.subs_total); set('subs_hoje', d.subs_hoje); set('subs_7d', d.subs_7d); set('subs_30d', d.subs_30d);
+    set('views_total', d.views_total); set('views_hoje', d.views_hoje); set('views_7d', d.views_7d);
+    var conv = d.views_total > 0 ? ((d.subs_total / d.views_total) * 100).toFixed(1) + "%" : "—";
+    set('conv', conv);
+    var agora = new Date();
+    set('upd', "atualizado " + agora.getHours().toString().padStart(2,'0') + ":" + agora.getMinutes().toString().padStart(2,'0'));
+  }).catch(function(){ set('upd', "erro ao carregar"); });
+}
+function carregarFb(){
+  fetch(SUPABASE_URL + "/rest/v1/rpc/painel_feedback", {method:"POST",headers:{apikey:SUPABASE_ANON_KEY,Authorization:"Bearer "+SUPABASE_ANON_KEY,"Content-Type":"application/json"},body:"{}"}).then(r=>r.json()).then(function(arr){
+    var el=document.getElementById('fblist');
+    if(!arr||!arr.length){ el.innerHTML='<div class="fbitem" style="color:#888">Nenhuma sugestão ainda.</div>'; return; }
+    el.innerHTML = arr.map(function(f){ return '<div class="fbitem">'+(f.texto||'').replace(/</g,'&lt;')+'<div class="fbm">'+(f.quando||'')+(f.path?(' · '+f.path):'')+'</div></div>'; }).join('');
+  }).catch(function(){});
+}
+function carregarEmails(){
+  fetch(SUPABASE_URL + "/rest/v1/rpc/painel_emails", {method:"POST",headers:{apikey:SUPABASE_ANON_KEY,Authorization:"Bearer "+SUPABASE_ANON_KEY,"Content-Type":"application/json"},body:"{}"}).then(r=>r.json()).then(function(d){
+    set('emails_total', d.total_envios);
+    if(d.ultima){ set('emails_ult', d.ultima.sent + ' enviados'); document.getElementById('emails_ultq').textContent = '"' + (d.ultima.subject||'') + '" · ' + (d.ultima.quando||'') + (d.ultima.failed? (' · '+d.ultima.failed+' falhas'):''); }
+    else { set('emails_ult','nenhum ainda'); }
+  }).catch(function(){});
+}
+function fmtBRL(v){ return "R$ " + (Number(v)||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtBRL0(v){ return "R$ " + Math.round(Number(v)||0).toLocaleString('pt-BR'); }
+const META_ALVO = 100000;
+function atualizarMeta(faturamento){
+  var fat = Number(faturamento)||0;
+  var pct = Math.min(100, (fat/META_ALVO)*100);
+  document.getElementById('meta_atual').textContent = fmtBRL0(fat);
+  document.getElementById('meta_fill').style.width = pct + "%";
+  document.getElementById('meta_pct').textContent = pct.toFixed(1) + "%";
+  // dias restantes até 30/06 (fim do dia)
+  var hoje = new Date();
+  var fim = new Date(hoje.getFullYear(), 5, 30, 23, 59, 59); // mês 5 = junho
+  var diasMs = fim - hoje;
+  var dias = Math.max(0, Math.ceil(diasMs/(1000*60*60*24)));
+  var falta = Math.max(0, META_ALVO - fat);
+  var ritmo = dias>0 ? falta/dias : falta;
+  document.getElementById('meta_dias').textContent = dias>0 ? (dias + (dias===1?" dia restante":" dias restantes")) : "último dia!";
+  document.getElementById('meta_falta').innerHTML = falta>0
+    ? ("Faltam <b>"+fmtBRL0(falta)+"</b> · ritmo necessário: <b>"+fmtBRL0(ritmo)+"/dia</b>")
+    : "🔥 META BATIDA! Parabéns!";
+}
+function carregarVendas(){
+  fetch(SUPABASE_URL + "/rest/v1/rpc/painel_vendas", {method:"POST",headers:{apikey:SUPABASE_ANON_KEY,Authorization:"Bearer "+SUPABASE_ANON_KEY,"Content-Type":"application/json"},body:"{}"}).then(r=>r.json()).then(function(d){
+    set('vendas_total', d.total_vendas);
+    set('vendas_fat', fmtBRL(d.faturamento));
+    set('vendas_hoje', d.vendas_hoje);
+    set('vendas_fathoje', fmtBRL(d.fat_hoje));
+    atualizarMeta(d.faturamento);
+  }).catch(function(){});
+}
+function carregarFunil(){
+  Promise.all([
+    fetch(SUPABASE_URL+"/rest/v1/rpc/painel_funil",{method:"POST",headers:{apikey:SUPABASE_ANON_KEY,Authorization:"Bearer "+SUPABASE_ANON_KEY,"Content-Type":"application/json"},body:"{}"}).then(r=>r.json()),
+    fetch(SUPABASE_URL+"/rest/v1/rpc/painel_vendas",{method:"POST",headers:{apikey:SUPABASE_ANON_KEY,Authorization:"Bearer "+SUPABASE_ANON_KEY,"Content-Type":"application/json"},body:"{}"}).then(r=>r.json())
+  ]).then(function(res){
+    var f=res[0]||{}, v=res[1]||{};
+    var etapas=[
+      ["🏠 Home", Number(f.home)||0],
+      ["📰 Matérias", Number(f.materias)||0],
+      ["🎁 Presentes", Number(f.presentes)||0],
+      ["💰 Oferta", Number(f.oferta)||0],
+      ["✅ Vendas", Number(v.total_vendas)||0]
+    ];
+    var max=Math.max.apply(null,etapas.map(e=>e[1]))||1;
+    var topo=etapas[0][1]||1;
+    var html=etapas.map(function(e,idx){
+      var w=Math.max(3,(e[1]/max)*100);
+      var conv = idx===0 ? "" : ((e[1]/topo*100).toFixed(1)+"% do topo");
+      return '<div class="funil-row"><div class="funil-lbl">'+e[0]+'</div><div class="funil-track"><div class="funil-bar" style="width:'+w+'%">'+e[1]+'</div></div><div class="funil-conv">'+conv+'</div></div>';
+    }).join('');
+    document.getElementById('funil').innerHTML=html;
+  }).catch(function(){ document.getElementById('funil').innerHTML='<div style="color:#888">erro ao carregar funil</div>'; });
+}
+carregar(); carregarFb(); carregarEmails(); carregarVendas(); carregarFunil();
+setInterval(function(){ carregar(); carregarFb(); carregarEmails(); carregarVendas(); carregarFunil(); }, 60000);
+</script>
+</body></html>

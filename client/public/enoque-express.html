@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>📁 ARQUIVO 003 · A página que enterraram</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+3:wght@400;600;700&display=swap');
+:root{--red:#b81d13;--ink:#1a1a1a;--gold:#8a6d1f;--bg:#0d0b09;--paper:#f4efe3}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:#e8e2d4;font-family:'Source Sans 3',Arial,sans-serif;line-height:1.5}
+.wrap{max-width:560px;margin:0 auto;padding:18px 16px 90px}
+.stamp{display:flex;align-items:center;gap:10px;border:1px solid #3a3226;border-radius:8px;padding:10px 14px;margin-bottom:16px;background:#151209}
+.stamp .n{font-family:'PT Serif',Georgia,serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#d4af37}
+.stamp .d{margin-left:auto;font-size:10.5px;color:#8a8170;text-align:right;line-height:1.4}
+.stamp .cls{color:#e05545;font-weight:700;letter-spacing:.1em}
+h1{font-family:'PT Serif',Georgia,serif;font-size:26px;line-height:1.2;color:#f2ead8;margin:6px 0 6px}
+.sub{color:#9a9080;font-size:14.5px;margin-bottom:18px}
+.provas{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0 6px}
+.provas figure{margin:0;background:#151209;border:1px solid #3a3226;border-radius:8px;overflow:hidden}
+.provas img{width:100%;height:86px;object-fit:cover;display:block}
+.provas figcaption{font-size:9.5px;letter-spacing:.5px;color:#9a9080;padding:6px 7px;line-height:1.3;text-transform:uppercase}
+.vist{font-size:11px;color:#6b6355;text-align:center;margin:4px 0 20px;letter-spacing:.5px}
+/* a página do livro */
+.folha{background:var(--paper);color:#2a2318;border-radius:10px;padding:26px 22px 0;margin:10px 0 0;position:relative;box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.folha .rot{font-family:'Source Sans 3',sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8a6d1f;margin-bottom:12px;text-align:center}
+.folha h3{font-family:'PT Serif',Georgia,serif;font-size:17px;color:#1a1408;text-align:center;margin-bottom:14px}
+.folha p{font-family:'PT Serif',Georgia,serif;font-size:17.5px;line-height:1.75;margin-bottom:14px}
+.folha .vn{font-weight:700;color:#8a6d1f;font-size:12px;vertical-align:6px;margin-right:4px}
+.fade{position:relative;height:110px;margin:0 -22px;border-radius:0 0 10px 10px;
+  background:linear-gradient(180deg,rgba(244,239,227,0) 0%,var(--paper) 78%)}
+.fade .corte{position:absolute;left:0;right:0;bottom:22px;text-align:center;
+  font-family:'Source Sans 3',sans-serif;font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:#b81d13;font-weight:700}
+/* a escolha */
+.desejo{text-align:center;font-family:'PT Serif',Georgia,serif;font-size:19px;color:#f2ead8;margin:26px 0 4px;line-height:1.35}
+.desejo b{color:#d4af37}
+.eco{text-align:center;font-size:12.5px;color:#8a8170;margin:8px 0 4px}
+.dupla{display:grid;grid-template-columns:1fr;gap:10px;margin:16px 0 8px}
+.dupla a{display:block;text-align:center;font-family:'PT Serif',Georgia,serif;font-size:15.5px;line-height:1.3;font-weight:700;text-decoration:none;padding:16px 10px;border-radius:8px;color:#fff}
+.dupla a small{display:block;font-size:11.5px;font-weight:400;margin-top:4px}
+.dupla .ver{background:linear-gradient(180deg,#d0271b,#9e150c);box-shadow:0 6px 18px rgba(184,29,19,.35)}
+.dupla .ver small{color:#f3ccc8}
+.dupla .ler{background:#23201a;border:1px solid #4a4234}
+.dupla .ler small{color:#b0a890}
+.gar{text-align:center;font-size:12px;color:#8a8170;margin-bottom:22px}
+.mais{text-align:center;font-size:13px;margin:18px 0 0}
+.mais a{color:#8a6d1f;text-decoration:none;border-bottom:1px dotted #8a6d1f}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;background:linear-gradient(180deg,rgba(184,29,19,.97),#9e150c);box-shadow:0 -4px 18px rgba(0,0,0,.4);padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+.sticky a{display:block;max-width:540px;margin:0 auto;text-align:center;color:#fff;font-family:'PT Serif',Georgia,serif;font-weight:700;font-size:15.5px;text-decoration:none}
+.sticky a small{display:block;font-size:11px;font-weight:400;color:#f3ccc8}
+/* modal de escolha */
+.veu{position:fixed;inset:0;z-index:100;background:rgba(8,6,4,.88);display:none;align-items:flex-end;justify-content:center;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.veu.aberto{display:flex}
+.modal{background:#17130d;border:1px solid #4a4234;border-radius:16px 16px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom));width:100%;max-width:560px;animation:sobe .25s ease}
+@keyframes sobe{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal h4{font-family:'PT Serif',Georgia,serif;font-size:19px;color:#f2ead8;text-align:center;margin-bottom:4px}
+.modal .mh{text-align:center;font-size:12.5px;color:#9a9080;margin-bottom:16px}
+.modal a{display:block;text-align:left;font-family:'PT Serif',Georgia,serif;font-size:16.5px;font-weight:700;text-decoration:none;padding:16px 16px;border-radius:10px;color:#fff;margin-bottom:10px}
+.modal a small{display:block;font-family:'Source Sans 3',sans-serif;font-size:12px;font-weight:400;margin-top:3px}
+.modal .mver{background:linear-gradient(180deg,#d0271b,#9e150c)}
+.modal .mver small{color:#f3ccc8}
+.modal .mler{background:#23201a;border:1px solid #4a4234}
+.modal .mler small{color:#b0a890}
+.modal .fechar{display:block;background:none;border:none;width:100%;text-align:center;font-size:12px;color:#6b6355;padding:6px;cursor:pointer;font-family:'Source Sans 3',sans-serif}
+/* lupa das provas */
+.provas figure{cursor:zoom-in}
+.lupa{position:fixed;inset:0;z-index:120;background:rgba(5,4,2,.96);display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
+.lupa.aberta{display:flex}
+.lupa img{max-width:100%;max-height:78vh;object-fit:contain;border-radius:6px;box-shadow:0 10px 50px rgba(0,0,0,.8)}
+.lupa .leg{margin-top:14px;font-size:13px;color:#d4c9a8;text-align:center;max-width:480px;line-height:1.45}
+.lupa .dica{margin-top:8px;font-size:11px;color:#6b6355;letter-spacing:.08em;text-transform:uppercase}
+</style></head>
+<body>
+<div class="wrap">
+
+ <div class="stamp">
+  <span class="n">📁 ARQUIVO Nº 003 · ENOQUE</span>
+  <span class="d"><span class="cls">ENTREGA SOLICITADA</span><br>4 de julho de 2026</span>
+ </div>
+
+ <h1>Você pediu o arquivo.<br>Aqui está a página que enterraram.</h1>
+ <p class="sub">Antes do trecho, as três provas de que isso é real:</p>
+
+ <div class="provas">
+  <figure onclick="abrirLupa(this)"><img src="midia/enoque-erc.png" alt="Documento oficial ERC"><figcaption>O documento oficial: a IA se chama "Enoch"</figcaption></figure>
+  <figure onclick="abrirLupa(this)"><img src="midia/enoque-4q201.jpg" alt="Fragmento 4Q201"><figcaption>O fragmento real do livro · Caverna 4</figcaption></figure>
+  <figure onclick="abrirLupa(this)"><img src="midia/enoque-qumran.jpg" alt="Cavernas de Qumran"><figcaption>Onde ficou escondido 2.000 anos</figcaption></figure>
+ </div>
+ <div class="vist">✓ verificável: Judas 1:14 cita este livro na sua Bíblia</div>
+
+ <!-- A PÁGINA DO LIVRO (a amostra que vende) -->
+ <div class="folha">
+  <div class="rot">Livro de Enoque · Capítulo 8 · o trecho que custou o livro</div>
+  <h3>O que os anjos caídos ensinaram aos homens</h3>
+  <p><span class="vn">1</span>E Azazel ensinou os homens a fazerem espadas, e facas, e escudos, e couraças; e mostrou-lhes os metais da terra e a arte de trabalhá-los; e braceletes, e adornos; e o uso da pintura ao redor dos olhos, e o embelezamento das pálpebras, e as pedras mais preciosas, e toda a arte de colorir.</p>
+  <p><span class="vn">2</span>E surgiu grande impiedade, e cometeram fornicação, e foram desviados, e corromperam-se em todos os seus caminhos.</p>
+  <p><span class="vn">3</span>Semjaza ensinou os encantamentos e o corte de raízes. Armaros, a desfazer encantamentos. Baraquel, a observar as estrelas. Kokabel, as constelações. Ezequel, o conhecimento das nuvens...</p>
+  <p><span class="vn">4</span>E à medida que os homens pereciam, clamaram, e o seu clamor subiu ao céu. E foi então que os quatro que vigiam olharam para a terra e viram o sangue derramado, e Aquele que é o Senhor dos séculos ordenou que</p>
+  <div class="fade"><div class="corte">▓▓ o texto continua no arquivo completo ▓▓</div></div>
+ </div>
+
+ <p class="desejo">O que o Senhor dos séculos ordenou fazer com esses anjos está no <b>capítulo 9</b>.<br><b>Exatamente onde cortaram.</b></p>
+ <p class="eco">Este livro ficou enterrado por 1.600 anos. Faltam 107 capítulos.</p>
+
+ <div class="dupla">
+  <a class="ver" href="#" onclick="abrirEscolha(event)">🔓 DESBLOQUEAR O ARQUIVO COMPLETO<small>O Livro de Enoque + O Documentário</small></a>
+ </div>
+ <div class="gar">Acesso imediato · Garantia de 7 dias · O arquivo é seu pra sempre</div>
+
+</div>
+
+<div class="sticky"><a href="#" onclick="abrirEscolha(event)">📜 Ler o que Ele ordenou<small>107 capítulos · ler ou assistir · garantia de 7 dias</small></a></div>
+
+<!-- tela de escolha: ler ou assistir -->
+<div class="veu" id="veu" onclick="if(event.target===this)fecharEscolha()">
+ <div class="modal">
+  <h4>Como você quer abrir o arquivo?</h4>
+  <p class="mh">O arquivo é o mesmo. Escolha como ele entra na sua vida.</p>
+  <a class="mver" href="https://pay.kirvano.com/955b5975-a120-4a1a-9f9a-f7dba563ad6d?utm_source=dm&utm_campaign=enoque&utm_content=express-assistir">🎬 Quero ASSISTIR<small>a investigação completa em vídeo · O Documentário Enoque</small></a>
+  <a class="mler" href="https://pay.kirvano.com/e23b389a-dbf6-44d0-89e0-68c87147bbe3?utm_source=dm&utm_campaign=enoque&utm_content=express-ler">📖 Quero CONTINUAR LENDO<small>o Livro de Enoque completo + os outros banidos · A Biblioteca Oculta</small></a>
+  <p class="mh" style="margin:4px 0 8px">Pagaram €2,5 milhões pra uma máquina ler estes manuscritos.<br>O arquivo completo é seu hoje.</p>
+  <button type="button" class="fechar" onclick="fecharEscolha()">voltar pro texto</button>
+ </div>
+</div>
+
+<!-- lupa: prova em tela cheia sem sair do site -->
+<div class="lupa" id="lupa" onclick="fecharLupa()">
+ <img id="lupaImg" src="" alt="">
+ <div class="leg" id="lupaLeg"></div>
+ <div class="dica">toque pra voltar</div>
+</div>
+
+<script>
+function abrirEscolha(e){e.preventDefault();document.getElementById('veu').classList.add('aberto')}
+function fecharEscolha(){document.getElementById('veu').classList.remove('aberto')}
+function abrirLupa(fig){
+  var img=fig.querySelector('img'),leg=fig.querySelector('figcaption');
+  document.getElementById('lupaImg').src=img.src;
+  document.getElementById('lupaImg').alt=img.alt;
+  document.getElementById('lupaLeg').textContent=leg?leg.textContent:'';
+  document.getElementById('lupa').classList.add('aberta');
+}
+function fecharLupa(){document.getElementById('lupa').classList.remove('aberta')}
+</script>
+<script src="tracking-only.js" defer></script>
+</body></html>

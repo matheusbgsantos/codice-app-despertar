@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arquivos Ocultos, Autorizaram furar a "Arca", e o que o radar viu lá embaixo não deveria existir</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+3:wght@400;600;700&display=swap');
+html{scroll-behavior:smooth}
+h2.sub[id]{scroll-margin-top:16px}
+:root{--red:#b81d13;--ink:#1a1a1a;--body:#333;--mut:#7a7a7a;--rule:#e6e6e6;--bg:#f0f0f0;--gold:#8a6d1f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--body);font-family:'Source Sans 3','Helvetica Neue',Arial,sans-serif}
+a{color:var(--red);text-decoration:none}
+.topbar{background:var(--red);position:sticky;top:0;z-index:10}
+.topbar .in{max-width:1000px;margin:0 auto;display:flex;align-items:center;height:54px;padding:0 18px;color:#fff;gap:18px}
+.menu{font-size:12px;font-weight:700;text-transform:uppercase;opacity:.95}
+.logo{font-weight:800;font-size:20px;color:#fff}.logo b{font-weight:300}
+.sec{flex:1;text-align:center;font-family:'PT Serif',Georgia,serif;font-size:19px;color:#fff;text-transform:uppercase}
+@media(max-width:680px){.sec{display:none}}
+.paper{max-width:620px;margin:0 auto;background:#fff;padding:30px 30px 40px}
+@media(max-width:680px){.paper{padding:22px 18px}}
+.stamp{display:flex;align-items:center;gap:10px;border:2px solid var(--ink);border-radius:6px;padding:10px 14px;margin-bottom:18px;background:#faf8f2}
+.stamp .n{font-family:'PT Serif',Georgia,serif;font-weight:700;font-size:13px;letter-spacing:.14em;color:var(--ink)}
+.stamp .d{margin-left:auto;font-size:11px;color:var(--mut);text-align:right;line-height:1.4}
+.stamp .cls{color:var(--red);font-weight:700;letter-spacing:.1em}
+.kicker{font-size:13px;font-weight:700;color:var(--red);text-transform:uppercase;margin-bottom:10px;letter-spacing:.03em}
+h1{font-family:'PT Serif',Georgia,serif;font-weight:700;font-size:37px;line-height:1.12;color:var(--ink);margin:0 0 16px}
+.dek{font-size:19px;line-height:1.45;color:#5a5a5a;margin:0 0 22px}
+.byline{font-size:13px;color:var(--mut);line-height:1.7;border-bottom:1px solid var(--rule);padding-bottom:16px;margin-bottom:20px}
+.byline .a{color:var(--ink);font-weight:700}
+figure{margin:0 0 6px}figure img,figure video{width:100%;display:block;border:1px solid #e0e0e0}
+figcaption{font-size:13px;color:var(--mut);margin:7px 0 26px;line-height:1.4}figcaption b{color:#555}
+p{font-size:18px;line-height:1.65;margin:0 0 21px}
+p.lead{font-size:19px}
+p.lead::first-letter{font-family:'PT Serif',Georgia,serif;float:left;font-size:64px;line-height:.8;padding:6px 9px 0 0;color:var(--red);font-weight:700}
+strong{color:var(--ink);font-weight:700}em{font-style:italic}
+h2.sub{font-family:'PT Serif',Georgia,serif;font-size:24px;color:var(--ink);margin:34px 0 14px;font-weight:700;line-height:1.2}
+.resumo{border:1px solid var(--rule);border-radius:6px;padding:18px 20px;margin:0 0 26px;background:#fbfbfb}
+.resumo b{font-size:12px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em}
+.resumo ul{margin:10px 0 0;padding-left:20px}
+.resumo li{font-size:16px;line-height:1.5;margin-bottom:8px;color:#444}
+.fact{background:#f7f7f7;border-left:4px solid var(--red);padding:14px 18px;margin:24px 0;font-size:16px;color:#444;line-height:1.55}
+.fact b{color:var(--red);font-weight:700;text-transform:uppercase;font-size:12px}
+.medidas{display:grid;grid-template-columns:1fr 1fr;gap:0;border:2px solid var(--ink);border-radius:6px;overflow:hidden;margin:26px 0}
+.medidas>div{padding:16px 18px}
+.medidas .a{background:#faf8f2;border-right:1px solid var(--rule)}
+.medidas .b{background:#fff}
+.medidas h5{font-family:'PT Serif',Georgia,serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin:0 0 8px}
+.medidas p{font-size:15px;margin:0;line-height:1.6}
+.medidas .num{font-family:'PT Serif',Georgia,serif;font-size:26px;font-weight:700;color:var(--ink)}
+.turn{font-family:'PT Serif',Georgia,serif;font-size:23px;line-height:1.35;color:var(--ink);text-align:center;margin:34px 14px;font-style:italic;font-weight:700;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:22px 0}
+.stack{border:2px solid var(--ink);border-radius:8px;margin:32px 0;overflow:hidden}
+.stack .hd{background:var(--ink);color:#fff;font-family:'PT Serif',Georgia,serif;font-size:17px;font-weight:700;padding:13px 18px}
+.stack ul{margin:0;padding:16px 18px 6px 38px}
+.stack li{font-size:16px;line-height:1.5;margin-bottom:10px;color:#333}
+.stack .cta{display:block;margin:8px 16px 16px;background:var(--red);color:#fff;text-align:center;font-family:'PT Serif',Georgia,serif;font-size:18px;font-weight:700;padding:16px 20px;border-radius:6px;box-shadow:0 4px 14px rgba(184,29,19,.3)}
+.stack .cta::after{content:' →'}
+.stack .s{display:block;text-align:center;font-size:13px;color:#888;margin:0 0 16px}
+.mail{background:#0f0d0b;border-radius:8px;padding:22px 20px;margin:32px 0;text-align:center}
+.mail h4{font-family:'PT Serif',Georgia,serif;color:#d4af37;font-size:18px;margin:0 0 6px}
+.mail p{color:#b9b2a4;font-size:14px;margin:0 0 14px;line-height:1.5}
+.mail form{display:flex;gap:8px;max-width:420px;margin:0 auto}
+.mail input{flex:1;border:1px solid #3a352c;background:#1a1712;color:#eee;border-radius:6px;padding:12px 14px;font-size:15px}
+.mail button{background:#d4af37;color:#000;border:0;border-radius:6px;font-weight:700;padding:12px 18px;font-size:14px;cursor:pointer}
+.mail .ok{color:#6fd6a3;font-size:14px;display:none;margin-top:10px}
+@media(max-width:520px){.mail form{flex-direction:column}}
+.relacionados{margin:36px 0 6px}
+.relacionados h3{font-family:'PT Serif',Georgia,serif;font-size:14px;color:var(--red);text-transform:uppercase;letter-spacing:.08em;border-top:2px solid var(--ink);padding-top:10px;margin:0 0 4px}
+.rel{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--rule);align-items:center}
+.rel img{width:98px;height:66px;object-fit:cover;flex:none;border-radius:3px}
+.rel .k{font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.05em}
+.rel h4{font-family:'PT Serif',Georgia,serif;font-size:17px;color:var(--ink);margin:3px 0 0;line-height:1.22}
+.foot{max-width:620px;margin:0 auto;padding:20px 30px 50px;font-size:11.5px;color:#9a9a9a;text-align:center;line-height:1.6}
+</style></head>
+<body>
+
+<div class="topbar"><div class="in">
+ <a class="menu" href="index.html" style="color:#fff">☰ MENU</a><a class="logo" href="index.html">ARQUIVOS<b>OCULTOS</b></a>
+ <div class="sec">A ARCA</div>
+</div></div>
+
+<div class="paper">
+
+ <div class="stamp">
+  <span class="n">📁 ARQUIVO Nº 002 · A ARCA</span>
+  <span class="d"><span class="cls">ABERTO A PEDIDO</span><br>3 de julho de 2026</span>
+ </div>
+
+ <div class="resumo"><b>O arquivo em 30 segundos</b>
+ <ul>
+ <li>Em <strong>18/06/2026</strong>, o governo turco autorizou, pela primeira vez, <strong>perfuração com extração de núcleo</strong> na formação de Durupinar, a 29 km do Monte Ararat.</li>
+ <li>A formação tem <strong>157 metros</strong>. As medidas da Arca em Gênesis 6:15 (300 côvados) dão <strong>~157 metros</strong>.</li>
+ <li>Scans de radar já mostraram <strong>corredor central de 4 metros, câmaras em camadas</strong> e solo com 3x mais matéria orgânica: madeira em decomposição onde não deveria existir madeira.</li>
+ <li>O chefe da varredura declarou <strong>"95% de confiança"</strong> de estrutura naval enterrada.</li>
+ <li>O drone que vai descer no buraco foi batizado de <strong>"GOPHER"</strong>, o nome da madeira da Arca em Gênesis 6:14 ("madeira de gofer").</li>
+ </ul>
+ </div>
+
+ <div class="kicker">A Arca · Investigação</div>
+ <h1>Riram por 60 anos. Agora vão furar o chão, e o que o radar viu lá embaixo não deveria existir.</h1>
+ <p class="dek">Chamaram de "formação rochosa natural". Chamaram de coincidência. Chamaram de fanatismo quem apontasse o óbvio. Em junho de 2026, o governo da Turquia assinou a autorização pra perfurar. E o robô que vai entrar no barco enterrado carrega, no próprio nome, a resposta que eles juram não saber.</p>
+ <div class="byline"><span class="a">Arquivos Ocultos</span> · Investigação<br>3 de julho de 2026 · leitura de 5 minutos</div>
+
+ <figure><img src="midia/arca-barco.jpg" alt="A formação de Durupinar vista do alto, com o formato de casco de navio"></figure>
+ <figcaption>A formação de Durupinar, leste da Turquia, a 29 km do Monte Ararat. O formato de casco é visível a olho nu. O comprimento: 157 metros. <b>Foto: registro aéreo da formação</b></figcaption>
+
+ <p class="lead">Abra a sua Bíblia em Gênesis 6:15 e faça a conta comigo: "de trezentos côvados o comprimento da arca". O côvado bíblico mede cerca de 52 centímetros. Trezentos côvados: <strong>cerca de 157 metros</strong>. Agora olhe a foto acima de novo. A formação de Durupinar, medida por instrumento, tem <strong>157 metros</strong>. Não é interpretação. É trena.</p>
+
+ <div class="medidas">
+  <div class="a"><h5>Gênesis 6:15 (escrito há milhares de anos)</h5><p><span class="num">~157 m</span><br>300 côvados de comprimento</p></div>
+  <div class="b"><h5>Durupinar (medido por instrumento)</h5><p><span class="num">157 m</span><br>comprimento da formação</p></div>
+ </div>
+
+ <p>Por seis décadas, a resposta oficial foi um dar de ombros: "formação rochosa natural". Curiosa, admitiam. Coincidente, admitiam. Mas natural. O problema é que ninguém, em sessenta anos, explicou <strong>por que uma pedra natural teria exatamente as medidas do versículo</strong>. E em vez de furar pra descobrir, preferiram rir de quem perguntava.</p>
+
+ <h2 class="sub">O que o radar viu antes da broca</h2>
+ <p>Antes da autorização, os pesquisadores passaram anos varrendo o subsolo com radar de penetração (GPR) e análise química. O que apareceu nas imagens tirou o caso da prateleira do folclore: um <strong>corredor central de 4 metros</strong> atravessando a estrutura. <strong>Câmaras laterais</strong>. Camadas empilhadas em intervalos regulares, compatíveis com <em>conveses</em>. E a análise de solo cravou o detalhe mais incômodo: <strong>matéria orgânica 3 vezes acima do entorno</strong>, o padrão químico de madeira apodrecendo, num lugar onde não deveria existir madeira nenhuma.</p>
+
+ <div class="fact"><b>O fato, com fonte</b><br>O acordo histórico de perfuração foi noticiado em 18/06/2026 (Charisma Magazine; ecoado por veículos internacionais na mesma semana). Andrew Jones, líder do projeto Noah's Ark Scans, declarou "95% de confiança de que algo como um navio de madeira em decomposição" causa as anomalias detectadas, e descreveu "um túnel não preenchido que leva a um grande vazio central". A expedição com extração de núcleo começa ainda em 2026.</div>
+
+ <h2 class="sub">Veja os documentos com os seus olhos</h2>
+ <figure><img src="midia/arca-carta.jpg" alt="Carta oficial de aprovação da perfuração, governo da Turquia"></figure>
+ <figcaption><b>A carta.</b> O documento oficial que autoriza a perfuração com extração de núcleo em Durupinar. Não é manchete: é o papel, com carimbo. <b>Fonte: Noah's Ark Scans (site oficial do projeto)</b></figcaption>
+
+ <figure><img src="midia/arca-radargrama.jpg" alt="Varredura GPR sobre a formação de Durupinar"></figure>
+ <figcaption><b>O radar em campo.</b> A varredura de GPR (radar de penetração de solo) sendo puxada sobre a formação. Foi ela que revelou o corredor central, as câmaras e as camadas em intervalos regulares. <b>Fonte: Noah's Ark Scans</b></figcaption>
+
+ <figure><img src="midia/arca-furos.jpg" alt="Mapa dos pontos de perfuração planejados sobre a formação"></figure>
+ <figcaption><b>O mapa da broca.</b> Os pontos exatos onde os núcleos serão extraídos, marcados sobre o casco. A expedição começa ainda em 2026. <b>Fonte: Noah's Ark Scans</b></figcaption>
+
+ <h2 class="sub">O nome do robô é uma confissão</h2>
+ <p>Aqui está o detalhe que quase nenhum jornal notou. O drone subterrâneo desenvolvido pra descer no buraco da perfuração recebeu um apelido dos próprios pesquisadores: <strong>"Gopher"</strong>. Agora leia Gênesis 6:14, a instrução de construção da Arca: <em>"Faze para ti uma arca de madeira de <strong>gofer</strong>"</em>. A equipe que o mundo oficial trata como "cautelosa" batizou a própria máquina com o nome da madeira do versículo. <strong>Eles já sabem o que esperam encontrar.</strong> Só não podem dizer em voz alta antes da broca confirmar.</p>
+
+ <figure><img src="midia/arca-pintura.jpg" alt="Pintura da Arca de Noé, século XVI"></figure>
+ <figcaption>A Arca retratada em 1570. A humanidade nunca esqueceu essa história, em centenas de culturas, com centenas de nomes, o mesmo dilúvio. <b>Imagem: pintura de 1570, domínio público</b></figcaption>
+
+ <p class="turn">"E se a Arca é real... o dilúvio é real. E se o dilúvio é real, a pergunta que ninguém quer fazer é: o que exatamente Deus precisou apagar?"</p>
+
+ <h2 class="sub">A parte da história que arrancaram da sua Bíblia</h2>
+ <p>Gênesis 6 abre com um dos trechos mais estranhos de toda a Escritura: "os filhos de Deus viram que as filhas dos homens eram formosas... e os <strong>gigantes</strong> estavam na terra naqueles dias". Duas linhas, sem explicação, e o texto muda de assunto direto pro dilúvio. Por quê? Porque a explicação existia em outro livro. O <strong>Livro de Enoque</strong>, citado nominalmente na sua Bíblia (Judas 1:14), lido pelos primeiros cristãos, conta o capítulo inteiro: os Vigilantes que desceram, o conhecimento proibido que entregaram, os gigantes que nasceram da mistura, e a corrupção de toda carne que fez o dilúvio ser <em>necessário</em>. A Arca não é uma história infantil de zoológico flutuante. É o registro de uma operação de resgate no fim de um mundo contaminado. E o livro que explicava a contaminação foi deixado de fora do cânon.</p>
+
+ <div class="stack">
+  <div class="hd">📁 O DOSSIÊ COMPLETO: o que afundou o mundo</div>
+  <ul>
+   <li><strong>O Livro de Enoque</strong>: os Vigilantes, Azazel, os gigantes, o aviso do dilúvio</li>
+   <li>Os <strong>12 livros deixados de fora da sua Bíblia</strong>, com a história de por que cada um saiu</li>
+   <li>A linha do tempo pré-dilúvio: <strong>o que Gênesis 6 resume em 4 versículos</strong>, explicado</li>
+   <li>Acesso imediato e vitalício · Garantia de 7 dias</li>
+  </ul>
+  <div style="padding:4px 16px 6px;text-align:center;font-family:'PT Serif',Georgia,serif;font-size:17px;font-weight:700;color:#1a1a1a">Como você quer abrir o dossiê?</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 8px">
+   <a style="display:block;background:#1a1a1a;color:#fff;text-align:center;font-family:'PT Serif',Georgia,serif;font-size:15.5px;line-height:1.3;font-weight:700;text-decoration:none;padding:14px 10px;border-radius:6px" href="https://pay.kirvano.com/955b5975-a120-4a1a-9f9a-f7dba563ad6d?utm_source=materia&utm_campaign=arca&utm_content=assistir">🎬 ASSISTINDO<span style="display:block;font-size:12px;font-weight:400;color:#c9c2b2;margin-top:3px">O Documentário Enoque</span></a>
+   <a style="display:block;background:var(--red);color:#fff;text-align:center;font-family:'PT Serif',Georgia,serif;font-size:15.5px;line-height:1.3;font-weight:700;text-decoration:none;padding:14px 10px;border-radius:6px;box-shadow:0 4px 14px rgba(184,29,19,.3)" href="biblioteca.html?utm_source=materia&utm_campaign=arca&utm_content=ler">📖 LENDO<span style="display:block;font-size:12px;font-weight:400;color:#f0cfcc;margin-top:3px">A Biblioteca Oculta completa</span></a>
+  </div>
+  <span class="s">Acesso imediato · Garantia de 7 dias · O arquivo é seu pra sempre</span>
+ </div>
+
+ <div class="mail">
+  <h4>🔔 O próximo arquivo, antes de todo mundo</h4>
+  <p>Quando a broca descer em Durupinar, quem estiver nesta lista lê primeiro. Sem spam: um arquivo por dia, direto da investigação.</p>
+  <form onsubmit="return capMail(this)">
+   <input type="email" required placeholder="seu melhor e-mail">
+   <button type="submit">Entrar na lista</button>
+  </form>
+  <div class="ok">✓ Você entrou. O próximo arquivo chega primeiro pra você.</div>
+ </div>
+
+ <div class="relacionados">
+ <h3>Mais nos Arquivos Ocultos</h3>
+ <a class="rel" href="satelite-materia.html?utm_source=rel&utm_campaign=arca"><img src="midia/satelite-rastro.jpg" alt=""><div><div class="k">Os Vigilantes</div><h4>O olho que caiu do céu do Brasil, e os 179 que continuam acesos</h4></div></a>
+ <a class="rel" href="vigilantes-materia.html"><img src="midia/vigilantes.jpg" alt=""><div><div class="k">Os Vigilantes</div><h4>O chip no crânio, os gigantes de Gênesis 6 e a "mistura proibida"</h4></div></a>
+ <a class="rel" href="ovni-materia.html"><img src="midia/uap-poster.jpg" alt=""><div><div class="k">Os Céus</div><h4>O Pentágono confirmou. No segundo seguinte, calou a boca</h4></div></a>
+ </div>
+</div>
+
+<a href="pagina-produto.html" style="display:flex;align-items:center;gap:14px;max-width:620px;margin:30px auto 0;padding:14px 18px;background:linear-gradient(100deg,#1a1a1a,#2a1410);border-bottom:3px solid #b81d13;text-decoration:none;border-radius:6px">
+ <img src="midia/codice-simbolo.png" alt="O Códice do Despertar" style="width:54px;height:54px;object-fit:contain;flex:none">
+ <div style="flex:1;display:flex;flex-direction:column;line-height:1.25">
+  <span style="font-size:10px;font-weight:700;color:#d4a93f;text-transform:uppercase;letter-spacing:.08em">O guia completo</span>
+  <b style="font-family:'PT Serif',Georgia,serif;font-size:18px;color:#fff">O Códice do Despertar</b>
+  <span style="font-size:12px;color:#bbb">Corpo, mente e espírito — num lugar só</span>
+ </div>
+ <span style="flex:none;background:#b81d13;color:#fff;font-weight:700;font-size:13px;padding:9px 16px;border-radius:5px;text-transform:uppercase">Ver →</span>
+</a>
+
+<div class="foot">ARQUIVOS OCULTOS · análise editorial independente · partimos de fatos verificáveis e os interpretamos.<br>Notícia real, lente nossa. © 2026 · arquivosoculto</div>
+
+<script>
+const SUPABASE_URL="https://nbizxbdugsmeoudkwtot.supabase.co";
+const SUPABASE_ANON_KEY="sb_publishable_MITJbApeJTSHm41YW8a50A_DnbYUWPI";
+function capMail(f){
+  var v=f.querySelector('input').value.trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v))return false;
+  fetch(SUPABASE_URL+"/rest/v1/subscribers",{method:"POST",headers:{"apikey":SUPABASE_ANON_KEY,"Authorization":"Bearer "+SUPABASE_ANON_KEY,"Content-Type":"application/json","Prefer":"return-minimal"},body:JSON.stringify({email:v})}).catch(function(){});
+  fetch("/.netlify/functions/boasvindas",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:v})}).catch(function(){});
+  try{localStorage.setItem("ao_sub",v)}catch(e){}
+  f.style.display='none';f.parentElement.querySelector('.ok').style.display='block';
+  return false;
+}
+</script>
+<script src="tracking-only.js" defer></script>
+<!-- tracking de visita + clique de DM (campanha via utm_campaign) -->
+<script>
+(function(){try{
+var v=localStorage.getItem('aov')||(Date.now().toString(36)+Math.random().toString(36).slice(2,8));localStorage.setItem('aov',v);
+var i=new Image();i.src="https://codice-app-production.up.railway.app/api/webhook/track?page=arca-materia&v="+v+"&t="+Date.now();
+var c=new URLSearchParams(location.search).get('utm_campaign');
+if(c){var j=new Image();j.src="https://codice-app-production.up.railway.app/api/webhook/track?page=dm:"+encodeURIComponent(c)+"&v="+v+"&t="+Date.now();}
+}catch(e){}})();
+</script>
+</body></html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>O Códice do Despertar</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Cinzel:wght@600;700;900&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+:root{--gold:#c0922f;--gold2:#d4a93f;--red:#b81d13;--ink:#000000;--txt:#cfc6b4;--white:#f4efe4}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--txt);font-family:'PT Serif',Georgia,serif;line-height:1.55;font-size:19px}
+body::before{content:"";position:fixed;inset:0;background-image:radial-gradient(rgba(255,255,255,.02) 1px,transparent 1px);background-size:4px 4px;pointer-events:none;z-index:0}
+.embers{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.ember{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;background:radial-gradient(circle,#d4a93f,rgba(192,146,47,0));opacity:0;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(0) scale(.6);opacity:0}10%{opacity:.9}90%{opacity:.5}100%{transform:translateY(-105vh) scale(1.1);opacity:0}}
+.ember:nth-child(1){left:8%;animation-duration:14s}.ember:nth-child(2){left:20%;animation-duration:18s;animation-delay:3s}.ember:nth-child(3){left:33%;animation-duration:12s;animation-delay:6s}.ember:nth-child(4){left:47%;animation-duration:20s;animation-delay:1s}.ember:nth-child(5){left:58%;animation-duration:15s;animation-delay:8s}.ember:nth-child(6){left:69%;animation-duration:17s;animation-delay:4s}.ember:nth-child(7){left:80%;animation-duration:13s;animation-delay:10s}.ember:nth-child(8){left:91%;animation-duration:19s;animation-delay:2s}
+@media(prefers-reduced-motion:reduce){.ember,.oferta{animation:none}}
+
+.wrap{max-width:660px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+
+/* HERO */
+.hero{text-align:center;padding:34px 0 6px}
+.eyebrow{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#8c7a52;border:1px solid #3a3020;border-radius:30px;padding:8px 16px;display:inline-block;margin-bottom:20px}
+h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:42px;line-height:1.06;color:var(--white);text-transform:uppercase;margin-bottom:20px}
+h1 .r{color:var(--red)}
+
+/* VSL 16:9 com capa/play */
+.vsl{position:relative;width:100%;max-width:620px;aspect-ratio:16/9;margin:0 auto 12px;border-radius:14px;overflow:hidden;border:1px solid rgba(192,146,47,.45);box-shadow:0 14px 50px rgba(0,0,0,.6),0 0 30px rgba(192,146,47,.15);background:#000;cursor:pointer}
+.vsl video{display:block;width:100%;height:100%;object-fit:cover;background:#000}
+.vsl-cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.72)),url('midia/codice-simbolo.png') center/cover no-repeat;transition:opacity .4s;z-index:2}
+.vsl-cover.hidden{opacity:0;pointer-events:none}
+.playbtn{width:84px;height:84px;border-radius:50%;background:linear-gradient(180deg,#d4a93f,#b8841f);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(192,146,47,.5);animation:pulseplay 2.2s ease-in-out infinite}
+.playbtn::after{content:"";display:block;width:0;height:0;border-style:solid;border-width:16px 0 16px 26px;border-color:transparent transparent transparent #1a1408;margin-left:6px}
+@keyframes pulseplay{0%,100%{transform:scale(1);box-shadow:0 8px 30px rgba(192,146,47,.5)}50%{transform:scale(1.07);box-shadow:0 8px 44px rgba(192,146,47,.75)}}
+.vsl-cover .pl{font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#e8dcc0;text-shadow:0 2px 8px #000}
+.vsl-note{text-align:center;font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6f6147;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;gap:8px}
+
+/* GATE — conteúdo travado */
+#locked{opacity:0;max-height:0;overflow:hidden;transition:opacity .8s ease}
+#locked.unlocked{opacity:1;max-height:none;overflow:visible}
+
+/* SEÇÃO */
+.section{padding:14px 0}
+.label{text-align:center;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.label .num{color:#5a5347;margin-right:8px}
+.stitle{font-family:'Oswald',sans-serif;font-weight:600;font-size:27px;line-height:1.12;color:var(--white);text-transform:uppercase;text-align:center;margin-bottom:22px}
+.gold{color:var(--gold2)}.rd{color:var(--red)}
+strong{color:var(--white)}
+.sep{width:50px;height:2px;background:#3a3020;margin:38px auto}
+
+/* ESPELHO DA DOR — texto pequeno de abertura */
+.espelho{text-align:left;max-width:560px;margin:10px auto 0;font-size:20px;line-height:1.7;color:#e6dcc4}
+.espelho strong{color:#fff}
+
+/* TRANSFORMAÇÃO — condensada */
+.tsub{text-align:center;font-style:italic;color:#bcae93;font-size:16px;margin-top:-12px;margin-bottom:22px}
+.estagio{padding:14px 18px;margin-bottom:10px;background:rgba(20,17,14,.5);border:1px solid #221d14;border-left:3px solid var(--gold);border-radius:10px}
+.estagio .et{font-family:'Oswald',sans-serif;color:var(--gold2);text-transform:uppercase;font-size:14px;letter-spacing:.03em;margin-bottom:5px;display:flex;gap:9px;align-items:baseline}
+.estagio .et .enum{font-family:'Cinzel',serif;font-weight:900;color:var(--gold);font-size:18px}
+.estagio p{font-size:15px;line-height:1.5;color:var(--txt)}
+.tclose{text-align:center;font-size:18px;color:#d8cdb4;max-width:560px;margin:22px auto 0;line-height:1.6}
+.tclose strong{color:var(--gold2)}
+
+/* dossiês / provas — cards expansíveis */
+.acc{background:rgba(20,17,14,.5);border:1px solid #221d14;border-radius:10px;margin-bottom:12px;overflow:hidden}
+.acc summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;align-items:center;gap:12px;font-family:'Oswald',sans-serif;text-transform:uppercase;color:var(--white);font-size:16px;letter-spacing:.02em}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary .ico{color:var(--gold2);font-size:18px;flex:none}
+.acc summary .arr{margin-left:auto;color:var(--gold);transition:transform .25s;font-size:14px}
+.acc[open] summary .arr{transform:rotate(90deg)}
+.acc summary .sm{display:block;font-family:'PT Serif',serif;text-transform:none;color:#8c7a52;font-size:13px;letter-spacing:0;margin-top:2px}
+.acc .body{padding:0 20px 18px 50px}
+.acc .body .item{padding:10px 0;border-top:1px solid #221d14}
+.acc .body .item b{font-family:'Oswald',sans-serif;color:var(--white);font-size:14px;text-transform:uppercase;display:block;margin-bottom:2px}
+.acc .body .item span{color:#8c7a52;font-size:14px}
+
+/* APPBOX — destaque do app */
+.appbox{border:1.5px solid var(--gold);border-radius:14px;padding:22px 20px;margin-bottom:22px;background:radial-gradient(ellipse at 50% 0%,rgba(192,146,47,.12),transparent 70%),#0f0d0b;box-shadow:0 12px 40px rgba(0,0,0,.5),inset 0 1px 0 rgba(212,169,63,.25)}
+.app-capa{display:block;width:calc(100% + 40px);margin:-22px -20px 18px;border-radius:13px 13px 0 0;border-bottom:1px solid rgba(192,146,47,.3)}
+.appbox-tag{display:inline-block;font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:.15em;color:var(--gold);border:1px solid rgba(192,146,47,.4);border-radius:20px;padding:4px 12px;margin-bottom:12px}
+.appbox-tit{font-family:'Oswald',sans-serif;font-size:24px;color:var(--white);line-height:1.2;margin-bottom:10px}
+.appbox-txt{font-size:15px;color:#c9bda0;line-height:1.55;margin-bottom:18px}
+.pers{display:flex;flex-direction:column;gap:14px;margin-bottom:18px}
+.pstep{display:flex;gap:14px;align-items:flex-start}
+.pn{flex-shrink:0;width:32px;height:32px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-weight:700;font-size:16px;color:var(--gold);background:rgba(192,146,47,.08)}
+.ptx{display:flex;flex-direction:column;padding-top:2px}
+.ptx b{font-family:'Oswald',sans-serif;color:var(--white);font-size:16px;text-transform:uppercase;letter-spacing:.02em;margin-bottom:3px}
+.ptx span{color:#a89a76;font-size:14px;line-height:1.5}
+.appbox-fecho{font-size:16px;color:var(--white);line-height:1.55;border-left:3px solid var(--gold);padding-left:14px;margin-bottom:18px;font-style:italic}
+.appseal{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.12em;color:var(--gold);text-align:center;border:1px dashed rgba(192,146,47,.5);border-radius:8px;padding:12px;background:rgba(192,146,47,.05)}
+.appbox-feats{display:flex;flex-direction:column;gap:10px}
+.af{display:flex;flex-direction:column;border-left:2px solid rgba(192,146,47,.5);padding-left:12px}
+.af b{color:var(--white);font-size:15px}
+.af span{color:#8c7a52;font-size:13px}
+
+/* OFERTA — só botão */
+.oferta{border:2px solid var(--gold);border-radius:14px;padding:34px 26px;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(192,146,47,.14),transparent 70%),#100e0c;box-shadow:0 20px 60px rgba(0,0,0,.6),inset 0 1px 0 rgba(212,169,63,.3);animation:glow 3.5s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 30px rgba(192,146,47,.1),inset 0 1px 0 rgba(212,169,63,.3)}50%{box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 55px rgba(192,146,47,.28),inset 0 1px 0 rgba(212,169,63,.3)}}
+.oferta .par{font-size:20px;color:var(--white);margin-bottom:18px;line-height:1.4}
+.cta{display:block;background:linear-gradient(180deg,#d4a93f,#b8841f);color:#1a1408;font-family:'Oswald',sans-serif;font-weight:700;font-size:26px;text-transform:uppercase;text-decoration:none;padding:24px;border-radius:8px;margin:6px 0 12px;box-shadow:0 8px 28px rgba(192,146,47,.4)}
+.cta:hover{filter:brightness(1.08)}
+.cta-sub{font-size:14px;color:#8c7a52}
+.gar{text-align:center;font-size:15px;color:#a89e8a;margin:26px auto;max-width:460px}
+.gar b{color:var(--gold2);font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:17px;display:block;margin-bottom:6px}
+.foot{text-align:center;font-size:12px;color:#5a5347;padding:34px 22px 46px;line-height:1.7;position:relative;z-index:1}
+.depos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.prints{display:flex;flex-direction:column;gap:10px;margin-bottom:8px;max-width:380px;margin-left:auto;margin-right:auto}
+.prints img{width:100%;border-radius:10px;border:1px solid rgba(192,146,47,.18);box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.depo{padding:18px;background:rgba(20,17,14,.5);border:1px solid #221d14;border-left:3px solid var(--gold);border-radius:8px}
+.depo p{font-size:16px;line-height:1.5;color:var(--white);font-style:italic;margin-bottom:8px}
+.depo span{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:#8c7a52}
+@media(max-width:680px){
+ .wrap{padding:0 14px}
+ .hero{padding:18px 0 4px}
+ .eyebrow{font-size:10px;letter-spacing:.18em;padding:7px 13px;margin-bottom:14px}
+ h1{font-size:26px;line-height:1.12;margin-bottom:14px}
+ .vsl{border-radius:12px;margin-bottom:10px}
+ .vsl-cover .pl{font-size:11px}
+ .playbtn{width:66px;height:66px}
+ .playbtn::after{border-width:13px 0 13px 21px}
+ .espelho{font-size:18px}
+ .stitle{font-size:22px;margin-bottom:18px}
+ .estagio{padding:13px 15px}
+ .estagio p{font-size:14px}
+ .acc summary{padding:15px 16px;font-size:15px}
+ .acc .body{padding:0 16px 16px 40px}
+ .oferta{padding:26px 18px;border-radius:12px}
+ .oferta .par{font-size:18px}
+ .cta{font-size:20px;padding:20px 14px}
+ .depos{grid-template-columns:1fr}
+ .sep{margin:30px auto}
+}
+</style></head>
+<body>
+<div class="embers"><span class="ember"></span><span class="ember"></span><span class="ember"></span><span class="ember"></span><span class="ember"></span><span class="ember"></span><span class="ember"></span><span class="ember"></span></div>
+<div class="wrap">
+
+ <!-- HERO -->
+ <div class="hero">
+  <span class="eyebrow">Dossiê aberto · não recomendado pra quem prefere dormir</span>
+  <h1>Eles não te prenderam com correntes. Te prenderam com <span class="r">prazer, medo e ruído.</span></h1>
+  <div class="vsl" id="vslBox" onclick="playVSL()">
+   <video id="vslVideo" playsinline preload="metadata">
+    <source src="https://codice-videos.b-cdn.net/vsl-codice.mp4" type="video/mp4">
+    Seu navegador não suporta vídeo.
+   </video>
+   <div class="vsl-cover" id="vslCover">
+    <div class="playbtn"></div>
+    <span class="pl">Assista antes de decidir</span>
+   </div>
+  </div>
+  <p class="vsl-note" id="vslNote">🔒 Assista o vídeo · o dossiê abre em seguida</p>
+ </div>
+
+ <!-- CONTEÚDO TRAVADO até 1 min de VSL -->
+ <div id="locked">
+
+  <div class="sep"></div>
+
+  <!-- ESPELHO DA DOR -->
+  <div class="section">
+   <p class="espelho">Você acorda já cansado. O corpo dormiu, mas alguém não desligou. Tem um aperto no peito que chega antes do café e não vai embora — e você não sabe o nome dele. Você anda preferindo o silêncio: parou de atender, parou de explicar, é mais fácil sozinho. E no fundo você sente: <strong>algo está errado. Não com você. Com tudo.</strong> Você só ainda não viu o quê.</p>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- O MAPA COMPLETO (em cima) -->
+  <div class="section">
+   <div class="label"><span class="num">·</span>O que você recebe</div>
+   <div class="stitle">O teu Códice <span class="gold">não existe pra mais ninguém.</span></div>
+
+   <div class="appbox">
+    <img class="app-capa" src="midia/app-capa.png" alt="O App do Despertar — protocolo personalizado">
+    <div class="appbox-tag">✦ O APP DO DESPERTAR · ACESSO IMEDIATO</div>
+    <p class="appbox-txt">Isto não é curso. Curso é o mesmo balde de água jogado em mil cabeças diferentes — eles te vendem fôrma e chamam de caminho. O teu protocolo nasce dentro de <strong>você</strong>: do que te prende, do que te trava, da corrente que ninguém te deixou ver. Feito pra você. <strong>Somente pra você.</strong></p>
+
+    <div class="pers">
+     <div class="pstep">
+      <span class="pn">1</span>
+      <div class="ptx"><b>O Interrogatório</b><span>Sete perguntas. Sem fuga. O app te decodifica pelo que você realmente responde — não pelo que finge ser.</span></div>
+     </div>
+     <div class="pstep">
+      <span class="pn">2</span>
+      <div class="ptx"><b>A Corrente Revelada</b><span>Corpo, Mente ou Espírito. Uma delas te domina sem você saber. O diagnóstico aponta o dedo nela e diz o nome do que te prende.</span></div>
+     </div>
+     <div class="pstep">
+      <span class="pn">3</span>
+      <div class="ptx"><b>O Protocolo Selado</b><span>30 dias. Um hábito real por dia, com a neurociência por trás. Calibrado na tua corrente, selado com o teu código. Intransferível.</span></div>
+     </div>
+    </div>
+
+    <p class="appbox-fecho">O do teu vizinho começa diferente. <strong>O teu começa onde dói.</strong> Dois homens, dois caminhos — nunca o mesmo mapa.</p>
+
+    <div class="appseal">𓂀 PROTOCOLO #A7F · INTRANSFERÍVEL · FORJADO PRA UM SÓ HOMEM</div>
+   </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- O QUE MUDA (embaixo, condensado) -->
+  <div class="section">
+   <div class="label"><span class="num">·</span>O que muda</div>
+   <div class="stitle">O que muda quando <span class="gold">você acorda.</span></div>
+   <p class="tsub">Não é mágica. É a corrente caindo, elo por elo.</p>
+
+   <div class="estagio">
+    <div class="et"><span class="enum">I</span>A primeira noite em que o olho abre</div>
+    <p>A ansiedade ganha nome e ganha dono. Você dorme pior nessa noite — porque pela primeira vez está acordado.</p>
+   </div>
+   <div class="estagio">
+    <div class="et"><span class="enum">II</span>Quando a primeira corrente cai</div>
+    <p>Você enxerga o roteiro: quem escreveu, quem lucra, o que esconderam. O cansaço afrouxa no minuto em que você para de lutar contra um fantasma.</p>
+   </div>
+   <div class="estagio">
+    <div class="et"><span class="enum">III</span>O corpo volta a ser seu</div>
+    <p>As 3 chaves giram: corpo, mente, espírito. Você respira fundo de novo, o sono volta, e o buraco do isolamento fecha. Não é remédio. É religação.</p>
+   </div>
+   <div class="estagio">
+    <div class="et"><span class="enum">IV</span>A virada</div>
+    <p>Você se olha no espelho e o cansado sumiu: quem está ali é o vigia. A ansiedade virou radar, o isolamento virou trincheira, a revolta virou ordem.</p>
+   </div>
+
+   <p class="tclose">Não foi Deus que apagou a luz — fomos nós, quando demos ouvido à serpente. Mas a porta nunca trancou por dentro. <strong>A saída tem nome, e o nome é Jesus.</strong></p>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- PROVA SOCIAL -->
+  <div class="section">
+   <div class="label"><span class="num">·</span>Quem já abriu os olhos</div>
+   <div class="stitle">Não sou só eu dizendo. <span class="gold">Olha a reação de quem viu.</span></div>
+   <div class="prints">
+    <img src="midia/prova-1.png" alt="Mensagem de Daniel S. - Belo Horizonte" loading="lazy">
+    <img src="midia/prova-2.png" alt="Mensagem de Marcos V. - Curitiba" loading="lazy">
+    <img src="midia/prova-3.png" alt="Mensagem de Latina R. - Goiânia" loading="lazy">
+   </div>
+   <p class="tclose" style="font-size:17px">Mais de <strong>um milhão</strong> acompanham a investigação. A maioria assiste e segue dormindo. Uma minoria atravessa a porta.</p>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- DECISÃO -->
+  <div class="section">
+   <div class="label"><span class="num">·</span>A decisão</div>
+   <div class="oferta">
+    <div class="par">Você já sentiu que algo está errado.<br>Do outro lado desse botão está o mapa inteiro.</div>
+    <a class="cta" href="https://pay.kirvano.com/c1cf8b40-70e3-4c31-b0eb-50421da7f026">Sim. Eu quero acordar →</a>
+    <div class="cta-sub">Acesso imediato · Garantia de 30 dias</div>
+   </div>
+   <div class="gar"><b>⚖ Risco zero</b>30 dias de garantia. Se continuar dormindo igual, eu devolvo cada centavo. Sem pergunta.</div>
+  </div>
+
+ </div><!-- /locked -->
+
+</div>
+<div class="foot">
+⚠️ O Códice do Despertar é um acervo de análise editorial. Não afirmamos profecia como fato — analisamos padrões e fontes públicas. O leitor tira suas próprias conclusões.<br><br>
+ARQUIVOS OCULTOS · © 2026
+</div>
+<script>
+var UNLOCK_AT = 60; // segundos de VSL pra liberar a página
+function unlockPage(){
+  var L=document.getElementById('locked');
+  if(L && !L.classList.contains('unlocked')){
+    L.classList.add('unlocked');
+    var n=document.getElementById('vslNote'); if(n) n.style.display='none';
+    try{localStorage.setItem('codice_unlocked','1');}catch(e){}
+  }
+}
+function playVSL(){
+  var box=document.getElementById('vslBox');
+  var v=document.getElementById('vslVideo'),c=document.getElementById('vslCover');
+  v.setAttribute('controls','');
+  c.classList.add('hidden');
+  v.play();
+  // remove o onclick do container pra liberar os controles nativos do video
+  // (sem isso, cada clique pra pausar re-dispara play = "clique morto")
+  if(box) box.onclick=null;
+  box.style.cursor='default';
+}
+(function(){
+  var v=document.getElementById('vslVideo');
+  // quem já desbloqueou antes não precisa esperar de novo
+  try{ if(localStorage.getItem('codice_unlocked')==='1'){ unlockPage(); } }catch(e){}
+  if(v){
+    v.addEventListener('timeupdate',function(){
+      if(v.currentTime>=UNLOCK_AT) unlockPage();
+    });
+    v.addEventListener('ended',unlockPage); // fallback: se o vídeo acabar, libera
+    v.addEventListener('error',unlockPage); // fallback: se falhar, não deixa preso
+  }
+})();
+</script>
+<script src="tracking-only.js" defer></script>
+<script>
+(function(){
+  try{
+    var v=localStorage.getItem('cv_id');
+    if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('cv_id',v);}
+    fetch("https://codice-app-production.up.railway.app/api/webhook/track?page=codice&v="+v,{mode:'no-cors',keepalive:true});
+  }catch(e){}
+})();
+</script>
+</body></html>

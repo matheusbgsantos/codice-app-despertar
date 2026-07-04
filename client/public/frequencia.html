@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protocolo Ressonância — Recupere a Sua Frequência</title>
+  <meta name="description" content="Em 1953 eles mudaram a frequência. Descubra como reverter o dano de 440Hz no seu corpo em 7 minutos com o Protocolo Ressonância." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { gold: '#d4af37' },
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans: ['Lora', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          },
+          keyframes: {
+            'fade-in': {
+              '0%': { opacity: '0', transform: 'translateY(8px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            }
+          },
+          animation: {
+            'fade-in': 'fade-in 0.8s ease-out forwards'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Lora', serif; }
+    h1, h2, h3, h4, h5, h6, .font-serif { font-family: 'Playfair Display', serif; }
+    .container { width:100%; margin-left:auto; margin-right:auto; padding-left:1rem; padding-right:1rem; }
+    @media (min-width:640px){ .container{ padding-left:1.5rem; padding-right:1.5rem; } }
+    @media (min-width:1024px){ .container{ padding-left:2rem; padding-right:2rem; max-width:1280px; } }
+    /* hide scrollbar helper not needed here */
+    [data-lucide].fill-current { fill: currentColor; }
+    [data-lucide].fill-white { fill: #fff; }
+  </style>
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","x9h7c74lg1");
+</script>
+</head>
+<body class="min-h-screen bg-black text-gray-100 font-sans selection:bg-gold selection:text-black overflow-x-hidden">
+
+  <!-- Sticky Header (Mobile Only) -->
+  <div class="md:hidden fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10 py-3 px-4 flex justify-between items-center">
+    <span class="text-gold font-serif font-bold tracking-widest text-xs">PROTOCOLO RESSONÂNCIA</span>
+    <button onclick="handleCheckout()" class="bg-red-700 text-white text-[10px] font-bold px-3 py-1.5 rounded uppercase tracking-wider">
+      ATIVAR AGORA
+    </button>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="relative pt-20 pb-12 md:pt-32 md:pb-20 overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gold/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+    <div class="container max-w-4xl mx-auto px-4 relative z-10 text-center">
+
+      <!-- Pre-headline -->
+      <div class="inline-flex items-center gap-2 bg-zinc-900/50 border border-white/10 rounded-full px-4 py-1.5 mb-6 md:mb-8 animate-fade-in">
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+        <span class="text-gray-400 text-[10px] md:text-xs font-medium uppercase tracking-widest">Atenção: Este vídeo sairá do ar em breve</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-3xl md:text-5xl lg:text-6xl font-serif text-white leading-tight mb-6 md:mb-8 tracking-wide">
+        EM 1953, ELES MUDARAM A <span class="text-gold relative inline-block">
+          FREQUÊNCIA
+          <svg class="absolute w-full h-2 -bottom-1 left-0 text-red-600 opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none">
+            <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="3" fill="none" />
+          </svg>
+        </span>...
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 md:mb-12 leading-relaxed">
+        Descubra como uma alteração invisível no padrão musical mundial está drenando sua energia, bloqueando sua prosperidade e mantendo você ansioso. E como reverter isso em 7 minutos.
+      </p>
+
+      <!-- VSL Container -->
+      <div class="relative w-full aspect-video bg-zinc-900 rounded-xl border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] overflow-hidden group mb-8 md:mb-12">
+        <!-- Thumbnail -->
+        <div id="vsl-thumb"
+          class="absolute inset-0 flex items-center justify-center bg-cover bg-center cursor-pointer group-hover:brightness-110 transition-all"
+          style="background-image: url('midia/freq/thumb.webp')"
+          onclick="playVSL()">
+          <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
+          <div class="relative z-10 flex flex-col items-center">
+            <div class="relative mb-4">
+              <div class="absolute inset-0 bg-gold/30 blur-2xl rounded-full animate-pulse"></div>
+              <i data-lucide="play" class="w-20 h-20 md:w-24 md:h-24 text-white fill-white relative z-10 drop-shadow-2xl transform group-hover:scale-110 transition-transform duration-300"></i>
+            </div>
+            <p class="text-white/90 text-sm md:text-base font-medium tracking-[0.2em] uppercase drop-shadow-lg animate-pulse">Clique para assistir</p>
+          </div>
+        </div>
+        <!-- Video (hidden until play) -->
+        <video id="vsl-video"
+          class="w-full h-full object-cover hidden"
+          src="https://codice-videos.b-cdn.net/freq-vsl.mp4"
+          playsinline
+          oncontextmenu="return false;">
+          Seu navegador não suporta o elemento de vídeo.
+        </video>
+      </div>
+
+      <!-- Sound Warning -->
+      <div class="flex items-center justify-center gap-2 text-gray-500 text-xs md:text-sm mb-8">
+        <i data-lucide="volume-2" class="w-4 h-4 text-gold"></i>
+        <span>Por favor, verifique se o seu som está ligado.</span>
+      </div>
+
+      <!-- CTA logo abaixo do video (sempre visivel) -->
+      <button onclick="handleCheckout()"
+        class="bg-red-700 hover:bg-red-600 text-white font-bold py-4 px-8 rounded shadow-[0_0_20px_rgba(185,28,28,0.4)] hover:shadow-[0_0_30px_rgba(185,28,28,0.6)] transition-all transform hover:scale-105 uppercase tracking-widest text-sm md:text-base inline-flex items-center gap-3 mx-auto">
+        <i data-lucide="play" class="w-5 h-5 fill-current"></i>
+        Ativar protocolo agora
+      </button>
+
+    </div>
+  </section>
+
+  <!-- Oferta (sem gate, sempre visivel) -->
+  <div id="offer">
+
+    <!-- Argumentacao curta -->
+    <section class="py-14 md:py-20 bg-zinc-950 border-t border-white/5">
+      <div class="container max-w-3xl mx-auto px-6 text-center">
+        <h2 class="text-2xl md:text-4xl font-serif text-white mb-6 leading-tight">
+          VOCÊ NÃO ESTÁ DOENTE.<br/><span class="text-gold">VOCÊ ESTÁ DESAFINADO.</span>
+        </h2>
+        <p class="text-gray-300 text-lg leading-relaxed mb-4">
+          Desde 1953, toda música que você ouve está calibrada em 440Hz — uma frequência artificial que mantém você em alerta permanente. Ansiedade. Cansaço. Névoa mental.
+        </p>
+        <p class="text-white font-medium text-lg border-l-4 border-gold pl-4 inline-block text-left">
+          Uma população ansiosa não questiona. Eles não precisam de correntes. Precisam de frequências.
+        </p>
+      </div>
+    </section>
+
+    <!-- Offer Stack Section -->
+    <section id="offer-section" class="py-16 md:py-24 bg-black border-t border-white/5 relative">
+      <div class="container max-w-4xl mx-auto px-4">
+        <div class="text-center mb-12 md:mb-16">
+          <h2 class="text-3xl md:text-5xl font-serif text-white mb-3 md:mb-4">O QUE VOCÊ VAI RECEBER</h2>
+          <p class="text-gold uppercase tracking-widest text-xs md:text-sm font-medium">Acesso Imediato ao Portal Secreto</p>
+        </div>
+
+        <div class="bg-zinc-900/30 border border-gold/30 rounded-2xl p-6 md:p-12 relative overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.1)]">
+          <div class="absolute top-0 right-0 w-96 h-96 bg-gold/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+          <div class="space-y-8 relative z-10">
+
+            <!-- ITEM 1 -->
+            <div class="flex flex-col md:flex-row gap-4 md:gap-6 items-start border-b border-white/10 pb-6 md:pb-8 relative">
+              <div class="absolute -left-6 -right-6 -top-4 -bottom-4 bg-gold/5 border-y border-gold/10 -z-10 hidden md:block"></div>
+              <div class="w-full md:w-32 h-40 md:h-32 bg-zinc-950 rounded border border-gold/50 shrink-0 overflow-hidden relative group shadow-[0_0_20px_rgba(212,175,55,0.15)]">
+                <img src="midia/freq/icon-shield.webp" alt="Escudo 432Hz" class="w-full h-full object-cover" />
+                <div class="absolute bottom-2 right-2 bg-gold text-black text-[10px] font-bold px-1.5 py-0.5 rounded">ÁUDIO</div>
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="bg-gold text-black text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">EXCLUSIVO</span>
+                </div>
+                <h3 class="text-xl md:text-2xl font-serif text-white mb-1">🛡️ ESCUDO (432Hz)</h3>
+                <p class="text-gold text-[10px] md:text-xs uppercase tracking-widest mb-2 md:mb-3">A FREQUÊNCIA DA TERRA</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-3">Anula a ansiedade e o medo que 440Hz planta no seu sistema nervoso. Ressoa com a vibração original da Terra. É o campo de força que te desconecta do ruído deles.</p>
+              </div>
+            </div>
+
+            <!-- ITEM 2 -->
+            <div class="flex flex-col md:flex-row gap-4 md:gap-6 items-start border-b border-white/10 pb-6 md:pb-8">
+              <div class="w-full md:w-32 h-40 md:h-32 bg-zinc-950 rounded border border-white/10 shrink-0 overflow-hidden relative group">
+                <img src="midia/freq/icon-dna.webp" alt="Regeneração 528Hz" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="bg-zinc-800 text-gray-300 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">ITEM 2</span>
+                </div>
+                <h3 class="text-xl md:text-2xl font-serif text-white mb-1">🧬 REGENERAÇÃO (528Hz)</h3>
+                <p class="text-gold text-[10px] md:text-xs uppercase tracking-widest mb-2 md:mb-3">REPARO CELULAR</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-3">A frequência do reparo. Quando o cansaço não passa com sono e o corpo pede socorro. Reparação de DNA e alívio físico real.</p>
+              </div>
+            </div>
+
+            <!-- ITEM 3 -->
+            <div class="flex flex-col md:flex-row gap-4 md:gap-6 items-start border-b border-white/10 pb-6 md:pb-8">
+              <div class="w-full md:w-32 h-40 md:h-32 bg-zinc-950 rounded border border-white/10 shrink-0 overflow-hidden relative group">
+                <img src="midia/freq/icon-brain.webp" alt="Foco Laser Gamma" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="bg-zinc-800 text-gray-300 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">ITEM 3</span>
+                </div>
+                <h3 class="text-xl md:text-2xl font-serif text-white mb-1">🎯 FOCO LASER (GAMMA)</h3>
+                <p class="text-gold text-[10px] md:text-xs uppercase tracking-widest mb-2 md:mb-3">PRODUTIVIDADE EXTREMA</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-3">Produtividade extrema e clareza mental. Quando a névoa não sai e você não consegue render. 7 minutos e o cérebro religa.</p>
+              </div>
+            </div>
+
+            <!-- ITEM 4 -->
+            <div class="flex flex-col md:flex-row gap-4 md:gap-6 items-start border-b border-white/10 pb-6 md:pb-8">
+              <div class="w-full md:w-32 h-40 md:h-32 bg-zinc-950 rounded border border-white/10 shrink-0 overflow-hidden relative group">
+                <img src="midia/freq/icon-moon.webp" alt="Sono Profundo Delta" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="bg-zinc-800 text-gray-300 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">ITEM 4</span>
+                </div>
+                <h3 class="text-xl md:text-2xl font-serif text-white mb-1">🌙 SONO PROFUNDO (DELTA)</h3>
+                <p class="text-gold text-[10px] md:text-xs uppercase tracking-widest mb-2 md:mb-3">DESLIGAMENTO TOTAL</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-3">Desliga os pensamentos acelerados. Dormir volta a ser reparação, não luta. Induz sono REM profundo.</p>
+              </div>
+            </div>
+
+            <!-- ITEM 5 -->
+            <div class="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
+              <div class="w-full md:w-32 h-40 md:h-32 bg-zinc-950 rounded border border-white/10 shrink-0 overflow-hidden relative group">
+                <img src="midia/freq/icon-key.webp" alt="Chave Mestra 963Hz" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="bg-zinc-800 text-gray-300 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">ITEM 5</span>
+                </div>
+                <h3 class="text-xl md:text-2xl font-serif text-white mb-1">🔑 CHAVE MESTRA (963Hz)</h3>
+                <p class="text-gold text-[10px] md:text-xs uppercase tracking-widest mb-2 md:mb-3">ATIVAÇÃO PINEAL</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-3">A frequência mais alta do Solfeggio. Ativa a glândula pineal — o órgão que eles calcificam com flúor e radiação. Prosperidade e intuição.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Price Anchor & CTA -->
+          <div class="mt-12 pt-8 border-t border-white/10 text-center">
+            <p class="text-2xl md:text-3xl font-serif text-white mb-6">ACESSO IMEDIATO AO PROTOCOLO COMPLETO</p>
+            <p class="text-zinc-500 text-[10px] uppercase tracking-widest mb-4">ACESSO VITALÍCIO | ENTREGA IMEDIATA | PAGAMENTO SEGURO</p>
+            <button onclick="handleCheckout()"
+              class="w-full md:w-auto bg-red-700 hover:bg-red-600 text-white font-bold py-4 px-8 rounded shadow-[0_0_20px_rgba(185,28,28,0.4)] hover:shadow-[0_0_30px_rgba(185,28,28,0.6)] transition-all transform hover:scale-105 uppercase tracking-widest text-sm md:text-base flex items-center justify-center gap-3 mx-auto">
+              ▶ ATIVAR PROTOCOLO AGORA
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final Closing Section -->
+    <section class="py-16 bg-zinc-950 border-t border-white/5 text-center">
+      <div class="container max-w-3xl mx-auto px-6">
+        <h2 class="text-2xl md:text-3xl font-serif text-white mb-6">RECUPERE A SUA FREQUÊNCIA.</h2>
+        <p class="text-gray-400 text-lg leading-relaxed mb-8">
+          Não é mágica. É física. Quando você vibra na frequência certa, a ansiedade solta, o foco volta, o corpo repara. Eles mudaram a frequência em 1953 pra te manter fraco. Você muda de volta em 7 minutos.
+        </p>
+        <button onclick="handleCheckout()"
+          class="bg-red-700 hover:bg-red-600 text-white font-bold py-4 px-8 rounded shadow-[0_0_20px_rgba(185,28,28,0.4)] hover:shadow-[0_0_30px_rgba(185,28,28,0.6)] transition-all transform hover:scale-105 uppercase tracking-widest text-sm md:text-base flex items-center gap-3 mx-auto">
+          <i data-lucide="play" class="w-5 h-5 fill-current"></i>
+          ATIVAR PROTOCOLO AGORA
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-black border-t border-white/5 text-center">
+      <div class="container mx-auto px-4">
+        <p class="text-gold font-serif tracking-widest text-sm mb-2">PROTOCOLO RESSONÂNCIA</p>
+        <p class="text-zinc-600 text-xs">@codice.oculto</p>
+      </div>
+    </footer>
+
+  </div><!-- /#offer -->
+
+  <script>
+    function handleCheckout() {
+      window.open("https://pay.kirvano.com/2a43902c-feb8-4030-9b63-75bdd7636fa2", "_blank");
+    }
+    function playVSL() {
+      var thumb = document.getElementById('vsl-thumb');
+      var video = document.getElementById('vsl-video');
+      thumb.classList.add('hidden');
+      video.classList.remove('hidden');
+      video.play().catch(function(){});
+      video.addEventListener('click', function () {
+        if (video.paused) { video.play(); } else { video.pause(); }
+      });
+    }
+    // Render lucide icons
+    lucide.createIcons();
+  </script>
+<script>
+(function(){
+  try{
+    var v=localStorage.getItem('cv_id');
+    if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('cv_id',v);}
+    fetch("https://codice-app-production.up.railway.app/api/webhook/track?page=frequencia&v="+v,{mode:'no-cors',keepalive:true});
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

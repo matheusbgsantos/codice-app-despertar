@@ -1,126 +1,149 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CÓDICE OCULTO — Portal</title>
+<title>CÓDICE OCULTO</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600&family=Archivo+Black&family=Space+Mono&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#050505;--card:#0b0b0b;--line:#1d1d1d;--ink:#f2f0ea;--mut:#6f6f6f;--gold:#e8b33b}
+:root{--bg:#050506;--panel:#111114;--panel2:#0a0a0c;--line:#222226;--ink:#f4f4f4;--mut:#8e8e93;--dim:#5b5b60;--red:#e03427}
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{background:var(--bg)}
-body{color:var(--ink);font-family:'Archivo',sans-serif;min-height:100vh;overflow-x:hidden;position:relative}
-/* estrelas / partículas */
-.dust{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5}
-.dust span{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.22;animation:tw 5s ease-in-out infinite}
-@keyframes tw{0%,100%{opacity:.06}50%{opacity:.3}}
-/* moldura editorial (cantos) */
-.frame{position:fixed;inset:0;pointer-events:none;z-index:5;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;color:#4a4a4a;text-transform:uppercase}
-.frame .tl{position:absolute;top:14px;left:16px}
-.frame .tr{position:absolute;top:14px;right:16px;text-align:right}
-.frame .bl{position:absolute;bottom:14px;left:16px}
-.frame .br{position:absolute;bottom:14px;right:16px;writing-mode:vertical-rl;top:auto}
-.frame b{color:var(--gold);font-weight:400}
-.wrap{position:relative;z-index:2;max-width:430px;margin:0 auto;padding:64px 22px 80px}
-/* HERO */
-.hero{margin-bottom:44px;position:relative}
-.hero .olho{font-size:30px;opacity:.9;margin-bottom:18px;display:block}
-.hero h1{font-family:'Archivo Black',sans-serif;font-size:44px;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;position:relative;display:inline-block}
-.hero h1 .g{position:relative;display:inline-block;color:var(--bg)}
-.hero h1 .g::before{content:"";position:absolute;left:-6%;right:-6%;top:8%;bottom:4%;background:var(--gold);z-index:-1;transform:rotate(-1.6deg);filter:url(#brush)}
-.hero p{margin-top:18px;font-size:13.5px;color:var(--mut);line-height:1.6;max-width:300px}
-.hero .risco{margin-top:22px;width:54px;height:3px;background:var(--gold);transform:rotate(-2deg)}
-/* CARDS */
-.sec{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.3em;color:#4a4a4a;text-transform:uppercase;margin:34px 0 14px;display:flex;align-items:center;gap:12px}
-.sec::after{content:"";flex:1;height:1px;background:var(--line)}
-a.card{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);padding:20px 18px;margin-bottom:12px;position:relative;transition:border-color .25s,transform .12s}
-a.card:active{transform:scale(.985)}
-a.card .num{position:absolute;top:16px;right:16px;font-family:'Space Mono',monospace;font-size:9.5px;color:#3d3d3d;letter-spacing:.15em}
-a.card h2{font-family:'Archivo Black',sans-serif;font-size:17px;text-transform:uppercase;letter-spacing:.01em;line-height:1.1;margin-bottom:6px;padding-right:44px}
-a.card p{font-size:12.5px;color:var(--mut);line-height:1.5;padding-right:30px}
-a.card .go{position:absolute;bottom:18px;right:16px;color:var(--gold);font-family:'Space Mono',monospace;font-size:13px}
-/* card HOJE */
-a.hoje{border-color:#3a2f14;background:linear-gradient(120deg,#0d0b06 0%,#0b0b0b 55%)}
-a.hoje::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
-a.hoje .tag{display:inline-flex;align-items:center;gap:7px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
-a.hoje .tag i{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pu 1.6s infinite}
-@keyframes pu{0%,100%{opacity:1}50%{opacity:.25}}
-a.hoje h2{font-size:21px}
-.foot{margin-top:40px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:#3d3d3d;text-transform:uppercase;line-height:2}
-.foot a{color:#5c5c5c;text-decoration:none}
+body{background:linear-gradient(180deg,#1b1b20 0%,#0e0e11 34%,#060608 72%,#040405 100%) fixed;color:var(--ink);font-family:'Archivo',sans-serif;overflow-x:hidden}
+.fumaca{position:fixed;inset:-12%;z-index:0;pointer-events:none;background:url('midia/portal/fundo-fumaca.jpg') center/cover;opacity:.5;animation:deriva 70s ease-in-out infinite alternate}
+.fumaca.b{opacity:.28;transform:scale(1.15) rotate(180deg);animation:deriva2 95s ease-in-out infinite alternate}
+@keyframes deriva{from{transform:translate(0,0) scale(1.05)}to{transform:translate(2.5%,-3%) scale(1.12)}}
+@keyframes deriva2{from{transform:translate(0,0) scale(1.15) rotate(180deg)}to{transform:translate(-3%,2%) scale(1.22) rotate(180deg)}}
+.vinheta{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 100% 80% at 50% 35%,transparent 50%,rgba(0,0,0,.6) 100%)}
+.stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.stars span{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.14;animation:tw 6s ease-in-out infinite}
+.stars span:nth-child(2n){width:1px;height:1px}
+@keyframes tw{0%,100%{opacity:.05}50%{opacity:.28}}
+/* grão */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.04;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{position:relative;z-index:2;max-width:430px;margin:0 auto;padding:0 22px 60px}
+/* barra mínima */
+.top{display:flex;justify-content:space-between;align-items:center;padding:20px 2px 0;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.26em;color:var(--dim);text-transform:uppercase}
+/* HERO tipográfico */
+.hero{text-align:center;padding:74px 0 56px;position:relative}
+.hero .peq{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.5em;color:var(--mut);text-transform:uppercase;display:block;margin-bottom:16px}
+.hero h1{font-family:'Archivo Black',sans-serif;font-size:54px;line-height:.94;letter-spacing:.01em;text-transform:uppercase}
+.hero h1 small{display:block;font-size:19px;letter-spacing:.42em;color:var(--mut);margin-top:12px}
+.hero .risco{width:36px;height:2px;background:var(--ink);margin:26px auto 0;opacity:.5}
+/* seção */
+.sec{text-align:center;margin:44px 0 20px}
+.sec .peq{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.4em;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:8px}
+.sec h2{font-family:'Archivo Black',sans-serif;font-size:24px;letter-spacing:.06em;text-transform:uppercase}
+/* DESTAQUE do dia */
+.feat{position:relative;background:linear-gradient(180deg,#131316,#0a0a0c);border:1px solid #2b2b31;border-top-color:#3c3c44;border-radius:16px;padding:26px 20px 24px;text-align:center;
+box-shadow:0 1px 0 rgba(255,255,255,.06) inset,
+ 0 30px 70px rgba(0,0,0,.85),0 8px 20px rgba(0,0,0,.65);
+animation:flutua 6s ease-in-out infinite alternate}
+.feat .live{position:absolute;top:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.28em;color:var(--mut);text-transform:uppercase}
+.feat .live i{width:5px;height:5px;border-radius:50%;background:var(--red);animation:pu 1.5s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.2}}
+.feat img{width:172px;height:220px;object-fit:cover;border-radius:10px;margin:26px auto 0;box-shadow:0 18px 44px rgba(0,0,0,.65);filter:saturate(.85)}
+.feat h3{font-family:'Archivo Black',sans-serif;font-size:23px;letter-spacing:.05em;text-transform:uppercase;margin-top:20px}
+.feat p{font-size:12.5px;color:var(--mut);line-height:1.6;max-width:280px;margin:8px auto 18px}
+.bt{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;border:1px solid #3a3a3f;border-radius:6px;padding:13px 26px;transition:background .2s}
+.bt:active{background:#222}
+.bt.cheio{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 8px 26px rgba(224,52,39,.3)}
+/* OFERTAS estilo ABSTRACT: palavra sobre a imagem */
+.of{display:block;position:relative;border-radius:16px;margin-bottom:22px;text-decoration:none;color:var(--ink);overflow:hidden;aspect-ratio:16/9;border:1px solid #2b2b31;border-top-color:#3c3c44;box-shadow:0 1px 0 rgba(255,255,255,.07) inset,0 24px 56px rgba(0,0,0,.85),0 8px 20px rgba(0,0,0,.6);animation:flutua 5s ease-in-out infinite alternate}
+.of:nth-of-type(2){animation-delay:1.2s}.of:nth-of-type(3){animation-delay:2.4s}.of:nth-of-type(4){animation-delay:.6s}
+.of img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.7) brightness(.62) contrast(1.05)}
+.of .veu{position:absolute;inset:0;background:radial-gradient(ellipse 90% 90% at 50% 50%,rgba(0,0,0,.1),rgba(0,0,0,.55))}
+.of .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 14px}
+@keyframes flutua{from{transform:translateY(0)}to{transform:translateY(-7px)}}
+.of:active{transform:scale(.985)}
+.of img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.7) brightness(.62) contrast(1.05)}
+.of .veu{position:absolute;inset:0;background:radial-gradient(ellipse 90% 90% at 50% 50%,rgba(0,0,0,.1),rgba(0,0,0,.55))}
+.of .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 14px}
+.of h3{font-family:'Archivo',sans-serif;font-weight:600;font-size:20px;letter-spacing:.34em;text-transform:uppercase;text-indent:.34em;text-shadow:0 2px 18px rgba(0,0,0,.85);white-space:nowrap}
+.of .linha{width:34px;height:1px;background:rgba(255,255,255,.55);margin:10px 0}
+.of p{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#cfcfcf;text-shadow:0 1px 10px rgba(0,0,0,.9)}
+/* PROVA SOCIAL */
+.stars{color:#fff;letter-spacing:.3em;font-size:13px;text-align:center}
+.social{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 18px;text-align:center;box-shadow:0 14px 34px rgba(0,0,0,.4);margin-bottom:12px}
+.social .frase{font-size:13.5px;line-height:1.7;color:#d6d6d6;font-style:italic;margin:12px 0 10px}
+.social .quem{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.24em;color:var(--dim);text-transform:uppercase}
+.nums{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
+.nums div{text-align:center;padding:14px 6px;background:linear-gradient(180deg,#121215,#0a0a0c);border:1px solid #2a2a2f;border-top-color:#3a3a41;border-radius:12px;box-shadow:0 1px 0 rgba(255,255,255,.05) inset,0 14px 30px rgba(0,0,0,.7)}
+.nums b{font-family:'Archivo Black',sans-serif;font-size:17px;display:block}
+.nums span{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;display:block;margin-top:4px}
+/* CONTATO */
+.cont{text-align:center;margin-top:48px;padding-top:30px;border-top:1px solid var(--line)}
+.cont .peq{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.4em;color:var(--dim);text-transform:uppercase}
+.cont a{color:var(--mut);text-decoration:none;font-size:12px;display:block;margin-top:8px}
 </style></head>
 <body>
 
-<svg width="0" height="0" style="position:absolute"><filter id="brush" x="-20%" y="-20%" width="140%" height="140%">
-<feTurbulence type="fractalNoise" baseFrequency="0.09 0.5" numOctaves="2" result="n"/>
-<feDisplacementMap in="SourceGraphic" in2="n" scale="14"/>
-</filter></svg>
-
-<div class="dust">
- <span style="left:8%;top:12%"></span><span style="left:22%;top:34%;animation-delay:1s"></span>
- <span style="left:76%;top:18%;animation-delay:2s"></span><span style="left:88%;top:44%;animation-delay:.5s"></span>
- <span style="left:14%;top:66%;animation-delay:1.4s"></span><span style="left:64%;top:72%;animation-delay:2.4s"></span>
- <span style="left:40%;top:88%;animation-delay:.8s"></span><span style="left:92%;top:82%;animation-delay:1.8s"></span>
- <span style="left:52%;top:8%;animation-delay:3s"></span><span style="left:30%;top:52%;animation-delay:3.4s"></span>
-</div>
-
-<div class="frame">
- <div class="tl">𓂀 códice oculto</div>
- <div class="tr">acesso <b>restrito</b></div>
- <div class="bl">arquivo vivo · 1.3M</div>
- <div class="br">be a voice. not an echo.</div>
+<div class="fumaca"></div>
+<div class="fumaca b"></div>
+<div class="vinheta"></div>
+<div class="stars">
+ <span style="left:6%;top:9%"></span><span style="left:18%;top:22%;animation-delay:1.2s"></span>
+ <span style="left:82%;top:12%;animation-delay:2.1s"></span><span style="left:91%;top:31%;animation-delay:.6s"></span>
+ <span style="left:12%;top:47%;animation-delay:1.8s"></span><span style="left:70%;top:44%;animation-delay:3s"></span>
+ <span style="left:31%;top:63%;animation-delay:.9s"></span><span style="left:88%;top:66%;animation-delay:2.5s"></span>
+ <span style="left:9%;top:81%;animation-delay:1.5s"></span><span style="left:55%;top:88%;animation-delay:3.4s"></span>
+ <span style="left:43%;top:15%;animation-delay:2.8s"></span><span style="left:64%;top:75%;animation-delay:.3s"></span>
 </div>
 
 <div class="wrap">
 
+ <div class="top"><span>𓂀</span><span>o arquivo</span><span>1939—44</span></div>
+
  <header class="hero">
-  <span class="olho">𓂀</span>
-  <h1>O QUE<br>ELES <span class="g">ESCONDEM</span><br>DE VOCÊ.</h1>
-  <p>Todos os arquivos da investigação, num só lugar. Escolha por onde entrar.</p>
+  <span class="peq">eles esconderam · nós arquivamos</span>
+  <h1>Códice<small>Oculto</small></h1>
   <div class="risco"></div>
  </header>
 
- <div class="sec">arquivo de hoje</div>
+ <!-- DESTAQUE: produto do vídeo do dia (eu troco conforme o post) -->
+ <section class="feat">
+  <span class="live"><i></i> falado no vídeo de hoje</span>
+  <img src="midia/portal/abs-freq.jpg" alt="Frequências">
+  <h3>Protocolos de Frequência</h3>
+  <p>O som que o seu corpo pede à noite. Protocolos pra dormir, focar e regenerar.</p>
+  <a class="bt cheio" href="https://kiwify.app/euq90Xj?afid=urKj2JjP">Quero acesso</a>
+ </section>
 
- <a class="card hoje" href="enoque-express.html?utm_source=bio&utm_campaign=enoque">
-  <span class="tag"><i></i> Aberto agora</span>
-  <h2>Arquivo Nº 003 · Enoque</h2>
-  <p>O livro que tiraram da sua Bíblia. A página que enterraram, aberta.</p>
-  <span class="go">→</span>
+ <div class="sec"><span class="peq">catálogo</span><h2>As Ofertas</h2></div>
+
+ <a class="of" href="https://kiwify.app/euq90Xj?afid=urKj2JjP">
+  <img src="midia/portal/abs-freq.jpg" alt="">
+  <div class="veu"></div>
+  <div class="c"><h3>Frequências</h3><div class="linha"></div><p>protocolos de som · sono e foco</p></div>
  </a>
 
- <div class="sec">o acervo</div>
-
- <a class="card" href="codice.html">
-  <span class="num">01</span>
-  <h2>O Códice do Despertar</h2>
-  <p>O app de 30 dias personalizado. Sua jornada pra sair da Matrix.</p>
-  <span class="go">→</span>
+ <a class="of" href="https://pay.kirvano.com/955b5975-a120-4a1a-9f9a-f7dba563ad6d">
+  <img src="midia/portal/abs-doc.jpg" alt="">
+  <div class="veu"></div>
+  <div class="c"><h3>Documentário</h3><div class="linha"></div><p>enoque · a investigação em vídeo</p></div>
  </a>
 
- <a class="card" href="https://pay.kirvano.com/955b5975-a120-4a1a-9f9a-f7dba563ad6d">
-  <span class="num">02</span>
-  <h2>Documentário Enoque</h2>
-  <p>A investigação completa em vídeo. O livro banido, revelado.</p>
-  <span class="go">→</span>
+ <a class="of" href="biblioteca.html">
+  <img src="midia/portal/abs-biblio.jpg" alt="">
+  <div class="veu"></div>
+  <div class="c"><h3>Biblioteca</h3><div class="linha"></div><p>12 livros banidos · reunidos</p></div>
  </a>
 
- <a class="card" href="biblioteca.html">
-  <span class="num">03</span>
-  <h2>A Biblioteca Oculta</h2>
-  <p>12 livros que não queriam que você lesse. Reunidos.</p>
-  <span class="go">→</span>
+ <a class="of" href="codice.html">
+  <img src="midia/portal/abs-codice.jpg" alt="">
+  <div class="veu"></div>
+  <div class="c"><h3>O Códice</h3><div class="linha"></div><p>app de 30 dias · o despertar</p></div>
  </a>
 
- <a class="card" href="frequencia.html">
-  <span class="num">04</span>
-  <h2>As Frequências</h2>
-  <p>O som que religa corpo e mente. Protocolos, não playlists.</p>
-  <span class="go">→</span>
- </a>
+ <div class="nums">
+  <div><b>+7.000</b><span>membros</span></div>
+  <div><b>Imediato</b><span>acesso</span></div>
+  <div><b>7 dias</b><span>garantia</span></div>
+ </div>
 
- <div class="foot">
-  investigação independente<br>
+ <div class="cont">
+  <span class="peq">contato</span>
   <a href="mailto:contato@arquivosoculto.com.br">contato@arquivosoculto.com.br</a>
  </div>
+
 </div>
 
 <script>

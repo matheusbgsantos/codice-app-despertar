@@ -7,6 +7,11 @@
 :root{--bg:#050506;--panel:#111114;--panel2:#0a0a0c;--line:#222226;--ink:#f4f4f4;--mut:#8e8e93;--dim:#5b5b60;--red:#e03427}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:'Archivo',sans-serif;overflow-x:hidden}
+.fumaca{position:fixed;inset:-12%;z-index:0;pointer-events:none;background:url('midia/portal/fundo-fumaca.jpg') center/cover;opacity:.5;animation:deriva 70s ease-in-out infinite alternate}
+.fumaca.b{opacity:.28;transform:scale(1.15) rotate(180deg);animation:deriva2 95s ease-in-out infinite alternate}
+@keyframes deriva{from{transform:translate(0,0) scale(1.05)}to{transform:translate(2.5%,-3%) scale(1.12)}}
+@keyframes deriva2{from{transform:translate(0,0) scale(1.15) rotate(180deg)}to{transform:translate(-3%,2%) scale(1.22) rotate(180deg)}}
+.vinheta{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 100% 80% at 50% 35%,transparent 50%,rgba(0,0,0,.6) 100%)}
 .stars{position:fixed;inset:0;z-index:0;pointer-events:none}
 .stars span{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.14;animation:tw 6s ease-in-out infinite}
 .stars span:nth-child(2n){width:1px;height:1px}
@@ -64,6 +69,9 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 </style></head>
 <body>
 
+<div class="fumaca"></div>
+<div class="fumaca b"></div>
+<div class="vinheta"></div>
 <div class="stars">
  <span style="left:6%;top:9%"></span><span style="left:18%;top:22%;animation-delay:1.2s"></span>
  <span style="left:82%;top:12%;animation-delay:2.1s"></span><span style="left:91%;top:31%;animation-delay:.6s"></span>

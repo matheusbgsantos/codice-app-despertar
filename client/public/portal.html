@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CÓDICE OCULTO — Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050505;--card:#0b0b0b;--line:#1d1d1d;--ink:#f2f0ea;--mut:#6f6f6f;--gold:#e8b33b}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:'Archivo',sans-serif;min-height:100vh;overflow-x:hidden;position:relative}
+/* estrelas / partículas */
+.dust{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5}
+.dust span{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.22;animation:tw 5s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.06}50%{opacity:.3}}
+/* moldura editorial (cantos) */
+.frame{position:fixed;inset:0;pointer-events:none;z-index:5;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;color:#4a4a4a;text-transform:uppercase}
+.frame .tl{position:absolute;top:14px;left:16px}
+.frame .tr{position:absolute;top:14px;right:16px;text-align:right}
+.frame .bl{position:absolute;bottom:14px;left:16px}
+.frame .br{position:absolute;bottom:14px;right:16px;writing-mode:vertical-rl;top:auto}
+.frame b{color:var(--gold);font-weight:400}
+.wrap{position:relative;z-index:2;max-width:430px;margin:0 auto;padding:64px 22px 80px}
+/* HERO */
+.hero{margin-bottom:44px;position:relative}
+.hero .olho{font-size:30px;opacity:.9;margin-bottom:18px;display:block}
+.hero h1{font-family:'Archivo Black',sans-serif;font-size:44px;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;position:relative;display:inline-block}
+.hero h1 .g{position:relative;display:inline-block;color:var(--bg)}
+.hero h1 .g::before{content:"";position:absolute;left:-6%;right:-6%;top:8%;bottom:4%;background:var(--gold);z-index:-1;transform:rotate(-1.6deg);filter:url(#brush)}
+.hero p{margin-top:18px;font-size:13.5px;color:var(--mut);line-height:1.6;max-width:300px}
+.hero .risco{margin-top:22px;width:54px;height:3px;background:var(--gold);transform:rotate(-2deg)}
+/* CARDS */
+.sec{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.3em;color:#4a4a4a;text-transform:uppercase;margin:34px 0 14px;display:flex;align-items:center;gap:12px}
+.sec::after{content:"";flex:1;height:1px;background:var(--line)}
+a.card{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);padding:20px 18px;margin-bottom:12px;position:relative;transition:border-color .25s,transform .12s}
+a.card:active{transform:scale(.985)}
+a.card .num{position:absolute;top:16px;right:16px;font-family:'Space Mono',monospace;font-size:9.5px;color:#3d3d3d;letter-spacing:.15em}
+a.card h2{font-family:'Archivo Black',sans-serif;font-size:17px;text-transform:uppercase;letter-spacing:.01em;line-height:1.1;margin-bottom:6px;padding-right:44px}
+a.card p{font-size:12.5px;color:var(--mut);line-height:1.5;padding-right:30px}
+a.card .go{position:absolute;bottom:18px;right:16px;color:var(--gold);font-family:'Space Mono',monospace;font-size:13px}
+/* card HOJE */
+a.hoje{border-color:#3a2f14;background:linear-gradient(120deg,#0d0b06 0%,#0b0b0b 55%)}
+a.hoje::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
+a.hoje .tag{display:inline-flex;align-items:center;gap:7px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+a.hoje .tag i{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pu 1.6s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.25}}
+a.hoje h2{font-size:21px}
+.foot{margin-top:40px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:#3d3d3d;text-transform:uppercase;line-height:2}
+.foot a{color:#5c5c5c;text-decoration:none}
+</style></head>
+<body>
+
+<svg width="0" height="0" style="position:absolute"><filter id="brush" x="-20%" y="-20%" width="140%" height="140%">
+<feTurbulence type="fractalNoise" baseFrequency="0.09 0.5" numOctaves="2" result="n"/>
+<feDisplacementMap in="SourceGraphic" in2="n" scale="14"/>
+</filter></svg>
+
+<div class="dust">
+ <span style="left:8%;top:12%"></span><span style="left:22%;top:34%;animation-delay:1s"></span>
+ <span style="left:76%;top:18%;animation-delay:2s"></span><span style="left:88%;top:44%;animation-delay:.5s"></span>
+ <span style="left:14%;top:66%;animation-delay:1.4s"></span><span style="left:64%;top:72%;animation-delay:2.4s"></span>
+ <span style="left:40%;top:88%;animation-delay:.8s"></span><span style="left:92%;top:82%;animation-delay:1.8s"></span>
+ <span style="left:52%;top:8%;animation-delay:3s"></span><span style="left:30%;top:52%;animation-delay:3.4s"></span>
+</div>
+
+<div class="frame">
+ <div class="tl">𓂀 códice oculto</div>
+ <div class="tr">acesso <b>restrito</b></div>
+ <div class="bl">arquivo vivo · 1.3M</div>
+ <div class="br">be a voice. not an echo.</div>
+</div>
+
+<div class="wrap">
+
+ <header class="hero">
+  <span class="olho">𓂀</span>
+  <h1>O QUE<br>ELES <span class="g">ESCONDEM</span><br>DE VOCÊ.</h1>
+  <p>Todos os arquivos da investigação, num só lugar. Escolha por onde entrar.</p>
+  <div class="risco"></div>
+ </header>
+
+ <div class="sec">arquivo de hoje</div>
+
+ <a class="card hoje" href="enoque-express.html?utm_source=bio&utm_campaign=enoque">
+  <span class="tag"><i></i> Aberto agora</span>
+  <h2>Arquivo Nº 003 · Enoque</h2>
+  <p>O livro que tiraram da sua Bíblia. A página que enterraram, aberta.</p>
+  <span class="go">→</span>
+ </a>
+
+ <div class="sec">o acervo</div>
+
+ <a class="card" href="codice.html">
+  <span class="num">01</span>
+  <h2>O Códice do Despertar</h2>
+  <p>O app de 30 dias personalizado. Sua jornada pra sair da Matrix.</p>
+  <span class="go">→</span>
+ </a>
+
+ <a class="card" href="https://pay.kirvano.com/955b5975-a120-4a1a-9f9a-f7dba563ad6d">
+  <span class="num">02</span>
+  <h2>Documentário Enoque</h2>
+  <p>A investigação completa em vídeo. O livro banido, revelado.</p>
+  <span class="go">→</span>
+ </a>
+
+ <a class="card" href="biblioteca.html">
+  <span class="num">03</span>
+  <h2>A Biblioteca Oculta</h2>
+  <p>12 livros que não queriam que você lesse. Reunidos.</p>
+  <span class="go">→</span>
+ </a>
+
+ <a class="card" href="frequencia.html">
+  <span class="num">04</span>
+  <h2>As Frequências</h2>
+  <p>O som que religa corpo e mente. Protocolos, não playlists.</p>
+  <span class="go">→</span>
+ </a>
+
+ <div class="foot">
+  investigação independente<br>
+  <a href="mailto:contato@arquivosoculto.com.br">contato@arquivosoculto.com.br</a>
+ </div>
+</div>
+
+<script>
+(function(){try{
+var v=localStorage.getItem('cv_id');
+if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('cv_id',v);}
+fetch("https://codice-app-production.up.railway.app/api/webhook/track?page=portal&v="+v,{mode:'no-cors',keepalive:true});
+}catch(e){}})();
+</script>
+</body></html>

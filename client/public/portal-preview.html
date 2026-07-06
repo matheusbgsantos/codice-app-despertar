@@ -54,9 +54,6 @@ animation:flutua 6s ease-in-out infinite alternate}
 .of .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 14px}
 @keyframes flutua{from{transform:translateY(0)}to{transform:translateY(-7px)}}
 .of:active{transform:scale(.985)}
-.of img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.7) brightness(.62) contrast(1.05)}
-.of .veu{position:absolute;inset:0;background:radial-gradient(ellipse 90% 90% at 50% 50%,rgba(0,0,0,.1),rgba(0,0,0,.55))}
-.of .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 14px}
 .of h3{font-family:'Archivo',sans-serif;font-weight:600;font-size:20px;letter-spacing:.34em;text-transform:uppercase;text-indent:.34em;text-shadow:0 2px 18px rgba(0,0,0,.85);white-space:nowrap}
 .of .linha{width:34px;height:1px;background:rgba(255,255,255,.55);margin:10px 0}
 .of p{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#cfcfcf;text-shadow:0 1px 10px rgba(0,0,0,.9)}
@@ -69,6 +66,12 @@ animation:flutua 6s ease-in-out infinite alternate}
 .nums div{text-align:center;padding:14px 6px;background:linear-gradient(180deg,#121215,#0a0a0c);border:1px solid #2a2a2f;border-top-color:#3a3a41;border-radius:12px;box-shadow:0 1px 0 rgba(255,255,255,.05) inset,0 14px 30px rgba(0,0,0,.7)}
 .nums b{font-family:'Archivo Black',sans-serif;font-size:17px;display:block}
 .nums span{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;display:block;margin-top:4px}
+/* MENTORIA: porta discreta */
+.mv{display:block;text-align:center;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 16px;margin-top:22px;box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.mv .tag{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.28em;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:8px}
+.mv b{font-family:'Archivo Black',sans-serif;font-size:16px;letter-spacing:.04em;text-transform:uppercase;display:block}
+.mv .mais{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-top:9px}
+.mv:active{background:#17171b}
 /* CONTATO */
 .cont{text-align:center;margin-top:48px;padding-top:30px;border-top:1px solid var(--line)}
 .cont .peq{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.4em;color:var(--dim);text-transform:uppercase}
@@ -133,10 +136,17 @@ animation:flutua 6s ease-in-out infinite alternate}
  </a>
 
  <div class="nums">
-  <div><b>+7.000</b><span>membros</span></div>
+  <div><b>+9.700</b><span>membros</span></div>
   <div><b>Imediato</b><span>acesso</span></div>
   <div><b>7 dias</b><span>garantia</span></div>
  </div>
+
+ <!-- MENTORIA: porta discreta pra quem cria conteúdo -->
+ <a class="mv" href="maquina-viral.html?utm_source=bio&utm_campaign=mentoria">
+  <span class="tag">🎬 pra quem cria conteúdo</span>
+  <b>Como eu faço estes vídeos</b>
+  <span class="mais">conhecer a máquina viral →</span>
+ </a>
 
  <div class="cont">
   <span class="peq">contato</span>

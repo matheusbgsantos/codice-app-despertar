@@ -2,112 +2,128 @@
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CÓDICE OCULTO</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Archivo:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600&family=Archivo+Black&family=Space+Mono&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#000;--ink:#fff;--mut:#9a9a9a;--red:#e03427}
+:root{--bg:#141416;--panel:#1a1a1d;--panel2:#101012;--line:#26262a;--ink:#f4f4f4;--mut:#8e8e93;--dim:#5b5b60;--red:#e03427}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:'Archivo',sans-serif;overflow-x:hidden}
-/* grão de vídeo */
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.055;
+/* textura de meio-tom nas laterais */
+.halft{position:fixed;top:0;bottom:0;width:46px;z-index:1;opacity:.14;pointer-events:none;
+background-image:radial-gradient(circle,#fff 1px,transparent 1.6px);background-size:9px 9px}
+.halft.l{left:0}.halft.r{right:0;background-position:4px 4px}
+/* grão */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.04;
 background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
-.wrap{max-width:440px;margin:0 auto;padding:0 0 60px}
-/* ABERTURA (frame de título de vídeo) */
-.abre{text-align:center;padding:54px 24px 34px}
-.abre .olho{font-size:22px;opacity:.85;letter-spacing:.4em;font-family:'Archivo',sans-serif;font-weight:700;font-size:11px;color:#c9c9c9;text-transform:uppercase}
-.abre .olho b{color:var(--red);font-weight:800}
-.abre h1{font-family:'DM Serif Display',serif;font-size:40px;line-height:1.06;margin-top:20px;letter-spacing:.005em}
-.abre h1 span{color:var(--red)}
-.abre p{margin-top:14px;font-size:13px;color:var(--mut);line-height:1.6}
-/* CARDS = capas de reel */
-.reel{display:block;position:relative;text-decoration:none;color:var(--ink);margin:0 14px 18px;border-radius:14px;overflow:hidden;background:#0a0a0a;box-shadow:0 12px 34px rgba(0,0,0,.6)}
-.reel:active{transform:scale(.985)}
-.reel img{width:100%;height:230px;object-fit:cover;display:block;filter:brightness(.85) contrast(1.06)}
-.reel .veu{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.32) 0%,rgba(0,0,0,0) 32%,rgba(0,0,0,.88) 100%)}
-.reel .tag{position:absolute;top:14px;left:14px;font-weight:800;font-size:10px;letter-spacing:.16em;text-transform:uppercase;background:var(--red);color:#fff;padding:6px 10px;border-radius:4px}
-.reel .tag.off{background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.25)}
-.reel .hoje{position:absolute;top:14px;right:14px;display:flex;align-items:center;gap:6px;font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.55);padding:6px 9px;border-radius:4px}
-.reel .hoje i{width:6px;height:6px;border-radius:50%;background:var(--red);animation:pu 1.5s infinite}
+.wrap{position:relative;z-index:2;max-width:430px;margin:0 auto;padding:0 22px 60px}
+/* barra mínima */
+.top{display:flex;justify-content:space-between;align-items:center;padding:20px 2px 0;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.26em;color:var(--dim);text-transform:uppercase}
+/* HERO tipográfico */
+.hero{text-align:center;padding:58px 0 46px;position:relative}
+.hero .peq{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.5em;color:var(--mut);text-transform:uppercase;display:block;margin-bottom:16px}
+.hero h1{font-family:'Archivo Black',sans-serif;font-size:54px;line-height:.94;letter-spacing:.01em;text-transform:uppercase}
+.hero h1 small{display:block;font-size:19px;letter-spacing:.42em;color:var(--mut);margin-top:12px}
+.hero .risco{width:36px;height:2px;background:var(--ink);margin:26px auto 0;opacity:.5}
+/* seção */
+.sec{text-align:center;margin:44px 0 20px}
+.sec .peq{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.4em;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:8px}
+.sec h2{font-family:'Archivo Black',sans-serif;font-size:24px;letter-spacing:.06em;text-transform:uppercase}
+/* DESTAQUE do dia */
+.feat{position:relative;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:26px 20px 24px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.feat .live{position:absolute;top:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.28em;color:var(--mut);text-transform:uppercase}
+.feat .live i{width:5px;height:5px;border-radius:50%;background:var(--red);animation:pu 1.5s infinite}
 @keyframes pu{0%,100%{opacity:1}50%{opacity:.2}}
-.reel .t{position:absolute;left:16px;right:16px;bottom:14px}
-.reel h2{font-family:'DM Serif Display',serif;font-size:25px;line-height:1.08;text-shadow:0 2px 14px rgba(0,0,0,.9)}
-.reel .sub{margin-top:6px;font-size:11.5px;color:#cfcfcf;font-weight:600;letter-spacing:.02em;display:flex;align-items:center;gap:8px}
-.reel .sub::before{content:"▶";color:var(--red);font-size:9px}
-.foot{text-align:center;margin-top:30px;font-size:10px;letter-spacing:.18em;color:#4e4e4e;text-transform:uppercase;line-height:2.2}
-.foot a{color:#7a7a7a;text-decoration:none}
+.feat img{width:172px;height:220px;object-fit:cover;border-radius:10px;margin:26px auto 0;box-shadow:0 18px 44px rgba(0,0,0,.65);filter:saturate(.85)}
+.feat h3{font-family:'Archivo Black',sans-serif;font-size:23px;letter-spacing:.05em;text-transform:uppercase;margin-top:20px}
+.feat p{font-size:12.5px;color:var(--mut);line-height:1.6;max-width:280px;margin:8px auto 18px}
+.bt{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;border:1px solid #3a3a3f;border-radius:6px;padding:13px 26px;transition:background .2s}
+.bt:active{background:#222}
+.bt.cheio{background:var(--ink);color:#111;border-color:var(--ink)}
+/* GRID de ofertas */
+.of{display:flex;align-items:center;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;text-decoration:none;color:var(--ink);box-shadow:0 14px 34px rgba(0,0,0,.4);transition:transform .12s}
+.of:active{transform:scale(.985)}
+.of img{width:64px;height:82px;object-fit:cover;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,.5);filter:saturate(.85)}
+.of .t{flex:1;min-width:0}
+.of h3{font-family:'Archivo Black',sans-serif;font-size:14.5px;letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
+.of p{font-size:11px;color:var(--mut);margin-top:4px;line-height:1.5}
+.of .go{font-family:'Space Mono',monospace;color:var(--mut);font-size:14px}
+/* PROVA SOCIAL */
+.stars{color:#fff;letter-spacing:.3em;font-size:13px;text-align:center}
+.social{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 18px;text-align:center;box-shadow:0 14px 34px rgba(0,0,0,.4);margin-bottom:12px}
+.social .frase{font-size:13.5px;line-height:1.7;color:#d6d6d6;font-style:italic;margin:12px 0 10px}
+.social .quem{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.24em;color:var(--dim);text-transform:uppercase}
+.nums{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
+.nums div{text-align:center;padding:14px 6px;background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.nums b{font-family:'Archivo Black',sans-serif;font-size:17px;display:block}
+.nums span{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;display:block;margin-top:4px}
+/* CONTATO */
+.cont{text-align:center;margin-top:48px;padding-top:30px;border-top:1px solid var(--line)}
+.cont .peq{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.4em;color:var(--dim);text-transform:uppercase}
+.cont a{color:var(--mut);text-decoration:none;font-size:12px;display:block;margin-top:8px}
 </style></head>
 <body>
+<div class="halft l"></div><div class="halft r"></div>
 
 <div class="wrap">
 
- <header class="abre">
-  <div class="olho">𓂀 CÓDICE OCULTO · <b>O ARQUIVO</b></div>
-  <h1>Eles esconderam.<br><span>Nós arquivamos.</span></h1>
-  <p>Escolha o arquivo. Todo o resto é entrega.</p>
+ <div class="top"><span>𓂀</span><span>o arquivo</span><span>1939—44</span></div>
+
+ <header class="hero">
+  <span class="peq">eles esconderam · nós arquivamos</span>
+  <h1>Códice<small>Oculto</small></h1>
+  <div class="risco"></div>
  </header>
 
- <a class="reel" href="enoque-express.html?utm_source=bio&utm_campaign=enoque">
-  <img src="midia/portal/card-enoque.jpg" alt="">
-  <div class="veu"></div>
-  <span class="tag">Arquivo Nº 003</span>
-  <span class="hoje"><i></i> Aberto hoje</span>
-  <div class="t">
-   <h2>Roubaram um livro da sua Bíblia.</h2>
-   <div class="sub">Abrir a página que enterraram</div>
-  </div>
+ <!-- DESTAQUE: produto do vídeo do dia (eu troco conforme o post) -->
+ <section class="feat">
+  <span class="live"><i></i> falado no vídeo de hoje</span>
+  <img src="midia/biblio/capa_enoque.webp" alt="Livro de Enoque">
+  <h3>O Livro de Enoque</h3>
+  <p>O livro que tiraram da sua Bíblia. A página que enterraram, com as provas reais.</p>
+  <a class="bt cheio" href="enoque-express.html?utm_source=bio&utm_campaign=enoque">Abrir o arquivo</a>
+ </section>
+
+ <div class="sec"><span class="peq">catálogo</span><h2>As Ofertas</h2></div>
+
+ <a class="of" href="codice.html">
+  <img src="midia/app-capa.png" alt="">
+  <div class="t"><h3>O Códice do Despertar</h3><p>App de 30 dias. Sua saída da Matrix, guiada.</p></div>
+  <span class="go">→</span>
  </a>
 
- <a class="reel" href="https://pay.kirvano.com/955b5975-a120-4a1a-9f9a-f7dba563ad6d">
-  <img src="midia/portal/card-enoque.jpg" alt="" style="object-position:0 80%">
-  <div class="veu"></div>
-  <span class="tag off">Documentário</span>
-  <div class="t">
-   <h2>Enoque: a investigação completa.</h2>
-   <div class="sub">Assistir agora</div>
-  </div>
+ <a class="of" href="https://pay.kirvano.com/955b5975-a120-4a1a-9f9a-f7dba563ad6d">
+  <img src="midia/enoque-4q201.jpg" alt="">
+  <div class="t"><h3>Documentário Enoque</h3><p>A investigação completa, em vídeo.</p></div>
+  <span class="go">→</span>
  </a>
 
- <a class="reel" href="biblioteca.html">
-  <img src="midia/biblio/capa_enoque.webp" alt="">
-  <div class="veu"></div>
-  <span class="tag off">Biblioteca</span>
-  <div class="t">
-   <h2>12 livros que tiraram de circulação.</h2>
-   <div class="sub">Entrar na Biblioteca Oculta</div>
-  </div>
+ <a class="of" href="biblioteca.html">
+  <img src="midia/biblio/capa_jasar.webp" alt="">
+  <div class="t"><h3>A Biblioteca Oculta</h3><p>12 livros retirados de circulação, reunidos.</p></div>
+  <span class="go">→</span>
  </a>
 
- <a class="reel" href="frequencia.html">
-  <img src="midia/portal/card-freq.jpg" alt="">
-  <div class="veu"></div>
-  <span class="tag off">Frequências</span>
-  <div class="t">
-   <h2>O som que o seu corpo pede à noite.</h2>
-   <div class="sub">Ouvir os protocolos</div>
-  </div>
+ <a class="of" href="frequencia.html">
+  <img src="midia/freq/thumb.webp" alt="">
+  <div class="t"><h3>Protocolos de Frequência</h3><p>O som que o corpo pede à noite.</p></div>
+  <span class="go">→</span>
  </a>
 
- <a class="reel" href="codice.html">
-  <img src="midia/portal/card-sono.jpg" alt="">
-  <div class="veu"></div>
-  <span class="tag off">App · 30 dias</span>
-  <div class="t">
-   <h2>O Códice do Despertar.</h2>
-   <div class="sub">Começar a jornada</div>
-  </div>
- </a>
+ <div class="sec"><span class="peq">quem já entrou</span><h2>Prova</h2></div>
 
- <a class="reel" href="arca-materia.html?utm_source=bio&utm_campaign=arca">
-  <img src="midia/portal/card-arca.jpg" alt="">
-  <div class="veu"></div>
-  <span class="tag off">Arquivo Nº 002</span>
-  <div class="t">
-   <h2>Disseram que a Arca era mentira.</h2>
-   <div class="sub">Ver as imagens de radar</div>
-  </div>
- </a>
+ <div class="social">
+  <div class="stars">★★★★★</div>
+  <p class="frase">[ espaço reservado: me manda um print de depoimento real de comprador que eu coloco aqui ]</p>
+  <div class="quem">comprador verificado</div>
+ </div>
 
- <div class="foot">
-  investigação independente<br>
+ <div class="nums">
+  <div><b>+7.000</b><span>membros</span></div>
+  <div><b>Imediato</b><span>acesso</span></div>
+  <div><b>7 dias</b><span>garantia</span></div>
+ </div>
+
+ <div class="cont">
+  <span class="peq">contato</span>
   <a href="mailto:contato@arquivosoculto.com.br">contato@arquivosoculto.com.br</a>
  </div>
 

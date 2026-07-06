@@ -33,7 +33,13 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .sec .peq{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.4em;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:8px}
 .sec h2{font-family:'Archivo Black',sans-serif;font-size:24px;letter-spacing:.06em;text-transform:uppercase}
 /* DESTAQUE do dia */
-.feat{position:relative;background:linear-gradient(180deg,#131316,#0a0a0c);border:1px solid #2a2a2f;border-top-color:#3d3d44;border-radius:16px;padding:26px 20px 24px;text-align:center;box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 30px 70px rgba(0,0,0,.85),0 6px 18px rgba(0,0,0,.6)}
+.feat{position:relative;background:linear-gradient(180deg,#131316,#0a0a0c);border:1px solid #3a3a42;border-top-color:#55555e;border-radius:16px;padding:26px 20px 24px;text-align:center;
+box-shadow:0 1px 0 rgba(255,255,255,.06) inset,
+ -16px 0 40px -16px rgba(255,255,255,.32),
+ 16px 0 40px -16px rgba(255,255,255,.32),
+ 0 -12px 34px -18px rgba(255,255,255,.25),
+ 0 30px 70px rgba(0,0,0,.85),0 8px 20px rgba(0,0,0,.65);
+animation:flutua 6s ease-in-out infinite alternate}
 .feat .live{position:absolute;top:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.28em;color:var(--mut);text-transform:uppercase}
 .feat .live i{width:5px;height:5px;border-radius:50%;background:var(--red);animation:pu 1.5s infinite}
 @keyframes pu{0%,100%{opacity:1}50%{opacity:.2}}
@@ -44,7 +50,16 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .bt:active{background:#222}
 .bt.cheio{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 8px 26px rgba(224,52,39,.3)}
 /* OFERTAS estilo ABSTRACT: palavra sobre a imagem */
-.of{display:block;position:relative;border-radius:16px;margin-bottom:20px;text-decoration:none;color:var(--ink);box-shadow:0 1px 0 rgba(255,255,255,.09) inset,0 26px 60px rgba(0,0,0,.9),0 8px 20px rgba(0,0,0,.65);transition:transform .12s;overflow:hidden;aspect-ratio:16/9;border:1px solid #2e2e34;border-top-color:#45454c}
+.of{display:block;position:relative;border-radius:16px;margin-bottom:26px;text-decoration:none;color:var(--ink);
+box-shadow:0 1px 0 rgba(255,255,255,.09) inset,
+ -14px 0 34px -16px rgba(255,255,255,.30),
+ 14px 0 34px -16px rgba(255,255,255,.30),
+ 0 -10px 30px -18px rgba(255,255,255,.22),
+ 0 26px 60px rgba(0,0,0,.9),0 10px 24px rgba(0,0,0,.7);
+transition:box-shadow .2s;overflow:hidden;aspect-ratio:16/9;border:1px solid #3a3a42;border-top-color:#55555e;
+animation:flutua 5s ease-in-out infinite alternate}
+.of:nth-of-type(2){animation-delay:1.2s}.of:nth-of-type(3){animation-delay:2.4s}.of:nth-of-type(4){animation-delay:.6s}
+@keyframes flutua{from{transform:translateY(0)}to{transform:translateY(-7px)}}
 .of:active{transform:scale(.985)}
 .of img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.7) brightness(.62) contrast(1.05)}
 .of .veu{position:absolute;inset:0;background:radial-gradient(ellipse 90% 90% at 50% 50%,rgba(0,0,0,.1),rgba(0,0,0,.55))}

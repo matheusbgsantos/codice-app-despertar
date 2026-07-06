@@ -6,7 +6,7 @@
 <style>
 :root{--bg:#050506;--panel:#111114;--panel2:#0a0a0c;--line:#222226;--ink:#f4f4f4;--mut:#8e8e93;--dim:#5b5b60;--red:#e03427}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:'Archivo',sans-serif;overflow-x:hidden}
+body{background:linear-gradient(180deg,#1b1b20 0%,#0e0e11 34%,#060608 72%,#040405 100%) fixed;color:var(--ink);font-family:'Archivo',sans-serif;overflow-x:hidden}
 .fumaca{position:fixed;inset:-12%;z-index:0;pointer-events:none;background:url('midia/portal/fundo-fumaca.jpg') center/cover;opacity:.5;animation:deriva 70s ease-in-out infinite alternate}
 .fumaca.b{opacity:.28;transform:scale(1.15) rotate(180deg);animation:deriva2 95s ease-in-out infinite alternate}
 @keyframes deriva{from{transform:translate(0,0) scale(1.05)}to{transform:translate(2.5%,-3%) scale(1.12)}}
@@ -33,11 +33,8 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .sec .peq{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.4em;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:8px}
 .sec h2{font-family:'Archivo Black',sans-serif;font-size:24px;letter-spacing:.06em;text-transform:uppercase}
 /* DESTAQUE do dia */
-.feat{position:relative;background:linear-gradient(180deg,#131316,#0a0a0c);border:1px solid #3a3a42;border-top-color:#55555e;border-radius:16px;padding:26px 20px 24px;text-align:center;
+.feat{position:relative;background:linear-gradient(180deg,#131316,#0a0a0c);border:1px solid #2b2b31;border-top-color:#3c3c44;border-radius:16px;padding:26px 20px 24px;text-align:center;
 box-shadow:0 1px 0 rgba(255,255,255,.06) inset,
- -16px 0 40px -16px rgba(255,255,255,.32),
- 16px 0 40px -16px rgba(255,255,255,.32),
- 0 -12px 34px -18px rgba(255,255,255,.25),
  0 30px 70px rgba(0,0,0,.85),0 8px 20px rgba(0,0,0,.65);
 animation:flutua 6s ease-in-out infinite alternate}
 .feat .live{position:absolute;top:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.28em;color:var(--mut);text-transform:uppercase}
@@ -50,19 +47,11 @@ animation:flutua 6s ease-in-out infinite alternate}
 .bt:active{background:#222}
 .bt.cheio{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 8px 26px rgba(224,52,39,.3)}
 /* OFERTAS estilo ABSTRACT: palavra sobre a imagem */
-.of{display:block;position:relative;border-radius:16px;margin-bottom:26px;text-decoration:none;color:var(--ink);
-background:linear-gradient(180deg,#131316,#0a0a0c);padding:14px 14px 20px;
-box-shadow:0 1px 0 rgba(255,255,255,.09) inset,
- -14px 0 34px -16px rgba(255,255,255,.30),
- 14px 0 34px -16px rgba(255,255,255,.30),
- 0 -10px 30px -18px rgba(255,255,255,.22),
- 0 26px 60px rgba(0,0,0,.9),0 10px 24px rgba(0,0,0,.7);
-transition:box-shadow .2s;border:1px solid #3a3a42;border-top-color:#55555e;
-animation:flutua 5s ease-in-out infinite alternate}
+.of{display:block;position:relative;border-radius:16px;margin-bottom:22px;text-decoration:none;color:var(--ink);overflow:hidden;aspect-ratio:16/9;border:1px solid #2b2b31;border-top-color:#3c3c44;box-shadow:0 1px 0 rgba(255,255,255,.07) inset,0 24px 56px rgba(0,0,0,.85),0 8px 20px rgba(0,0,0,.6);animation:flutua 5s ease-in-out infinite alternate}
 .of:nth-of-type(2){animation-delay:1.2s}.of:nth-of-type(3){animation-delay:2.4s}.of:nth-of-type(4){animation-delay:.6s}
-.of img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;display:block;box-shadow:0 16px 36px rgba(0,0,0,.65);filter:saturate(.8) brightness(.85)}
-.of .veu{display:none}
-.of .c{display:flex;flex-direction:column;align-items:center;text-align:center;padding:16px 8px 0}
+.of img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.7) brightness(.62) contrast(1.05)}
+.of .veu{position:absolute;inset:0;background:radial-gradient(ellipse 90% 90% at 50% 50%,rgba(0,0,0,.1),rgba(0,0,0,.55))}
+.of .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 14px}
 @keyframes flutua{from{transform:translateY(0)}to{transform:translateY(-7px)}}
 .of:active{transform:scale(.985)}
 .of img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.7) brightness(.62) contrast(1.05)}

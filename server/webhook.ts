@@ -282,6 +282,46 @@ webhookRouter.get('/traffic', async (_req: Request, res: Response) => {
   }
 });
 
+/**
+ * Aplicações da mentoria (A Máquina Viral). POST /api/webhook/aplicacao
+ * body: { nome, email, whatsapp, momento } — grava e avisa no Discord na hora.
+ */
+webhookRouter.post('/aplicacao', async (req: Request, res: Response) => {
+  try {
+    const nome = String(req.body?.nome || '').slice(0, 120).trim();
+    const email = String(req.body?.email || '').slice(0, 160).trim().toLowerCase();
+    const whatsapp = String(req.body?.whatsapp || '').slice(0, 40).trim();
+    const momento = String(req.body?.momento || '').slice(0, 500).trim();
+    if (!nome || !email || !whatsapp) return res.status(400).json({ ok: false, erro: 'campos obrigatórios' });
+
+    await logWebhook({ eventType: 'APLICACAO_MENTORIA', email, payload: JSON.stringify({ nome, whatsapp, momento }), status: 'received' } as any);
+
+    const hook = process.env.DISCORD_WEBHOOK;
+    if (hook) {
+      await fetch(hook, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: `🎓 **NOVA APLICAÇÃO · A MÁQUINA VIRAL**\n**${nome}**\n📱 ${whatsapp}\n✉️ ${email}\n💬 ${momento || '(sem resposta)'}\n\n👉 Chama no WhatsApp agora (lead quente esfria em horas).` }),
+      }).catch(() => {});
+    }
+    return res.status(200).json({ ok: true });
+  } catch (e) {
+    return res.status(500).json({ ok: false });
+  }
+});
+
+/** Lista aplicações da mentoria. POST /api/webhook/aplicacoes body:{key} */
+webhookRouter.post('/aplicacoes', async (req: Request, res: Response) => {
+  try {
+    if (req.body?.key !== 'codice2026') return res.status(401).json({ error: 'unauthorized' });
+    const { listWebhookLogs } = await import('./db');
+    const logs = await listWebhookLogs(500);
+    const apps = (logs as any[]).filter(l => l.eventType === 'APLICACAO_MENTORIA').map(l => ({ email: l.email, ...(JSON.parse(l.payload || '{}')), em: l.createdAt }));
+    return res.status(200).json({ total: apps.length, aplicacoes: apps });
+  } catch (e) {
+    return res.status(500).json({ error: 'erro' });
+  }
+});
+
 /** Pessoas online agora nos apps (ativas < 5min). GET /api/webhook/online */
 webhookRouter.get('/online', async (_req: Request, res: Response) => {
   try {

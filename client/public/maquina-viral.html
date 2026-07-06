@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A MÁQUINA VIRAL — Mentoria Fundadora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050506;--panel:#111114;--line:#26262a;--ink:#f4f4f4;--mut:#8e8e93;--dim:#5b5b60;--red:#e03427;--verde:#2fbf71}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(180deg,#17171b 0%,#0a0a0c 40%,#050506 100%) fixed;color:var(--ink);font-family:'Archivo',sans-serif;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{position:relative;z-index:2;max-width:440px;margin:0 auto;padding:0 22px 80px}
+.top{display:flex;justify-content:space-between;padding:18px 2px 0;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.26em;color:var(--dim);text-transform:uppercase}
+/* HERO */
+.hero{text-align:center;padding:52px 0 30px}
+.hero .peq{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.4em;color:var(--red);text-transform:uppercase;display:block;margin-bottom:16px}
+.hero h1{font-family:'Archivo Black',sans-serif;font-size:40px;line-height:1;text-transform:uppercase}
+.hero h1 span{color:var(--red)}
+.hero p{margin:16px auto 0;font-size:14px;color:var(--mut);line-height:1.65;max-width:330px}
+.hero p b{color:var(--ink)}
+/* MÉTRICAS */
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:30px 0 8px}
+.nums div{text-align:center;padding:18px 8px;background:linear-gradient(180deg,#121215,#0a0a0c);border:1px solid #2a2a2f;border-top-color:#3a3a41;border-radius:12px;box-shadow:0 14px 30px rgba(0,0,0,.6)}
+.nums b{font-family:'Archivo Black',sans-serif;font-size:22px;display:block}
+.nums b i{font-style:normal;color:var(--red)}
+.nums span{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase;display:block;margin-top:5px;line-height:1.5}
+.fonte{text-align:center;font-size:10px;color:#4c4c52;margin-bottom:6px}
+/* SEÇÃO */
+.sec{text-align:center;margin:40px 0 16px}
+.sec .peq{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.4em;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:8px}
+.sec h2{font-family:'Archivo Black',sans-serif;font-size:22px;letter-spacing:.04em;text-transform:uppercase}
+/* LISTA DO QUE RECEBE */
+.item{display:flex;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:10px;box-shadow:0 12px 28px rgba(0,0,0,.45)}
+.item .ic{font-size:20px;flex-shrink:0}
+.item b{display:block;font-size:14px;margin-bottom:3px}
+.item p{font-size:12px;color:var(--mut);line-height:1.55}
+/* OFERTA */
+.oferta{background:linear-gradient(180deg,#131316,#0a0a0c);border:1px solid #3a2320;border-radius:16px;padding:26px 20px;text-align:center;margin-top:28px;box-shadow:0 24px 60px rgba(0,0,0,.7)}
+.oferta .vagas{display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.24em;color:#ffb3ab;text-transform:uppercase;border:1px solid rgba(224,52,39,.4);border-radius:20px;padding:6px 14px;margin-bottom:14px}
+.oferta .vagas i{width:6px;height:6px;border-radius:50%;background:var(--red);animation:pu 1.5s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.2}}
+.oferta h3{font-family:'Archivo Black',sans-serif;font-size:21px;text-transform:uppercase;line-height:1.15}
+.oferta .preco{margin:16px 0 4px;font-family:'Archivo Black',sans-serif;font-size:34px}
+.oferta .preco small{font-size:15px;color:var(--mut);font-family:'Archivo',sans-serif;font-weight:600}
+.oferta .pix{font-size:12.5px;color:var(--verde);font-weight:600;margin-bottom:4px}
+.oferta .obs{font-size:11px;color:var(--dim)}
+/* FORM */
+.form{margin-top:26px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 18px;box-shadow:0 18px 44px rgba(0,0,0,.55)}
+.form h4{font-family:'Archivo Black',sans-serif;font-size:16px;text-transform:uppercase;text-align:center;margin-bottom:4px}
+.form .sub{text-align:center;font-size:11.5px;color:var(--mut);margin-bottom:18px;line-height:1.5}
+.form label{display:block;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;margin:14px 0 6px}
+.form input,.form textarea{width:100%;background:#0a0a0c;border:1px solid #2e2e34;border-radius:9px;color:var(--ink);padding:13px 14px;font-size:15px;font-family:'Archivo',sans-serif}
+.form input:focus,.form textarea:focus{outline:none;border-color:#55555e}
+.form textarea{resize:none;height:74px}
+.form button{width:100%;margin-top:20px;background:var(--red);color:#fff;border:0;border-radius:10px;padding:17px;font-family:'Archivo Black',sans-serif;font-size:15px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 30px rgba(224,52,39,.35)}
+.form button:disabled{opacity:.6}
+.form .micro{text-align:center;font-size:10px;color:var(--dim);margin-top:10px;line-height:1.6}
+.ok{display:none;text-align:center;padding:30px 10px}
+.ok .e{font-size:40px}
+.ok h4{font-family:'Archivo Black',sans-serif;font-size:18px;text-transform:uppercase;margin:12px 0 8px}
+.ok p{font-size:13px;color:var(--mut);line-height:1.6}
+.foot{text-align:center;margin-top:40px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:#4c4c52;text-transform:uppercase;line-height:2.2}
+</style></head>
+<body>
+
+<div class="wrap">
+
+ <div class="top"><span>𓂀 códice oculto</span><span>mentoria fundadora</span></div>
+
+ <header class="hero">
+  <span class="peq">● turma fundadora · julho 2026</span>
+  <h1>A Máquina<br><span>Viral</span></h1>
+  <p>Em 30 dias eu te ensino, na prática, o sistema completo que eu uso pra fazer <b>vídeos de milhões de views com IA</b>, sem aparecer, sem equipe, e transformar essas views em <b>vendas no automático</b>.</p>
+ </header>
+
+ <div class="nums">
+  <div><b>8,9<i>M</i></b><span>views num único vídeo</span></div>
+  <div><b>1,2<i>M</i></b><span>seguidores construídos</span></div>
+  <div><b>150<i>k</i></b><span>views nas últimas 48h</span></div>
+  <div><b>3.100<i>+</i></b><span>vendas entregues por robô de DM</span></div>
+ </div>
+ <div class="fonte">números reais do meu perfil, os prints estão no meu Instagram</div>
+
+ <div class="sec"><span class="peq">o que você leva</span><h2>O Sistema Inteiro</h2></div>
+
+ <div class="item"><span class="ic">🎬</span><div><b>A fábrica de vídeo com IA</b><p>Meu processo exato: gancho, roteiro, geração das cenas cinematográficas, edição e a regra do primeiro frame. Do zero ao vídeo pronto.</p></div></div>
+ <div class="item"><span class="ic">🧲</span><div><b>A fórmula que viraliza</b><p>Por que um vídeo faz 8 milhões e outro morre em 2 mil. As 4 peças do vídeo que o algoritmo empurra (validadas com dados do meu perfil).</p></div></div>
+ <div class="item"><span class="ic">🤖</span><div><b>O funil que vende sozinho</b><p>O sistema comenta-palavra → DM automática → página → venda. O mesmo robô que já entregou 3.100+ vendas pra mim, montado no SEU negócio.</p></div></div>
+ <div class="item"><span class="ic">📁</span><div><b>Meus templates e prompts</b><p>Os prompts de cena, os moldes de roteiro, os ganchos campeões e as páginas que converteram. Copiar, colar, adaptar.</p></div></div>
+ <div class="item"><span class="ic">🎯</span><div><b>4 encontros ao vivo + 1 sessão 1x1</b><p>4 semanas de mentoria em grupo (gravadas) + uma sessão individual de 45 minutos só sua, aplicando tudo no teu caso.</p></div></div>
+ <div class="item"><span class="ic">💬</span><div><b>Suporte direto por 30 dias</b><p>Grupo fechado no WhatsApp com acesso direto a mim durante o mês inteiro.</p></div></div>
+
+ <div class="oferta">
+  <span class="vagas"><i></i> apenas 10 vagas · fundadores</span>
+  <h3>Mentoria A Máquina Viral</h3>
+  <div class="preco">12x R$347 <small>no cartão</small></div>
+  <div class="pix">ou R$2.497 à vista no Pix (economiza R$500)</div>
+  <div class="obs">turma única de julho · quando fechar as 10, fechou</div>
+ </div>
+
+ <div class="form" id="form">
+  <h4>Aplicar pra uma vaga</h4>
+  <div class="sub">Preenche que eu te chamo no WhatsApp pra conversar. Sem compromisso: a vaga só é tua depois do nosso papo.</div>
+  <form id="apf">
+   <label>Teu nome</label>
+   <input type="text" id="nome" required maxlength="120" placeholder="Nome completo">
+   <label>Teu WhatsApp (com DDD)</label>
+   <input type="tel" id="whatsapp" required maxlength="20" placeholder="(11) 99999-9999">
+   <label>Teu melhor e-mail</label>
+   <input type="email" id="email" required maxlength="160" placeholder="voce@email.com">
+   <label>Teu momento hoje (1 frase)</label>
+   <textarea id="momento" maxlength="400" placeholder="Ex: tenho uma loja e preciso de vídeo que venda / quero viver de conteúdo / já crio mas não viralizo..."></textarea>
+   <button type="submit" id="btn">QUERO MINHA VAGA →</button>
+   <div class="micro">🔒 Teus dados ficam só comigo. Eu chamo os aplicados por ordem de chegada.</div>
+  </form>
+ </div>
+
+ <div class="ok" id="ok">
+  <div class="e">✅</div>
+  <h4>Aplicação recebida!</h4>
+  <p>Eu vou te chamar no WhatsApp <b>ainda hoje</b> pra gente conversar sobre a tua vaga. Fica de olho nas mensagens (e nas solicitações). 𓂀</p>
+ </div>
+
+ <div class="foot">𓂀 códice oculto · mentoria fundadora<br>vagas limitadas de verdade: é acompanhamento, não curso gravado</div>
+
+</div>
+
+<script>
+document.getElementById('apf').addEventListener('submit',async function(e){
+e.preventDefault();
+var b=document.getElementById('btn');b.disabled=true;b.textContent='ENVIANDO...';
+try{
+var r=await fetch('https://codice-app-production.up.railway.app/api/webhook/aplicacao',{
+method:'POST',headers:{'Content-Type':'application/json'},
+body:JSON.stringify({nome:document.getElementById('nome').value,whatsapp:document.getElementById('whatsapp').value,email:document.getElementById('email').value,momento:document.getElementById('momento').value})});
+var j=await r.json();
+if(j.ok){document.getElementById('form').style.display='none';document.getElementById('ok').style.display='block';window.scrollTo({top:document.getElementById('ok').offsetTop-80,behavior:'smooth'});}
+else{b.disabled=false;b.textContent='QUERO MINHA VAGA →';alert('Confere os campos e tenta de novo.');}
+}catch(err){b.disabled=false;b.textContent='QUERO MINHA VAGA →';alert('Falha de conexão. Tenta de novo.');}
+});
+(function(){try{
+var v=localStorage.getItem('cv_id');
+if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('cv_id',v);}
+fetch("https://codice-app-production.up.railway.app/api/webhook/track?page=maquina-viral&v="+v,{mode:'no-cors',keepalive:true});
+}catch(e){}})();
+</script>
+</body></html>

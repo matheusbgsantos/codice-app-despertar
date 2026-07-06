@@ -7,6 +7,10 @@
 :root{--bg:#050506;--panel:#111114;--panel2:#0a0a0c;--line:#222226;--ink:#f4f4f4;--mut:#8e8e93;--dim:#5b5b60;--red:#e03427}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:'Archivo',sans-serif;overflow-x:hidden}
+.stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.stars span{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.14;animation:tw 6s ease-in-out infinite}
+.stars span:nth-child(2n){width:1px;height:1px}
+@keyframes tw{0%,100%{opacity:.05}50%{opacity:.28}}
 /* grão */
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.04;
 background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -14,7 +18,8 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 /* barra mínima */
 .top{display:flex;justify-content:space-between;align-items:center;padding:20px 2px 0;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.26em;color:var(--dim);text-transform:uppercase}
 /* HERO tipográfico */
-.hero{text-align:center;padding:58px 0 46px;position:relative}
+.hero{text-align:center;padding:74px 0 56px;position:relative}
+.hero .forma{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:330px;height:330px;background:url('midia/portal/abs-codice.jpg') center/cover;border-radius:50%;opacity:.34;filter:brightness(.9);z-index:-1;-webkit-mask-image:radial-gradient(circle,#000 30%,transparent 68%);mask-image:radial-gradient(circle,#000 30%,transparent 68%)}
 .hero .peq{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.5em;color:var(--mut);text-transform:uppercase;display:block;margin-bottom:16px}
 .hero h1{font-family:'Archivo Black',sans-serif;font-size:54px;line-height:.94;letter-spacing:.01em;text-transform:uppercase}
 .hero h1 small{display:block;font-size:19px;letter-spacing:.42em;color:var(--mut);margin-top:12px}
@@ -59,11 +64,21 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 </style></head>
 <body>
 
+<div class="stars">
+ <span style="left:6%;top:9%"></span><span style="left:18%;top:22%;animation-delay:1.2s"></span>
+ <span style="left:82%;top:12%;animation-delay:2.1s"></span><span style="left:91%;top:31%;animation-delay:.6s"></span>
+ <span style="left:12%;top:47%;animation-delay:1.8s"></span><span style="left:70%;top:44%;animation-delay:3s"></span>
+ <span style="left:31%;top:63%;animation-delay:.9s"></span><span style="left:88%;top:66%;animation-delay:2.5s"></span>
+ <span style="left:9%;top:81%;animation-delay:1.5s"></span><span style="left:55%;top:88%;animation-delay:3.4s"></span>
+ <span style="left:43%;top:15%;animation-delay:2.8s"></span><span style="left:64%;top:75%;animation-delay:.3s"></span>
+</div>
+
 <div class="wrap">
 
  <div class="top"><span>𓂀</span><span>o arquivo</span><span>1939—44</span></div>
 
  <header class="hero">
+  <div class="forma"></div>
   <span class="peq">eles esconderam · nós arquivamos</span>
   <h1>Códice<small>Oculto</small></h1>
   <div class="risco"></div>

@@ -1,172 +1,139 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CÓDICE OCULTO — Hub</title>
+<title>CÓDICE OCULTO — Arquivo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Archivo:wght@500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#060607;--card:#0d0d10;--line:#1e1e22;--ink:#efe9db;--mut:#8b8577;--gold:#d5a94f;--gold2:#e8c477}
+:root{--bg:#0a0a0b;--paper:#141416;--line:#26262a;--ink:#e8e4da;--mut:#7d7a72;--red:#c23b2e;--stamp:#d64a3b}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:'Archivo',sans-serif;overflow-x:hidden}
-img{display:block}
-.wrap{max-width:440px;margin:0 auto;padding:0 14px 70px}
-/* grão de filme */
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.05;
-background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")}
-/* HERO */
-.hero{position:relative;text-align:center;padding:52px 18px 30px;overflow:hidden}
-.hero .beam{position:absolute;left:50%;top:0;transform:translateX(-50%);width:150px;height:100%;
-background:radial-gradient(ellipse 60% 45% at 50% 30%,rgba(213,169,79,.16),transparent 70%);pointer-events:none}
-.hero .marca{display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.34em;color:var(--mut);text-transform:uppercase;margin-bottom:34px}
-.hero .marca .olho{color:var(--gold);font-size:15px}
-.hero h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:42px;line-height:1.04;letter-spacing:.01em}
-.hero h1 em{font-style:italic;color:var(--gold2)}
-.hero .sub{margin:16px auto 26px;font-size:13.5px;color:var(--mut);line-height:1.65;max-width:300px}
-.cta{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(180deg,var(--gold2),#b8893a);color:#171006;font-weight:700;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:15px 30px;border-radius:9px;box-shadow:0 8px 30px rgba(213,169,79,.22)}
-.hero .abaixo{margin-top:12px;font-size:11px;color:#5c574c;letter-spacing:.04em}
-/* CHIPS */
-.chips{display:flex;gap:8px;overflow-x:auto;padding:26px 2px 6px;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex-shrink:0;font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:20px;padding:8px 15px;text-decoration:none}
-.chip.on{color:#171006;background:var(--gold);border-color:var(--gold);font-weight:700}
-/* GRID DE CARDS */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
-.doc{position:relative;display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:transform .12s}
-.doc:active{transform:scale(.98)}
-.doc.full{grid-column:1/-1}
-.doc .ph{position:relative;height:120px;overflow:hidden}
-.doc.full .ph{height:150px}
-.doc .ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(.5) contrast(1.08) brightness(.72)}
-.doc .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(6,6,7,.92) 100%)}
-.doc .tag{position:absolute;top:10px;left:10px;z-index:2;font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);background:rgba(10,9,5,.75);border:1px solid rgba(213,169,79,.35);border-radius:4px;padding:4px 8px}
-.doc .play{position:absolute;right:12px;bottom:-14px;z-index:3;width:34px;height:34px;border-radius:50%;background:var(--gold);color:#171006;display:flex;align-items:center;justify-content:center;font-size:12px;box-shadow:0 4px 14px rgba(0,0,0,.5)}
-.doc .info{padding:13px 13px 15px}
-.doc h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:19px;line-height:1.1;margin-bottom:5px}
-.doc .meta{font-size:10.5px;color:var(--mut);letter-spacing:.03em}
-.doc.hoje{border-color:rgba(213,169,79,.5)}
-.doc.hoje .pulso{position:absolute;top:10px;right:10px;z-index:2;display:flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.2em;color:#ffd98a;text-transform:uppercase;background:rgba(10,9,5,.75);border-radius:4px;padding:4px 8px}
-.doc.hoje .pulso i{width:5px;height:5px;border-radius:50%;background:#ffd98a;animation:pu 1.6s infinite}
-@keyframes pu{0%,100%{opacity:1}50%{opacity:.25}}
-/* FAIXA DESBLOQUEIO */
-.unlock{display:flex;align-items:center;gap:14px;background:linear-gradient(120deg,#12100a,#0d0d10);border:1px solid rgba(213,169,79,.3);border-radius:12px;padding:16px;margin-top:22px}
-.unlock .k{font-size:22px}
-.unlock .t{flex:1}
-.unlock .t b{display:block;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:17.5px;line-height:1.15}
-.unlock .t span{font-size:11px;color:var(--mut)}
-.unlock a{flex-shrink:0;background:var(--gold);color:#171006;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:11px 14px;border-radius:7px}
-/* CONFIANÇA */
-.trust{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:22px}
-.trust div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 8px;text-align:center}
-.trust b{display:block;font-size:12px;color:var(--gold2);margin-bottom:3px}
-.trust span{font-size:9.5px;color:var(--mut);line-height:1.4;display:block}
-.foot{text-align:center;margin-top:36px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:#4a463d;text-transform:uppercase;line-height:2.2}
-.foot a{color:#6b6558;text-decoration:none}
+body{background:var(--bg);color:var(--ink);font-family:'Courier Prime',monospace;overflow-x:hidden}
+/* grão + vinheta */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.06;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:49;background:radial-gradient(ellipse 90% 70% at 50% 30%,transparent 55%,rgba(0,0,0,.55) 100%)}
+.wrap{max-width:430px;margin:0 auto;padding:0 16px 70px;position:relative;z-index:2}
+/* CABEÇALHO DE PROCESSO */
+.head{padding:40px 0 8px;text-align:center}
+.head .selo{font-size:26px;margin-bottom:14px;display:block;opacity:.9}
+.head .org{font-family:'Special Elite',monospace;font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--mut)}
+.head h1{font-family:'Special Elite',monospace;font-size:31px;letter-spacing:.06em;margin:8px 0 4px;text-transform:uppercase}
+.head .ref{font-size:10px;color:#55524b;letter-spacing:.18em;text-transform:uppercase}
+/* IMAGEM HERO (slot) */
+.capa{position:relative;margin:22px 0 8px;border:1px solid var(--line);overflow:hidden}
+.capa img{width:100%;height:200px;object-fit:cover;filter:grayscale(1) contrast(1.15) brightness(.62)}
+.capa .carimbo{position:absolute;top:14px;right:-34px;transform:rotate(12deg);font-family:'Special Elite',monospace;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--stamp);border:2.5px solid var(--stamp);padding:6px 40px;opacity:.9;background:rgba(10,10,11,.25)}
+.capa .leg{position:absolute;left:12px;bottom:10px;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#b9b4a8;background:rgba(10,10,11,.7);padding:4px 8px}
+/* AVISO DE ACESSO */
+.aviso{display:flex;align-items:center;gap:10px;font-size:10.5px;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:16px 0 30px;justify-content:center}
+.aviso::before,.aviso::after{content:"";flex:1;height:1px;background:var(--line)}
+/* DOSSIÊS */
+.dossie{display:block;text-decoration:none;color:var(--ink);background:var(--paper);border:1px solid var(--line);margin-bottom:16px;position:relative;transition:transform .12s;overflow:visible}
+.dossie:active{transform:scale(.985)}
+/* aba da pasta */
+.dossie .aba{position:absolute;top:-11px;left:14px;font-family:'Special Elite',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);background:var(--paper);border:1px solid var(--line);border-bottom-color:var(--paper);padding:3px 12px}
+.dossie .corpo{padding:22px 16px 16px;display:flex;gap:14px;align-items:flex-start}
+.dossie .foto{flex-shrink:0;width:74px;height:88px;border:1px solid var(--line);overflow:hidden;position:relative;background:#0e0e10}
+.dossie .foto img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15) brightness(.68)}
+.dossie .foto::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 18px rgba(0,0,0,.75)}
+.dossie .txt{flex:1;min-width:0}
+.dossie h2{font-family:'Special Elite',monospace;font-size:16.5px;line-height:1.25;text-transform:uppercase;letter-spacing:.02em;margin-bottom:6px}
+.dossie p{font-size:11.5px;color:var(--mut);line-height:1.55}
+.dossie .abrir{display:inline-block;margin-top:10px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--red);padding-bottom:2px}
+.dossie .num{position:absolute;right:14px;top:12px;font-size:9px;color:#4c4a44;letter-spacing:.14em}
+/* carimbo do dossiê de hoje */
+.dossie.hoje{border-color:#3a2320}
+.dossie.hoje .stamp{position:absolute;right:10px;bottom:12px;transform:rotate(-9deg);font-family:'Special Elite',monospace;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--stamp);border:2px solid var(--stamp);padding:4px 10px;opacity:.92}
+.foot{text-align:center;margin-top:34px;font-size:9px;letter-spacing:.2em;color:#4c4a44;text-transform:uppercase;line-height:2.2}
+.foot a{color:#6e6b63;text-decoration:none}
 </style></head>
 <body>
 
 <div class="wrap">
 
- <header class="hero">
-  <div class="beam"></div>
-  <div class="marca"><span class="olho">𓂀</span> códice oculto · o arquivo</div>
-  <h1>Descubra o que<br><em>ficou escondido.</em></h1>
-  <p class="sub">Frequências, história oculta e verdades silenciadas. Toda a investigação num só lugar.</p>
-  <a class="cta" href="#acervo">🔓 Abrir o arquivo</a>
-  <div class="abaixo">Todos os produtos · atualizações semanais</div>
+ <header class="head">
+  <span class="selo">𓂀</span>
+  <div class="org">códice oculto</div>
+  <h1>O Arquivo</h1>
+  <div class="ref">acesso restrito · registro nº 1939-44</div>
  </header>
 
- <nav class="chips" id="acervo">
-  <span class="chip on">Tudo</span>
-  <a class="chip" href="#hoje">Arquivo de hoje</a>
-  <a class="chip" href="frequencia.html">Frequências</a>
-  <a class="chip" href="biblioteca.html">Biblioteca</a>
-  <a class="chip" href="codice.html">App</a>
- </nav>
-
- <div class="grid">
-
-  <a class="doc full hoje" id="hoje" href="enoque-express.html?utm_source=bio&utm_campaign=enoque">
-   <div class="ph"><img src="midia/enoque-qumran.jpg" alt="Cavernas de Qumran">
-    <span class="tag">Arquivo Nº 003</span>
-    <span class="pulso"><i></i> aberto agora</span>
-    <span class="play">▶</span>
-   </div>
-   <div class="info">
-    <h3>Enoque: o livro que tiraram da sua Bíblia</h3>
-    <div class="meta">A página que enterraram · provas reais · 3 min de leitura</div>
-   </div>
-  </a>
-
-  <a class="doc" href="frequencia.html">
-   <div class="ph"><img src="midia/freq/thumb.webp" alt="Frequências">
-    <span class="tag">Frequências</span>
-    <span class="play">▶</span>
-   </div>
-   <div class="info">
-    <h3>Protocolos de Frequência</h3>
-    <div class="meta">Áudios · sono, foco e regeneração</div>
-   </div>
-  </a>
-
-  <a class="doc" href="https://pay.kirvano.com/955b5975-a120-4a1a-9f9a-f7dba563ad6d">
-   <div class="ph"><img src="midia/enoque-4q201.jpg" alt="Fragmento 4Q201">
-    <span class="tag">Mini doc</span>
-    <span class="play">▶</span>
-   </div>
-   <div class="info">
-    <h3>Documentário Enoque</h3>
-    <div class="meta">A investigação completa em vídeo</div>
-   </div>
-  </a>
-
-  <a class="doc" href="biblioteca.html">
-   <div class="ph"><img src="midia/biblio/capa_enoque.webp" alt="Biblioteca Oculta">
-    <span class="tag">Biblioteca</span>
-    <span class="play">▶</span>
-   </div>
-   <div class="info">
-    <h3>A Biblioteca Oculta</h3>
-    <div class="meta">12 livros banidos · e-books</div>
-   </div>
-  </a>
-
-  <a class="doc" href="codice.html">
-   <div class="ph"><img src="midia/app-capa.png" alt="Códice do Despertar">
-    <span class="tag">App · 30 dias</span>
-    <span class="play">▶</span>
-   </div>
-   <div class="info">
-    <h3>O Códice do Despertar</h3>
-    <div class="meta">Sua jornada pra sair da Matrix</div>
-   </div>
-  </a>
-
-  <a class="doc full" href="arca-materia.html?utm_source=bio&utm_campaign=arca">
-   <div class="ph"><img src="midia/arca-radargrama.jpg" alt="Arca">
-    <span class="tag">Arquivo Nº 002</span>
-    <span class="play">▶</span>
-   </div>
-   <div class="info">
-    <h3>A Arca: as fotos de radar que enterraram</h3>
-    <div class="meta">Matéria completa · documentos e imagens</div>
-   </div>
-  </a>
-
+ <!-- IMAGEM HERO: slot pronto pra tua imagem do Meta. Por enquanto, Qumran tratada. -->
+ <div class="capa">
+  <img src="midia/enoque-qumran.jpg" alt="Arquivo">
+  <span class="carimbo">Confidencial</span>
+  <span class="leg">material recuperado · origem não divulgada</span>
  </div>
 
- <div class="unlock">
-  <span class="k">🗝️</span>
-  <div class="t"><b>Desbloqueie todo o conhecimento oculto.</b><span>Acesso aos arquivos e novidades exclusivas.</span></div>
-  <a href="biblioteca.html">Quero acesso</a>
- </div>
+ <div class="aviso">selecione o dossiê</div>
 
- <div class="trust">
-  <div><b>+7.000</b><span>membros no arquivo</span></div>
-  <div><b>Imediato</b><span>acesso na hora, no celular</span></div>
-  <div><b>7 dias</b><span>de garantia total</span></div>
- </div>
+ <a class="dossie hoje" href="enoque-express.html?utm_source=bio&utm_campaign=enoque">
+  <span class="aba">Caso nº 003 · em andamento</span>
+  <span class="num">REF. EN-08</span>
+  <div class="corpo">
+   <div class="foto"><img src="midia/enoque-4q201.jpg" alt=""></div>
+   <div class="txt">
+    <h2>Enoque: o livro extraviado da sua Bíblia</h2>
+    <p>A página que enterraram por 1.600 anos, aberta. Com as provas.</p>
+    <span class="abrir">abrir dossiê →</span>
+   </div>
+  </div>
+  <span class="stamp">Aberto hoje</span>
+ </a>
+
+ <a class="dossie" href="https://pay.kirvano.com/955b5975-a120-4a1a-9f9a-f7dba563ad6d">
+  <span class="aba">Registro audiovisual</span>
+  <span class="num">REF. DOC-01</span>
+  <div class="corpo">
+   <div class="foto"><img src="midia/enoque-qumran.jpg" alt=""></div>
+   <div class="txt">
+    <h2>Documentário Enoque</h2>
+    <p>A investigação completa em vídeo. O caso inteiro, do início ao fim.</p>
+    <span class="abrir">abrir dossiê →</span>
+   </div>
+  </div>
+ </a>
+
+ <a class="dossie" href="biblioteca.html">
+  <span class="aba">Acervo apreendido</span>
+  <span class="num">REF. BIB-12</span>
+  <div class="corpo">
+   <div class="foto"><img src="midia/biblio/capa_enoque.webp" alt=""></div>
+   <div class="txt">
+    <h2>A Biblioteca Oculta</h2>
+    <p>12 livros retirados de circulação, reunidos num único acervo.</p>
+    <span class="abrir">abrir dossiê →</span>
+   </div>
+  </div>
+ </a>
+
+ <a class="dossie" href="frequencia.html">
+  <span class="aba">Material sonoro</span>
+  <span class="num">REF. FRQ-285</span>
+  <div class="corpo">
+   <div class="foto"><img src="midia/freq/thumb.webp" alt=""></div>
+   <div class="txt">
+    <h2>Os Protocolos de Frequência</h2>
+    <p>O som padronizado em 1939, e os protocolos que sobreviveram.</p>
+    <span class="abrir">abrir dossiê →</span>
+   </div>
+  </div>
+ </a>
+
+ <a class="dossie" href="codice.html">
+  <span class="aba">Programa de campo</span>
+  <span class="num">REF. CDX-30</span>
+  <div class="corpo">
+   <div class="foto"><img src="midia/app-capa.png" alt=""></div>
+   <div class="txt">
+    <h2>O Códice do Despertar</h2>
+    <p>O programa de 30 dias. Sua saída da Matrix, guiada.</p>
+    <span class="abrir">abrir dossiê →</span>
+   </div>
+  </div>
+ </a>
 
  <div class="foot">
-  investigação independente<br>
+  investigação independente · desde 2025<br>
   <a href="mailto:contato@arquivosoculto.com.br">contato@arquivosoculto.com.br</a>
  </div>
 

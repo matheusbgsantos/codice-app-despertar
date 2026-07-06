@@ -1,139 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CÓDICE OCULTO — Arquivo</title>
+<title>CÓDICE OCULTO</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Archivo:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0b;--paper:#141416;--line:#26262a;--ink:#e8e4da;--mut:#7d7a72;--red:#c23b2e;--stamp:#d64a3b}
+:root{--bg:#000;--ink:#fff;--mut:#9a9a9a;--red:#e03427}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:'Courier Prime',monospace;overflow-x:hidden}
-/* grão + vinheta */
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.06;
-background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:49;background:radial-gradient(ellipse 90% 70% at 50% 30%,transparent 55%,rgba(0,0,0,.55) 100%)}
-.wrap{max-width:430px;margin:0 auto;padding:0 16px 70px;position:relative;z-index:2}
-/* CABEÇALHO DE PROCESSO */
-.head{padding:40px 0 8px;text-align:center}
-.head .selo{font-size:26px;margin-bottom:14px;display:block;opacity:.9}
-.head .org{font-family:'Special Elite',monospace;font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--mut)}
-.head h1{font-family:'Special Elite',monospace;font-size:31px;letter-spacing:.06em;margin:8px 0 4px;text-transform:uppercase}
-.head .ref{font-size:10px;color:#55524b;letter-spacing:.18em;text-transform:uppercase}
-/* IMAGEM HERO (slot) */
-.capa{position:relative;margin:22px 0 8px;border:1px solid var(--line);overflow:hidden}
-.capa img{width:100%;height:200px;object-fit:cover;filter:grayscale(1) contrast(1.15) brightness(.62)}
-.capa .carimbo{position:absolute;top:14px;right:-34px;transform:rotate(12deg);font-family:'Special Elite',monospace;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--stamp);border:2.5px solid var(--stamp);padding:6px 40px;opacity:.9;background:rgba(10,10,11,.25)}
-.capa .leg{position:absolute;left:12px;bottom:10px;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#b9b4a8;background:rgba(10,10,11,.7);padding:4px 8px}
-/* AVISO DE ACESSO */
-.aviso{display:flex;align-items:center;gap:10px;font-size:10.5px;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin:16px 0 30px;justify-content:center}
-.aviso::before,.aviso::after{content:"";flex:1;height:1px;background:var(--line)}
-/* DOSSIÊS */
-.dossie{display:block;text-decoration:none;color:var(--ink);background:var(--paper);border:1px solid var(--line);margin-bottom:16px;position:relative;transition:transform .12s;overflow:visible}
-.dossie:active{transform:scale(.985)}
-/* aba da pasta */
-.dossie .aba{position:absolute;top:-11px;left:14px;font-family:'Special Elite',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);background:var(--paper);border:1px solid var(--line);border-bottom-color:var(--paper);padding:3px 12px}
-.dossie .corpo{padding:22px 16px 16px;display:flex;gap:14px;align-items:flex-start}
-.dossie .foto{flex-shrink:0;width:74px;height:88px;border:1px solid var(--line);overflow:hidden;position:relative;background:#0e0e10}
-.dossie .foto img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15) brightness(.68)}
-.dossie .foto::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 18px rgba(0,0,0,.75)}
-.dossie .txt{flex:1;min-width:0}
-.dossie h2{font-family:'Special Elite',monospace;font-size:16.5px;line-height:1.25;text-transform:uppercase;letter-spacing:.02em;margin-bottom:6px}
-.dossie p{font-size:11.5px;color:var(--mut);line-height:1.55}
-.dossie .abrir{display:inline-block;margin-top:10px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--red);padding-bottom:2px}
-.dossie .num{position:absolute;right:14px;top:12px;font-size:9px;color:#4c4a44;letter-spacing:.14em}
-/* carimbo do dossiê de hoje */
-.dossie.hoje{border-color:#3a2320}
-.dossie.hoje .stamp{position:absolute;right:10px;bottom:12px;transform:rotate(-9deg);font-family:'Special Elite',monospace;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--stamp);border:2px solid var(--stamp);padding:4px 10px;opacity:.92}
-.foot{text-align:center;margin-top:34px;font-size:9px;letter-spacing:.2em;color:#4c4a44;text-transform:uppercase;line-height:2.2}
-.foot a{color:#6e6b63;text-decoration:none}
+body{background:var(--bg);color:var(--ink);font-family:'Archivo',sans-serif;overflow-x:hidden}
+/* grão de vídeo */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.055;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{max-width:440px;margin:0 auto;padding:0 0 60px}
+/* ABERTURA (frame de título de vídeo) */
+.abre{text-align:center;padding:54px 24px 34px}
+.abre .olho{font-size:22px;opacity:.85;letter-spacing:.4em;font-family:'Archivo',sans-serif;font-weight:700;font-size:11px;color:#c9c9c9;text-transform:uppercase}
+.abre .olho b{color:var(--red);font-weight:800}
+.abre h1{font-family:'DM Serif Display',serif;font-size:40px;line-height:1.06;margin-top:20px;letter-spacing:.005em}
+.abre h1 span{color:var(--red)}
+.abre p{margin-top:14px;font-size:13px;color:var(--mut);line-height:1.6}
+/* CARDS = capas de reel */
+.reel{display:block;position:relative;text-decoration:none;color:var(--ink);margin:0 14px 18px;border-radius:14px;overflow:hidden;background:#0a0a0a;box-shadow:0 12px 34px rgba(0,0,0,.6)}
+.reel:active{transform:scale(.985)}
+.reel img{width:100%;height:230px;object-fit:cover;display:block;filter:brightness(.85) contrast(1.06)}
+.reel .veu{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.32) 0%,rgba(0,0,0,0) 32%,rgba(0,0,0,.88) 100%)}
+.reel .tag{position:absolute;top:14px;left:14px;font-weight:800;font-size:10px;letter-spacing:.16em;text-transform:uppercase;background:var(--red);color:#fff;padding:6px 10px;border-radius:4px}
+.reel .tag.off{background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.25)}
+.reel .hoje{position:absolute;top:14px;right:14px;display:flex;align-items:center;gap:6px;font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.55);padding:6px 9px;border-radius:4px}
+.reel .hoje i{width:6px;height:6px;border-radius:50%;background:var(--red);animation:pu 1.5s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.2}}
+.reel .t{position:absolute;left:16px;right:16px;bottom:14px}
+.reel h2{font-family:'DM Serif Display',serif;font-size:25px;line-height:1.08;text-shadow:0 2px 14px rgba(0,0,0,.9)}
+.reel .sub{margin-top:6px;font-size:11.5px;color:#cfcfcf;font-weight:600;letter-spacing:.02em;display:flex;align-items:center;gap:8px}
+.reel .sub::before{content:"▶";color:var(--red);font-size:9px}
+.foot{text-align:center;margin-top:30px;font-size:10px;letter-spacing:.18em;color:#4e4e4e;text-transform:uppercase;line-height:2.2}
+.foot a{color:#7a7a7a;text-decoration:none}
 </style></head>
 <body>
 
 <div class="wrap">
 
- <header class="head">
-  <span class="selo">𓂀</span>
-  <div class="org">códice oculto</div>
-  <h1>O Arquivo</h1>
-  <div class="ref">acesso restrito · registro nº 1939-44</div>
+ <header class="abre">
+  <div class="olho">𓂀 CÓDICE OCULTO · <b>O ARQUIVO</b></div>
+  <h1>Eles esconderam.<br><span>Nós arquivamos.</span></h1>
+  <p>Escolha o arquivo. Todo o resto é entrega.</p>
  </header>
 
- <!-- IMAGEM HERO: slot pronto pra tua imagem do Meta. Por enquanto, Qumran tratada. -->
- <div class="capa">
-  <img src="midia/enoque-qumran.jpg" alt="Arquivo">
-  <span class="carimbo">Confidencial</span>
-  <span class="leg">material recuperado · origem não divulgada</span>
- </div>
-
- <div class="aviso">selecione o dossiê</div>
-
- <a class="dossie hoje" href="enoque-express.html?utm_source=bio&utm_campaign=enoque">
-  <span class="aba">Caso nº 003 · em andamento</span>
-  <span class="num">REF. EN-08</span>
-  <div class="corpo">
-   <div class="foto"><img src="midia/enoque-4q201.jpg" alt=""></div>
-   <div class="txt">
-    <h2>Enoque: o livro extraviado da sua Bíblia</h2>
-    <p>A página que enterraram por 1.600 anos, aberta. Com as provas.</p>
-    <span class="abrir">abrir dossiê →</span>
-   </div>
-  </div>
-  <span class="stamp">Aberto hoje</span>
- </a>
-
- <a class="dossie" href="https://pay.kirvano.com/955b5975-a120-4a1a-9f9a-f7dba563ad6d">
-  <span class="aba">Registro audiovisual</span>
-  <span class="num">REF. DOC-01</span>
-  <div class="corpo">
-   <div class="foto"><img src="midia/enoque-qumran.jpg" alt=""></div>
-   <div class="txt">
-    <h2>Documentário Enoque</h2>
-    <p>A investigação completa em vídeo. O caso inteiro, do início ao fim.</p>
-    <span class="abrir">abrir dossiê →</span>
-   </div>
+ <a class="reel" href="enoque-express.html?utm_source=bio&utm_campaign=enoque">
+  <img src="midia/portal/card-enoque.jpg" alt="">
+  <div class="veu"></div>
+  <span class="tag">Arquivo Nº 003</span>
+  <span class="hoje"><i></i> Aberto hoje</span>
+  <div class="t">
+   <h2>Roubaram um livro da sua Bíblia.</h2>
+   <div class="sub">Abrir a página que enterraram</div>
   </div>
  </a>
 
- <a class="dossie" href="biblioteca.html">
-  <span class="aba">Acervo apreendido</span>
-  <span class="num">REF. BIB-12</span>
-  <div class="corpo">
-   <div class="foto"><img src="midia/biblio/capa_enoque.webp" alt=""></div>
-   <div class="txt">
-    <h2>A Biblioteca Oculta</h2>
-    <p>12 livros retirados de circulação, reunidos num único acervo.</p>
-    <span class="abrir">abrir dossiê →</span>
-   </div>
+ <a class="reel" href="https://pay.kirvano.com/955b5975-a120-4a1a-9f9a-f7dba563ad6d">
+  <img src="midia/portal/card-enoque.jpg" alt="" style="object-position:0 80%">
+  <div class="veu"></div>
+  <span class="tag off">Documentário</span>
+  <div class="t">
+   <h2>Enoque: a investigação completa.</h2>
+   <div class="sub">Assistir agora</div>
   </div>
  </a>
 
- <a class="dossie" href="frequencia.html">
-  <span class="aba">Material sonoro</span>
-  <span class="num">REF. FRQ-285</span>
-  <div class="corpo">
-   <div class="foto"><img src="midia/freq/thumb.webp" alt=""></div>
-   <div class="txt">
-    <h2>Os Protocolos de Frequência</h2>
-    <p>O som padronizado em 1939, e os protocolos que sobreviveram.</p>
-    <span class="abrir">abrir dossiê →</span>
-   </div>
+ <a class="reel" href="biblioteca.html">
+  <img src="midia/biblio/capa_enoque.webp" alt="">
+  <div class="veu"></div>
+  <span class="tag off">Biblioteca</span>
+  <div class="t">
+   <h2>12 livros que tiraram de circulação.</h2>
+   <div class="sub">Entrar na Biblioteca Oculta</div>
   </div>
  </a>
 
- <a class="dossie" href="codice.html">
-  <span class="aba">Programa de campo</span>
-  <span class="num">REF. CDX-30</span>
-  <div class="corpo">
-   <div class="foto"><img src="midia/app-capa.png" alt=""></div>
-   <div class="txt">
-    <h2>O Códice do Despertar</h2>
-    <p>O programa de 30 dias. Sua saída da Matrix, guiada.</p>
-    <span class="abrir">abrir dossiê →</span>
-   </div>
+ <a class="reel" href="frequencia.html">
+  <img src="midia/portal/card-freq.jpg" alt="">
+  <div class="veu"></div>
+  <span class="tag off">Frequências</span>
+  <div class="t">
+   <h2>O som que o seu corpo pede à noite.</h2>
+   <div class="sub">Ouvir os protocolos</div>
+  </div>
+ </a>
+
+ <a class="reel" href="codice.html">
+  <img src="midia/portal/card-sono.jpg" alt="">
+  <div class="veu"></div>
+  <span class="tag off">App · 30 dias</span>
+  <div class="t">
+   <h2>O Códice do Despertar.</h2>
+   <div class="sub">Começar a jornada</div>
+  </div>
+ </a>
+
+ <a class="reel" href="arca-materia.html?utm_source=bio&utm_campaign=arca">
+  <img src="midia/portal/card-arca.jpg" alt="">
+  <div class="veu"></div>
+  <span class="tag off">Arquivo Nº 002</span>
+  <div class="t">
+   <h2>Disseram que a Arca era mentira.</h2>
+   <div class="sub">Ver as imagens de radar</div>
   </div>
  </a>
 
  <div class="foot">
-  investigação independente · desde 2025<br>
+  investigação independente<br>
   <a href="mailto:contato@arquivosoculto.com.br">contato@arquivosoculto.com.br</a>
  </div>
 

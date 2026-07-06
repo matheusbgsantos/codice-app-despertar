@@ -51,14 +51,18 @@ animation:flutua 6s ease-in-out infinite alternate}
 .bt.cheio{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 8px 26px rgba(224,52,39,.3)}
 /* OFERTAS estilo ABSTRACT: palavra sobre a imagem */
 .of{display:block;position:relative;border-radius:16px;margin-bottom:26px;text-decoration:none;color:var(--ink);
+background:linear-gradient(180deg,#131316,#0a0a0c);padding:14px 14px 20px;
 box-shadow:0 1px 0 rgba(255,255,255,.09) inset,
  -14px 0 34px -16px rgba(255,255,255,.30),
  14px 0 34px -16px rgba(255,255,255,.30),
  0 -10px 30px -18px rgba(255,255,255,.22),
  0 26px 60px rgba(0,0,0,.9),0 10px 24px rgba(0,0,0,.7);
-transition:box-shadow .2s;overflow:hidden;aspect-ratio:16/9;border:1px solid #3a3a42;border-top-color:#55555e;
+transition:box-shadow .2s;border:1px solid #3a3a42;border-top-color:#55555e;
 animation:flutua 5s ease-in-out infinite alternate}
 .of:nth-of-type(2){animation-delay:1.2s}.of:nth-of-type(3){animation-delay:2.4s}.of:nth-of-type(4){animation-delay:.6s}
+.of img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;display:block;box-shadow:0 16px 36px rgba(0,0,0,.65);filter:saturate(.8) brightness(.85)}
+.of .veu{display:none}
+.of .c{display:flex;flex-direction:column;align-items:center;text-align:center;padding:16px 8px 0}
 @keyframes flutua{from{transform:translateY(0)}to{transform:translateY(-7px)}}
 .of:active{transform:scale(.985)}
 .of img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.7) brightness(.62) contrast(1.05)}

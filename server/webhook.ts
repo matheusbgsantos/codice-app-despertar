@@ -321,6 +321,33 @@ webhookRouter.post('/aplicacao', async (req: Request, res: Response) => {
   }
 });
 
+/** Captura de e-mail nos funis de DM (portão das páginas de entrega). POST /api/webhook/email-captura body:{email, origem} */
+webhookRouter.post('/email-captura', async (req: Request, res: Response) => {
+  try {
+    const email = String(req.body?.email || '').slice(0, 160).trim().toLowerCase();
+    const origem = String(req.body?.origem || 'desconhecida').slice(0, 60).trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return res.status(400).json({ ok: false });
+    await logWebhook({ eventType: 'EMAIL_CAPTURA', email, payload: JSON.stringify({ origem }), status: 'received' } as any);
+    return res.status(200).json({ ok: true });
+  } catch (e) {
+    return res.status(200).json({ ok: true }); // nunca travar a entrega por erro nosso
+  }
+});
+
+/** Lista e-mails capturados. POST /api/webhook/emails body:{key} */
+webhookRouter.post('/emails', async (req: Request, res: Response) => {
+  try {
+    if (req.body?.key !== 'codice2026') return res.status(401).json({ error: 'unauthorized' });
+    const { listWebhookLogs } = await import('./db');
+    const logs = await listWebhookLogs(5000);
+    const vistos = new Set<string>();
+    const emails = (logs as any[]).filter(l => l.eventType === 'EMAIL_CAPTURA').map(l => ({ email: l.email, ...(JSON.parse(l.payload || '{}')), em: l.createdAt })).filter(e => { if (vistos.has(e.email)) return false; vistos.add(e.email); return true; });
+    return res.status(200).json({ total: emails.length, emails });
+  } catch (e) {
+    return res.status(500).json({ error: 'erro' });
+  }
+});
+
 /** Lista aplicações da mentoria. POST /api/webhook/aplicacoes body:{key} */
 webhookRouter.post('/aplicacoes', async (req: Request, res: Response) => {
   try {

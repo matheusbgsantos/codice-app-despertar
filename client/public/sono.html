@@ -29,6 +29,14 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .oferta h3{font-family:'Archivo Black',sans-serif;font-size:20px;text-transform:uppercase;line-height:1.2}
 .oferta p{font-size:12.5px;color:var(--mut);line-height:1.65;max-width:300px;margin:10px auto 18px}
 .bt{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#fff;text-decoration:none;background:var(--red);border-radius:8px;padding:15px 30px;box-shadow:0 10px 30px rgba(224,52,39,.35)}
+.gate{background:linear-gradient(180deg,#131316,#0a0a0c);border:1px solid #3a2320;border-radius:16px;padding:26px 20px;text-align:center;margin-top:22px;box-shadow:0 24px 60px rgba(0,0,0,.7)}
+.gate h3{font-family:'Archivo Black',sans-serif;font-size:17px;text-transform:uppercase;margin-bottom:6px}
+.gate p{font-size:12px;color:var(--mut);line-height:1.6;max-width:300px;margin:0 auto 16px}
+.gate input{width:100%;background:#0a0a0c;border:1px solid #2e2e34;border-radius:9px;color:var(--ink);padding:14px;font-size:15px;font-family:'Archivo',sans-serif;text-align:center}
+.gate input:focus{outline:none;border-color:#55555e}
+.gate button{width:100%;margin-top:12px;background:var(--red);color:#fff;border:0;border-radius:10px;padding:16px;font-family:'Archivo Black',sans-serif;font-size:14px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 30px rgba(224,52,39,.35)}
+.gate .micro{font-size:10px;color:var(--dim);margin-top:10px}
+#conteudo{display:none}
 .foot{text-align:center;margin-top:36px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:#4c4c52;text-transform:uppercase;line-height:2.2}
 </style></head>
 <body>
@@ -42,6 +50,15 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
   <p><b>10 minutos de 285Hz.</b> A mesma frequência do vídeo, inteira, pra você ouvir hoje à noite do jeito certo.</p>
  </header>
 
+ <div class="gate" id="gate">
+  <h3>🔒 Desbloquear o protocolo</h3>
+  <p>Deixa teu melhor e-mail e o áudio abre na hora. Você também entra pro <b>Arquivo</b>: os avisos que o algoritmo não deixa a gente te dar.</p>
+  <input type="email" id="gmail" placeholder="teu@email.com" autocomplete="email">
+  <button id="gbtn">ABRIR O PROTOCOLO 🌙</button>
+  <div class="micro">🔒 teu e-mail fica só com a gente · zero spam</div>
+ </div>
+
+ <div id="conteudo">
  <div class="player">
   <div class="t">🌙 Night Solfeggio · 285Hz</div>
   <span class="s">10 minutos · a frequência mesclada, pronta pra tocar hoje à noite</span>
@@ -61,11 +78,24 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
   <p>Sessões inteiras pra <b>dormir, focar e regenerar</b>, organizadas por objetivo, prontas pra tocar a noite toda. O som que o teu corpo pede, sem depender de ninguém.</p>
   <a class="bt" href="frequencia.html?utm_source=dm&utm_campaign=sono">QUERO OS PROTOCOLOS →</a>
  </div>
+ </div>
 
  <div class="foot">𓂀 códice oculto · o arquivo não dorme<br>uso pessoal · não substitui orientação médica</div>
 
 </div>
 <script>
+(function(){
+var g=document.getElementById('gate'),c=document.getElementById('conteudo');
+function abre(){g.style.display='none';c.style.display='block';try{localStorage.setItem('sono_ok','1')}catch(e){}}
+try{if(localStorage.getItem('sono_ok')==='1')abre();}catch(e){}
+document.getElementById('gbtn').addEventListener('click',async function(){
+var em=(document.getElementById('gmail').value||'').trim();
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){document.getElementById('gmail').style.borderColor='#e03427';return;}
+this.textContent='ABRINDO...';
+try{await fetch('https://codice-app-production.up.railway.app/api/webhook/email-captura',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,origem:'sono'})});}catch(e){}
+abre();window.scrollTo({top:c.offsetTop-60,behavior:'smooth'});
+});
+})();
 (function(){try{
 var v=localStorage.getItem('cv_id');
 if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('cv_id',v);}

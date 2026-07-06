@@ -49,7 +49,7 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .form h4{font-family:'Archivo Black',sans-serif;font-size:16px;text-transform:uppercase;text-align:center;margin-bottom:4px}
 .form .sub{text-align:center;font-size:11.5px;color:var(--mut);margin-bottom:18px;line-height:1.5}
 .form label{display:block;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;margin:14px 0 6px}
-.form input,.form textarea{width:100%;background:#0a0a0c;border:1px solid #2e2e34;border-radius:9px;color:var(--ink);padding:13px 14px;font-size:15px;font-family:'Archivo',sans-serif}
+.form input,.form textarea,.form select{width:100%;background:#0a0a0c;border:1px solid #2e2e34;border-radius:9px;color:var(--ink);padding:13px 14px;font-size:15px;font-family:'Archivo',sans-serif;appearance:none}
 .form input:focus,.form textarea:focus{outline:none;border-color:#55555e}
 .form textarea{resize:none;height:74px}
 .form button{width:100%;margin-top:20px;background:var(--red);color:#fff;border:0;border-radius:10px;padding:17px;font-family:'Archivo Black',sans-serif;font-size:15px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 30px rgba(224,52,39,.35)}
@@ -110,6 +110,28 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
    <input type="tel" id="whatsapp" required maxlength="20" placeholder="(11) 99999-9999">
    <label>Teu melhor e-mail</label>
    <input type="email" id="email" required maxlength="160" placeholder="voce@email.com">
+   <label>Você já cria conteúdo?</label>
+   <select id="cria" required>
+    <option value="" disabled selected>escolhe uma opção</option>
+    <option value="zero">Nunca criei, quero começar do jeito certo</option>
+    <option value="posto">Já posto, mas não viralizo</option>
+    <option value="vivo">Já vivo de conteúdo, quero escalar</option>
+   </select>
+   <label>O que você venderia com os vídeos?</label>
+   <select id="vende" required>
+    <option value="" disabled selected>escolhe uma opção</option>
+    <option value="negocio">Tenho produto ou negócio próprio</option>
+    <option value="afiliado">Venderia como afiliado</option>
+    <option value="naosei">Ainda não sei</option>
+   </select>
+   <label>O investimento é 12x de R$497. Se fizer sentido na conversa, você tá pronto(a)?</label>
+   <select id="invest" required>
+    <option value="" disabled selected>escolhe uma opção</option>
+    <option value="pronto">Sim, à vista no Pix</option>
+    <option value="parcelado">Sim, no parcelado</option>
+    <option value="entender">Preciso entender melhor primeiro</option>
+    <option value="agoranao">Agora não tenho como investir</option>
+   </select>
    <label>Teu momento hoje (1 frase)</label>
    <textarea id="momento" maxlength="400" placeholder="Ex: tenho uma loja e preciso de vídeo que venda / quero viver de conteúdo / já crio mas não viralizo..."></textarea>
    <button type="submit" id="btn">QUERO MINHA VAGA →</button>
@@ -134,7 +156,7 @@ var b=document.getElementById('btn');b.disabled=true;b.textContent='ENVIANDO...'
 try{
 var r=await fetch('https://codice-app-production.up.railway.app/api/webhook/aplicacao',{
 method:'POST',headers:{'Content-Type':'application/json'},
-body:JSON.stringify({nome:document.getElementById('nome').value,whatsapp:document.getElementById('whatsapp').value,email:document.getElementById('email').value,momento:document.getElementById('momento').value})});
+body:JSON.stringify({nome:document.getElementById('nome').value,whatsapp:document.getElementById('whatsapp').value,email:document.getElementById('email').value,momento:document.getElementById('momento').value,cria:document.getElementById('cria').value,vende:document.getElementById('vende').value,invest:document.getElementById('invest').value})});
 var j=await r.json();
 if(j.ok){document.getElementById('form').style.display='none';document.getElementById('ok').style.display='block';window.scrollTo({top:document.getElementById('ok').offsetTop-80,behavior:'smooth'});}
 else{b.disabled=false;b.textContent='QUERO MINHA VAGA →';alert('Confere os campos e tenta de novo.');}

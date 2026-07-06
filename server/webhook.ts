@@ -292,15 +292,27 @@ webhookRouter.post('/aplicacao', async (req: Request, res: Response) => {
     const email = String(req.body?.email || '').slice(0, 160).trim().toLowerCase();
     const whatsapp = String(req.body?.whatsapp || '').slice(0, 40).trim();
     const momento = String(req.body?.momento || '').slice(0, 500).trim();
+    const cria = String(req.body?.cria || '').slice(0, 40).trim();       // zero | posto | vivo
+    const vende = String(req.body?.vende || '').slice(0, 40).trim();     // negocio | afiliado | naosei
+    const invest = String(req.body?.invest || '').slice(0, 40).trim();   // pronto | parcelado | entender | agoranao
     if (!nome || !email || !whatsapp) return res.status(400).json({ ok: false, erro: 'campos obrigatórios' });
 
-    await logWebhook({ eventType: 'APLICACAO_MENTORIA', email, payload: JSON.stringify({ nome, whatsapp, momento }), status: 'received' } as any);
+    // Calibragem do lead: A = prioridade máxima, B = chama no dia, C = lista de agosto
+    let pontos = 0;
+    if (invest === 'pronto') pontos += 3; else if (invest === 'parcelado') pontos += 2; else if (invest === 'entender') pontos += 1;
+    if (vende === 'negocio') pontos += 2; else if (vende === 'afiliado') pontos += 1;
+    if (cria === 'vivo') pontos += 2; else if (cria === 'posto') pontos += 1;
+    const nota = (!cria && !vende && !invest) ? 'B' : invest === 'agoranao' ? 'C' : pontos >= 5 ? 'A' : pontos >= 3 ? 'B' : 'C';
+
+    await logWebhook({ eventType: 'APLICACAO_MENTORIA', email, payload: JSON.stringify({ nome, whatsapp, momento, cria, vende, invest, nota }), status: 'received' } as any);
 
     const hook = process.env.DISCORD_WEBHOOK;
     if (hook) {
+      const rot: Record<string, string> = { zero: 'nunca criou', posto: 'posta mas não viraliza', vivo: 'já vive de conteúdo', negocio: 'TEM negócio/produto', afiliado: 'afiliado', naosei: 'não sabe o que vender', pronto: 'PRONTO pra investir', parcelado: 'pronto no parcelado', entender: 'quer entender melhor', agoranao: 'sem condição agora' };
+      const cab = nota === 'A' ? '🔥🔥 **LEAD A — CHAMA EM 30 MIN**' : nota === 'B' ? '🟡 **LEAD B — chama hoje**' : '❄️ **LEAD C — lista de agosto (não gastar conversa)**';
       await fetch(hook, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content: `🎓 **NOVA APLICAÇÃO · A MÁQUINA VIRAL**\n**${nome}**\n📱 ${whatsapp}\n✉️ ${email}\n💬 ${momento || '(sem resposta)'}\n\n👉 Chama no WhatsApp agora (lead quente esfria em horas).` }),
+        body: JSON.stringify({ content: `${cab}\n🎓 **${nome}**\n📱 ${whatsapp}\n✉️ ${email}\n🎬 ${rot[cria] || cria || '?'} · 💼 ${rot[vende] || vende || '?'} · 💰 ${rot[invest] || invest || '?'}\n💬 ${momento || '(sem resposta)'}` }),
       }).catch(() => {});
     }
     return res.status(200).json({ ok: true });

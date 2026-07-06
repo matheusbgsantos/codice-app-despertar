@@ -38,17 +38,15 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .bt{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;border:1px solid #3a3a3f;border-radius:6px;padding:13px 26px;transition:background .2s}
 .bt:active{background:#222}
 .bt.cheio{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 8px 26px rgba(224,52,39,.3)}
-/* GRID de ofertas: imagem 16:9 grande em cima */
-.of{display:block;background:var(--panel);border:1px solid var(--line);border-radius:16px;margin-bottom:18px;text-decoration:none;color:var(--ink);box-shadow:0 18px 44px rgba(0,0,0,.5);transition:transform .12s;overflow:hidden}
+/* OFERTAS estilo ABSTRACT: palavra sobre a imagem */
+.of{display:block;position:relative;border-radius:16px;margin-bottom:18px;text-decoration:none;color:var(--ink);box-shadow:0 18px 44px rgba(0,0,0,.55);transition:transform .12s;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--line)}
 .of:active{transform:scale(.985)}
-.of .ph{aspect-ratio:16/9;overflow:hidden;position:relative}
-.of .ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) brightness(.92)}
-.of .ph::after{content:"";position:absolute;inset:0;box-shadow:inset 0 -30px 40px rgba(0,0,0,.45)}
-.of .t{padding:16px 18px 18px;display:flex;align-items:center;gap:12px}
-.of .tt{flex:1;min-width:0}
-.of h3{font-family:'Archivo Black',sans-serif;font-size:16px;letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
-.of p{font-size:11.5px;color:var(--mut);margin-top:4px;line-height:1.5}
-.of .go{font-family:'Space Mono',monospace;color:var(--mut);font-size:15px}
+.of img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.7) brightness(.62) contrast(1.05)}
+.of .veu{position:absolute;inset:0;background:radial-gradient(ellipse 90% 90% at 50% 50%,rgba(0,0,0,.1),rgba(0,0,0,.55))}
+.of .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 14px}
+.of h3{font-family:'Archivo',sans-serif;font-weight:600;font-size:20px;letter-spacing:.34em;text-transform:uppercase;text-indent:.34em;text-shadow:0 2px 18px rgba(0,0,0,.85);white-space:nowrap}
+.of .linha{width:34px;height:1px;background:rgba(255,255,255,.55);margin:10px 0}
+.of p{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#cfcfcf;text-shadow:0 1px 10px rgba(0,0,0,.9)}
 /* PROVA SOCIAL */
 .stars{color:#fff;letter-spacing:.3em;font-size:13px;text-align:center}
 .social{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 18px;text-align:center;box-shadow:0 14px 34px rgba(0,0,0,.4);margin-bottom:12px}
@@ -87,24 +85,28 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 
  <div class="sec"><span class="peq">catálogo</span><h2>As Ofertas</h2></div>
 
- <a class="of" href="codice.html">
-  <div class="ph"><img src="midia/portal/card-sono.jpg" alt=""></div>
-  <div class="t"><div class="tt"><h3>O Códice do Despertar</h3><p>App de 30 dias. Sua saída da Matrix, guiada.</p></div><span class="go">→</span></div>
+ <a class="of" href="frequencia.html">
+  <img src="midia/portal/card-freq.jpg" alt="">
+  <div class="veu"></div>
+  <div class="c"><h3>Frequências</h3><div class="linha"></div><p>protocolos de som · sono e foco</p></div>
  </a>
 
  <a class="of" href="https://pay.kirvano.com/955b5975-a120-4a1a-9f9a-f7dba563ad6d">
-  <div class="ph"><img src="midia/portal/card-enoque.jpg" alt=""></div>
-  <div class="t"><div class="tt"><h3>Documentário Enoque</h3><p>A investigação completa, em vídeo.</p></div><span class="go">→</span></div>
+  <img src="midia/portal/card-enoque.jpg" alt="">
+  <div class="veu"></div>
+  <div class="c"><h3>Documentário</h3><div class="linha"></div><p>enoque · a investigação em vídeo</p></div>
  </a>
 
  <a class="of" href="biblioteca.html">
-  <div class="ph"><img src="midia/biblio/capa_enoque.webp" alt="" style="object-position:50% 30%"></div>
-  <div class="t"><div class="tt"><h3>A Biblioteca Oculta</h3><p>12 livros retirados de circulação, reunidos.</p></div><span class="go">→</span></div>
+  <img src="midia/biblio/capa_enoque.webp" alt="">
+  <div class="veu"></div>
+  <div class="c"><h3>Biblioteca</h3><div class="linha"></div><p>12 livros banidos · reunidos</p></div>
  </a>
 
- <a class="of" href="frequencia.html">
-  <div class="ph"><img src="midia/portal/card-freq.jpg" alt=""></div>
-  <div class="t"><div class="tt"><h3>Protocolos de Frequência</h3><p>O som que o corpo pede à noite.</p></div><span class="go">→</span></div>
+ <a class="of" href="codice.html">
+  <img src="midia/portal/card-sono.jpg" alt="">
+  <div class="veu"></div>
+  <div class="c"><h3>O Códice</h3><div class="linha"></div><p>app de 30 dias · o despertar</p></div>
  </a>
 
  <div class="sec"><span class="peq">quem já entrou</span><h2>Prova</h2></div>

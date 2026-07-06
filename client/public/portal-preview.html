@@ -37,15 +37,18 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .feat p{font-size:12.5px;color:var(--mut);line-height:1.6;max-width:280px;margin:8px auto 18px}
 .bt{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;border:1px solid #3a3a3f;border-radius:6px;padding:13px 26px;transition:background .2s}
 .bt:active{background:#222}
-.bt.cheio{background:var(--ink);color:#111;border-color:var(--ink)}
-/* GRID de ofertas */
-.of{display:flex;align-items:center;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;text-decoration:none;color:var(--ink);box-shadow:0 14px 34px rgba(0,0,0,.4);transition:transform .12s}
+.bt.cheio{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 8px 26px rgba(224,52,39,.3)}
+/* GRID de ofertas: imagem 16:9 grande em cima */
+.of{display:block;background:var(--panel);border:1px solid var(--line);border-radius:16px;margin-bottom:18px;text-decoration:none;color:var(--ink);box-shadow:0 18px 44px rgba(0,0,0,.5);transition:transform .12s;overflow:hidden}
 .of:active{transform:scale(.985)}
-.of img{width:64px;height:82px;object-fit:cover;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,.5);filter:saturate(.85)}
-.of .t{flex:1;min-width:0}
-.of h3{font-family:'Archivo Black',sans-serif;font-size:14.5px;letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
-.of p{font-size:11px;color:var(--mut);margin-top:4px;line-height:1.5}
-.of .go{font-family:'Space Mono',monospace;color:var(--mut);font-size:14px}
+.of .ph{aspect-ratio:16/9;overflow:hidden;position:relative}
+.of .ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) brightness(.92)}
+.of .ph::after{content:"";position:absolute;inset:0;box-shadow:inset 0 -30px 40px rgba(0,0,0,.45)}
+.of .t{padding:16px 18px 18px;display:flex;align-items:center;gap:12px}
+.of .tt{flex:1;min-width:0}
+.of h3{font-family:'Archivo Black',sans-serif;font-size:16px;letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
+.of p{font-size:11.5px;color:var(--mut);margin-top:4px;line-height:1.5}
+.of .go{font-family:'Space Mono',monospace;color:var(--mut);font-size:15px}
 /* PROVA SOCIAL */
 .stars{color:#fff;letter-spacing:.3em;font-size:13px;text-align:center}
 .social{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 18px;text-align:center;box-shadow:0 14px 34px rgba(0,0,0,.4);margin-bottom:12px}
@@ -78,34 +81,30 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
   <span class="live"><i></i> falado no vídeo de hoje</span>
   <img src="midia/biblio/capa_enoque.webp" alt="Livro de Enoque">
   <h3>O Livro de Enoque</h3>
-  <p>O livro que tiraram da sua Bíblia. A página que enterraram, com as provas reais.</p>
-  <a class="bt cheio" href="enoque-express.html?utm_source=bio&utm_campaign=enoque">Abrir o arquivo</a>
+  <p>O livro que tiraram da sua Bíblia. Dentro da Biblioteca Oculta, completo.</p>
+  <a class="bt cheio" href="biblioteca.html?utm_source=bio&utm_campaign=enoque">Quero o livro</a>
  </section>
 
  <div class="sec"><span class="peq">catálogo</span><h2>As Ofertas</h2></div>
 
  <a class="of" href="codice.html">
-  <img src="midia/app-capa.png" alt="">
-  <div class="t"><h3>O Códice do Despertar</h3><p>App de 30 dias. Sua saída da Matrix, guiada.</p></div>
-  <span class="go">→</span>
+  <div class="ph"><img src="midia/portal/card-sono.jpg" alt=""></div>
+  <div class="t"><div class="tt"><h3>O Códice do Despertar</h3><p>App de 30 dias. Sua saída da Matrix, guiada.</p></div><span class="go">→</span></div>
  </a>
 
  <a class="of" href="https://pay.kirvano.com/955b5975-a120-4a1a-9f9a-f7dba563ad6d">
-  <img src="midia/enoque-4q201.jpg" alt="">
-  <div class="t"><h3>Documentário Enoque</h3><p>A investigação completa, em vídeo.</p></div>
-  <span class="go">→</span>
+  <div class="ph"><img src="midia/portal/card-enoque.jpg" alt=""></div>
+  <div class="t"><div class="tt"><h3>Documentário Enoque</h3><p>A investigação completa, em vídeo.</p></div><span class="go">→</span></div>
  </a>
 
  <a class="of" href="biblioteca.html">
-  <img src="midia/biblio/capa_jasar.webp" alt="">
-  <div class="t"><h3>A Biblioteca Oculta</h3><p>12 livros retirados de circulação, reunidos.</p></div>
-  <span class="go">→</span>
+  <div class="ph"><img src="midia/biblio/capa_enoque.webp" alt="" style="object-position:50% 30%"></div>
+  <div class="t"><div class="tt"><h3>A Biblioteca Oculta</h3><p>12 livros retirados de circulação, reunidos.</p></div><span class="go">→</span></div>
  </a>
 
  <a class="of" href="frequencia.html">
-  <img src="midia/freq/thumb.webp" alt="">
-  <div class="t"><h3>Protocolos de Frequência</h3><p>O som que o corpo pede à noite.</p></div>
-  <span class="go">→</span>
+  <div class="ph"><img src="midia/portal/card-freq.jpg" alt=""></div>
+  <div class="t"><div class="tt"><h3>Protocolos de Frequência</h3><p>O som que o corpo pede à noite.</p></div><span class="go">→</span></div>
  </a>
 
  <div class="sec"><span class="peq">quem já entrou</span><h2>Prova</h2></div>

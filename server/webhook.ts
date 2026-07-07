@@ -334,6 +334,22 @@ webhookRouter.post('/email-captura', async (req: Request, res: Response) => {
   }
 });
 
+/** Tamanho da fila do Códice OS (público, só o número). GET /api/webhook/fila */
+webhookRouter.get('/fila', async (_req: Request, res: Response) => {
+  try {
+    const { listWebhookLogs } = await import('./db');
+    const logs = await listWebhookLogs(5000);
+    const vistos = new Set<string>();
+    let n = 0;
+    for (const l of logs as any[]) {
+      if (l.event === 'EMAIL_CAPTURA' && String(l.payload || '').includes('"origem":"codice-os"') && !vistos.has(l.customerEmail)) { vistos.add(l.customerEmail); n++; }
+    }
+    return res.status(200).json({ fila: n });
+  } catch (e) {
+    return res.status(200).json({ fila: 0 });
+  }
+});
+
 /** Lista e-mails capturados. POST /api/webhook/emails body:{key} */
 webhookRouter.post('/emails', async (req: Request, res: Response) => {
   try {

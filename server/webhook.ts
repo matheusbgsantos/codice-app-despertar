@@ -304,7 +304,7 @@ webhookRouter.post('/aplicacao', async (req: Request, res: Response) => {
     if (cria === 'vivo') pontos += 2; else if (cria === 'posto') pontos += 1;
     const nota = (!cria && !vende && !invest) ? 'B' : invest === 'agoranao' ? 'C' : pontos >= 5 ? 'A' : pontos >= 3 ? 'B' : 'C';
 
-    await logWebhook({ eventType: 'APLICACAO_MENTORIA', email, payload: JSON.stringify({ nome, whatsapp, momento, cria, vende, invest, nota }), status: 'received' } as any);
+    await logWebhook({ event: 'APLICACAO_MENTORIA', customerEmail: email, payload: JSON.stringify({ nome, whatsapp, momento, cria, vende, invest, nota }), processed: true } as any);
 
     const hook = process.env.DISCORD_WEBHOOK;
     if (hook) {
@@ -327,7 +327,7 @@ webhookRouter.post('/email-captura', async (req: Request, res: Response) => {
     const email = String(req.body?.email || '').slice(0, 160).trim().toLowerCase();
     const origem = String(req.body?.origem || 'desconhecida').slice(0, 60).trim();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return res.status(400).json({ ok: false });
-    await logWebhook({ eventType: 'EMAIL_CAPTURA', email, payload: JSON.stringify({ origem }), status: 'received' } as any);
+    await logWebhook({ event: 'EMAIL_CAPTURA', customerEmail: email, payload: JSON.stringify({ origem }), processed: true } as any);
     return res.status(200).json({ ok: true });
   } catch (e) {
     return res.status(200).json({ ok: true }); // nunca travar a entrega por erro nosso
@@ -341,7 +341,7 @@ webhookRouter.post('/emails', async (req: Request, res: Response) => {
     const { listWebhookLogs } = await import('./db');
     const logs = await listWebhookLogs(5000);
     const vistos = new Set<string>();
-    const emails = (logs as any[]).filter(l => l.eventType === 'EMAIL_CAPTURA').map(l => ({ email: l.email, ...(JSON.parse(l.payload || '{}')), em: l.createdAt })).filter(e => { if (vistos.has(e.email)) return false; vistos.add(e.email); return true; });
+    const emails = (logs as any[]).filter(l => l.event === 'EMAIL_CAPTURA').map(l => ({ email: l.customerEmail, ...(JSON.parse(l.payload || '{}')), em: l.createdAt })).filter(e => { if (vistos.has(e.email)) return false; vistos.add(e.email); return true; });
     return res.status(200).json({ total: emails.length, emails });
   } catch (e) {
     return res.status(500).json({ error: 'erro' });
@@ -354,7 +354,7 @@ webhookRouter.post('/aplicacoes', async (req: Request, res: Response) => {
     if (req.body?.key !== 'codice2026') return res.status(401).json({ error: 'unauthorized' });
     const { listWebhookLogs } = await import('./db');
     const logs = await listWebhookLogs(500);
-    const apps = (logs as any[]).filter(l => l.eventType === 'APLICACAO_MENTORIA').map(l => ({ email: l.email, ...(JSON.parse(l.payload || '{}')), em: l.createdAt }));
+    const apps = (logs as any[]).filter(l => l.event === 'APLICACAO_MENTORIA').map(l => ({ email: l.customerEmail, ...(JSON.parse(l.payload || '{}')), em: l.createdAt }));
     return res.status(200).json({ total: apps.length, aplicacoes: apps });
   } catch (e) {
     return res.status(500).json({ error: 'erro' });

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CÓDICE OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Archivo:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0b;--creme:#e9e4da;--ink:#f2efe9;--mut:#9a958c;--dim:#5f5b54;--line:#232320;--red:#c8402f;--metal:#b9b4aa}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Archivo',sans-serif;overflow-x:hidden}
+::selection{background:var(--red);color:#fff}
+.grao{position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.05;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.8'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+.mono{font-family:'Space Mono',monospace}
+/* ===== HERO ===== */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 22px}
+#ceu{position:absolute;inset:0;width:100%;height:100%}
+.hero .conteudo{position:relative;z-index:2}
+.etq{position:absolute;font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;z-index:2}
+.etq.a{top:22px;left:22px}.etq.b{top:22px;right:22px;text-align:right}
+.etq.c{bottom:22px;left:22px}.etq.d{bottom:22px;right:22px;text-align:right}
+.olho-hero{font-size:30px;display:block;margin-bottom:26px;opacity:.9}
+.hero .kicker{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.5em;color:var(--red);text-transform:uppercase;display:block;margin-bottom:22px}
+.hero h1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(44px,9vw,84px);line-height:1.02;letter-spacing:-.01em}
+.hero h1 em{font-style:italic;color:var(--creme)}
+.hero .sub{margin:26px auto 0;font-size:15px;color:var(--mut);line-height:1.75;max-width:430px}
+.hero .sub b{color:var(--ink);font-weight:600}
+.seta-baixo{position:absolute;bottom:70px;left:50%;transform:translateX(-50%);color:var(--dim);font-size:18px;animation:desce 2s infinite;z-index:2}
+@keyframes desce{0%,100%{transform:translate(-50%,0);opacity:.4}50%{transform:translate(-50%,8px);opacity:1}}
+/* ===== faixa números ===== */
+.numeros{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);max-width:1000px;margin:0 auto}
+.num{padding:38px 10px;text-align:center;border-right:1px solid var(--line)}
+.num:last-child{border-right:0}
+.num b{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(26px,4.6vw,44px);display:block;letter-spacing:-.02em}
+.num span{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;display:block;margin-top:8px}
+/* ===== seções ===== */
+.sec{max-width:1000px;margin:0 auto;padding:110px 22px 30px}
+.sec .rotulo{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.4em;color:var(--red);text-transform:uppercase;display:block;margin-bottom:18px}
+.sec h2{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(30px,5.4vw,52px);line-height:1.1;max-width:640px}
+.sec h2 em{font-style:italic}
+/* chat mock */
+.terminal{background:#0e0e10;border:1px solid var(--line);border-radius:14px;margin-top:44px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.6)}
+.terminal .barra{display:flex;gap:6px;padding:13px 16px;border-bottom:1px solid var(--line)}
+.terminal .barra i{width:9px;height:9px;border-radius:50%;background:#2c2c2e;display:block}
+.terminal .corpo{padding:24px 22px;font-family:'Space Mono',monospace;font-size:12px;line-height:2.2;color:var(--mut)}
+.terminal .voce{color:#8f9db8}
+.terminal .ia{color:#d08a80}
+.terminal b{color:var(--ink)}
+.cursor{display:inline-block;width:8px;height:15px;background:var(--red);animation:pisca 1s infinite;vertical-align:middle}
+@keyframes pisca{0%,100%{opacity:1}50%{opacity:0}}
+/* lista editorial */
+.poder{display:grid;grid-template-columns:90px 1fr;gap:20px;padding:38px 0;border-bottom:1px solid var(--line);align-items:start}
+.poder:last-child{border-bottom:0}
+.poder .n{font-family:'Playfair Display',serif;font-style:italic;font-size:30px;color:var(--dim)}
+.poder h3{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(20px,3vw,28px);margin-bottom:8px}
+.poder p{font-size:13.5px;color:var(--mut);line-height:1.75;max-width:560px}
+.poder p b{color:var(--ink)}
+/* fila */
+.fila-sec{max-width:560px;margin:0 auto;padding:120px 22px 60px;text-align:center}
+.fila-sec h2{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(34px,6vw,54px);line-height:1.08}
+.fila-sec h2 em{font-style:italic}
+.fila-n{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.26em;color:var(--red);text-transform:uppercase;display:block;margin:20px 0 30px}
+.campo{display:flex;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0e0e10}
+.campo input{flex:1;background:transparent;border:0;color:var(--ink);padding:20px 20px;font-size:15px;font-family:'Archivo',sans-serif;outline:none}
+.campo button{background:var(--creme);color:#0a0a0b;border:0;padding:0 28px;font-family:'Space Mono',monospace;font-weight:700;font-size:11px;letter-spacing:.14em;cursor:pointer;text-transform:uppercase;transition:background .2s}
+.campo button:hover{background:#fff}
+.micro{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;margin-top:14px}
+.ok{display:none;padding:34px 0 0}
+.ok .pos{font-family:'Playfair Display',serif;font-style:italic;font-size:64px;color:var(--creme)}
+.ok p{font-size:13.5px;color:var(--mut);line-height:1.75;max-width:380px;margin:14px auto 24px}
+.ok p b{color:var(--ink)}
+.bt-fund{display:inline-block;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#0a0a0b;background:var(--creme);text-decoration:none;border-radius:10px;padding:17px 30px}
+.foot{border-top:1px solid var(--line);margin-top:80px;padding:34px 22px;display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;max-width:1000px;margin-left:auto;margin-right:auto}
+/* reveal */
+.rev{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
+.rev.on{opacity:1;transform:none}
+@media(max-width:640px){.numeros{grid-template-columns:1fr 1fr}.num:nth-child(2){border-right:0}.num{border-bottom:1px solid var(--line)}.num:nth-child(3),.num:nth-child(4){border-bottom:0}.poder{grid-template-columns:54px 1fr}}
+</style></head>
+<body>
+<div class="grao"></div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+ <canvas id="ceu"></canvas>
+ <span class="etq a">𓂀 códice os</span>
+ <span class="etq b">acesso antecipado<br>ARQ.Nº 001</span>
+ <span class="etq c">lat -23.55 / lon -46.63</span>
+ <span class="etq d">validado · 120.4M views</span>
+ <div class="conteudo">
+  <span class="olho-hero">𓂀</span>
+  <span class="kicker">a máquina viral</span>
+  <h1>O futuro<br><em>já opera.</em></h1>
+  <p class="sub">Não é mais uma IA de conversa. É o <b>sistema pronto</b> que cria, posta e vende no automático: com os agentes validados por <b>120 milhões de views reais</b>.</p>
+ </div>
+ <div class="seta-baixo">↓</div>
+</section>
+
+<!-- ===== NÚMEROS ===== -->
+<div class="numeros rev">
+ <div class="num"><b data-alvo="120" data-suf="M">0</b><span>views validadas</span></div>
+ <div class="num"><b data-alvo="9749" data-suf="">0</b><span>vendas no automático</span></div>
+ <div class="num"><b data-alvo="452" data-suf="">0</b><span>DMs essa madrugada</span></div>
+ <div class="num"><b data-alvo="24" data-suf="/7">0</b><span>trabalhando por você</span></div>
+</div>
+
+<!-- ===== O CHAT ===== -->
+<section class="sec rev">
+ <span class="rotulo">01 · a inteligência</span>
+ <h2>Você pergunta.<br><em>A máquina executa.</em></h2>
+ <div class="terminal">
+  <div class="barra"><i></i><i></i><i></i></div>
+  <div class="corpo">
+   <div><span class="voce">você ›</span> qual vídeo eu faço hoje?</div>
+   <div><span class="ia">códice os ›</span> <b>garimpei teu nicho. 3 temas quentes:</b></div>
+   <div><span class="ia">›</span> o nº1 tem estudo publicado ONTEM como prova.</div>
+   <div><span class="ia">›</span> quer o roteiro no molde que fez 8,9M? <span class="cursor"></span></div>
+  </div>
+ </div>
+</section>
+
+<!-- ===== PODERES ===== -->
+<section class="sec">
+ <span class="rotulo rev">02 · o sistema</span>
+ <h2 class="rev">Quatro máquinas.<br><em>Um império.</em></h2>
+ <div style="margin-top:30px">
+  <div class="poder rev"><div class="n">i.</div><div><h3>O chat que faz tudo</h3><p>Roteiro, copy, stories, análise de mercado e leitura de métricas <b>num lugar só</b>: treinado nas fórmulas que construíram 1,2 milhão de seguidores.</p></div></div>
+  <div class="poder rev"><div class="n">ii.</div><div><h3>Processos de um botão</h3><p>Aperta <b>"Começar a Semana"</b> e a tua grade de 7 posts nasce pronta: temas garimpados da web na hora, com prova por link e nota da peneira.</p></div></div>
+  <div class="poder rev"><div class="n">iii.</div><div><h3>O robô que vende dormindo</h3><p>Comentou a palavra, recebeu o cartão na DM, caiu na página. <b>O mesmo sistema que disparou 450+ DMs essa madrugada</b>, sem tocar no celular.</p></div></div>
+  <div class="poder rev"><div class="n">iv.</div><div><h3>O funil medido ao Pix</h3><p>Do comentário à venda, cada elo com número contra régua. <b>Você nunca mais posta no escuro.</b></p></div></div>
+ </div>
+</section>
+
+<!-- ===== FILA ===== -->
+<section class="fila-sec">
+ <div id="gate" class="rev">
+  <h2>Entre para<br><em>a fila.</em></h2>
+  <span class="fila-n" id="fila-n">● carregando…</span>
+  <div class="campo">
+   <input type="email" id="gmail" placeholder="teu melhor e-mail" autocomplete="email">
+   <button type="button" id="gbtn">ENTRAR</button>
+  </div>
+  <div class="micro">🔒 condição de fundador pra fila · zero spam</div>
+ </div>
+ <div class="ok" id="ok">
+  <div class="pos" id="pos">#—</div>
+  <p><b>Teu lugar está selado.</b> Você entra com condição de fila quando as portas abrirem.<br><br>Não quer esperar? As 20 vagas fundadoras usam a máquina <b>antes de todo mundo</b>, comigo do lado por 30 dias.</p>
+  <a class="bt-fund" href="maquina-viral.html?utm_source=fila&utm_campaign=codice-os">conhecer a turma fundadora →</a>
+ </div>
+</section>
+
+<div class="foot"><span>𓂀 códice os · MMXXVI</span><span>construído por quem opera</span></div>
+
+<script>
+// ===== esfera de partículas (vanilla, sem dependência) =====
+(function(){
+const cv=document.getElementById('ceu'),cx=cv.getContext('2d');
+let W,H,DPR=Math.min(devicePixelRatio||1,2);
+function dim(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0);}
+dim();addEventListener('resize',dim);
+const N=innerWidth<640?220:340,R=Math.min(innerWidth,640)*.34;
+const P=[];
+for(let i=0;i<N;i++){const t=Math.acos(2*Math.random()-1),f=Math.random()*Math.PI*2;
+P.push({x:Math.sin(t)*Math.cos(f),y:Math.cos(t),z:Math.sin(t)*Math.sin(f)});}
+let a=0,b=0,mx=0,my=0;
+addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5)*.6;my=(e.clientY/innerHeight-.5)*.4;});
+function passo(){
+a+=.0016+(mx-a)*.002;b+=.0009+(my-b)*.002;
+cx.clearRect(0,0,W,H);
+const cxp=W/2,cyp=H/2,pts=[];
+const sa=Math.sin(a),ca=Math.cos(a),sb=Math.sin(b),cb=Math.cos(b);
+for(const p of P){
+ let x=p.x*ca+p.z*sa, z=-p.x*sa+p.z*ca, y=p.y*cb+z*sb; z=-p.y*sb+z*cb;
+ const esc=1/(1.9-z), sx=cxp+x*R*esc, sy=cyp+y*R*esc, al=.12+ (z+1)*.28;
+ pts.push([sx,sy,al,z]);
+}
+cx.strokeStyle='rgba(233,228,218,.05)';
+for(let i=0;i<pts.length;i+=3){for(let j=i+3;j<Math.min(i+24,pts.length);j+=6){
+ const dx=pts[i][0]-pts[j][0],dy=pts[i][1]-pts[j][1];
+ if(dx*dx+dy*dy<2100){cx.beginPath();cx.moveTo(pts[i][0],pts[i][1]);cx.lineTo(pts[j][0],pts[j][1]);cx.stroke();}
+}}
+for(const q of pts){cx.beginPath();cx.arc(q[0],q[1],q[3]>.4?1.5:1,0,7);cx.fillStyle='rgba(233,228,218,'+q[2]+')';cx.fill();}
+requestAnimationFrame(passo);
+}
+passo();
+})();
+// ===== reveal on scroll =====
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}}),{threshold:.15});
+document.querySelectorAll('.rev').forEach(x=>io.observe(x));
+// ===== contadores =====
+const io2=new IntersectionObserver(es=>es.forEach(e=>{
+ if(!e.isIntersecting)return;io2.unobserve(e.target);
+ e.target.querySelectorAll('[data-alvo]').forEach(el=>{
+  const alvo=+el.dataset.alvo,suf=el.dataset.suf||'';const t0=performance.now();
+  (function tick(t){const k=Math.min((t-t0)/1600,1);const v=Math.round(alvo*(1-Math.pow(1-k,3)));
+   el.textContent=(alvo>999?v.toLocaleString('pt-BR'):v)+suf;if(k<1)requestAnimationFrame(tick);})(t0);
+ });
+}),{threshold:.4});
+document.querySelectorAll('.numeros').forEach(x=>io2.observe(x));
+// ===== fila =====
+(function(){
+async function fila(){try{const f=await fetch('https://codice-app-production.up.railway.app/api/webhook/fila').then(r=>r.json());document.getElementById('fila-n').textContent='● '+(f.fila||0)+' pessoas na fila';return f.fila||0;}catch(e){document.getElementById('fila-n').textContent='● fila aberta';return 0;}}
+fila();
+document.getElementById('gbtn').addEventListener('click',async function(){
+var em=(document.getElementById('gmail').value||'').trim();
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){document.getElementById('gmail').style.borderBottom='1px solid #c8402f';return;}
+this.textContent='...';
+try{await fetch('https://codice-app-production.up.railway.app/api/webhook/email-captura',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,origem:'codice-os'})});}catch(e){}
+var n=await fila();
+document.getElementById('pos').textContent='#'+(n>0?n:1);
+document.getElementById('gate').style.display='none';
+document.getElementById('ok').style.display='block';
+});
+})();
+(function(){try{
+var v=localStorage.getItem('cv_id');
+if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('cv_id',v);}
+fetch("https://codice-app-production.up.railway.app/api/webhook/track?page=codice-os-v2&v="+v,{mode:'no-cors',keepalive:true});
+}catch(e){}})();
+</script>
+</body></html>

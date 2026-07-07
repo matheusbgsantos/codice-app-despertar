@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A LISTA · O Ladrão do Armário</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600&family=Archivo+Black&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--panel:#111114;--line:#26262a;--ink:#f4f4f4;--mut:#8e8e93;--dim:#5b5b60;--red:#e03427;--verde:#2fbf71;--oro:#d9a441}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(180deg,#15151a 0%,#0a0a0c 45%,#050506 100%) fixed;color:var(--ink);font-family:'Archivo',sans-serif;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{position:relative;z-index:2;max-width:430px;margin:0 auto;padding:0 22px 70px}
+.top{display:flex;justify-content:space-between;padding:18px 2px 0;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.26em;color:var(--dim);text-transform:uppercase}
+.hero{text-align:center;padding:44px 0 24px}
+.hero .peq{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.4em;color:var(--red);text-transform:uppercase;display:block;margin-bottom:14px}
+.hero h1{font-family:'Archivo Black',sans-serif;font-size:30px;line-height:1.08;text-transform:uppercase}
+.hero p{margin:14px auto 0;font-size:13.5px;color:var(--mut);line-height:1.65;max-width:330px}
+.hero p b{color:var(--ink)}
+.fato{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--oro);border-radius:12px;padding:15px 16px;margin-top:12px}
+.fato .t{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.2em;color:var(--oro);text-transform:uppercase;display:block;margin-bottom:6px}
+.fato p{font-size:13px;line-height:1.6;color:#d9d9de}
+.fato p b{color:var(--ink)}
+.item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:12px}
+.item .n{font-family:'Archivo Black',sans-serif;font-size:13px;color:var(--red);display:block;margin-bottom:4px}
+.item b{font-size:14.5px;display:block}
+.item p{font-size:12px;color:var(--mut);line-height:1.6;margin-top:6px}
+.item .troca{color:var(--verde);font-weight:600}
+.trava{position:relative;margin-top:14px}
+.trava .borrado{filter:blur(6px);pointer-events:none;user-select:none}
+.gate{background:linear-gradient(180deg,#131316,#0a0a0c);border:1px solid #3a2320;border-radius:16px;padding:24px 20px;text-align:center;margin-top:14px;box-shadow:0 24px 60px rgba(0,0,0,.7)}
+.gate h3{font-family:'Archivo Black',sans-serif;font-size:17px;text-transform:uppercase;margin-bottom:6px}
+.gate p{font-size:12px;color:var(--mut);line-height:1.6;max-width:300px;margin:0 auto 16px}
+.gate input{width:100%;background:#0a0a0c;border:1px solid #2e2e34;border-radius:9px;color:var(--ink);padding:14px;font-size:15px;font-family:'Archivo',sans-serif;text-align:center}
+.gate input:focus{outline:none;border-color:#55555e}
+.gate button{width:100%;margin-top:12px;background:var(--red);color:#fff;border:0;border-radius:10px;padding:16px;font-family:'Archivo Black',sans-serif;font-size:14px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 30px rgba(224,52,39,.35)}
+.gate .micro{font-size:10px;color:var(--dim);margin-top:10px}
+#resto{display:none}
+.regra{background:linear-gradient(135deg,#16130e,#0d0b08);border:1px solid #3a3020;border-radius:14px;padding:18px;margin-top:14px;text-align:center}
+.regra .t{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.26em;color:var(--oro);text-transform:uppercase;display:block;margin-bottom:8px}
+.regra b{font-family:'Archivo Black',sans-serif;font-size:16px;text-transform:uppercase;line-height:1.35}
+.regra p{font-size:12px;color:var(--mut);margin-top:8px;line-height:1.6}
+.oferta{background:linear-gradient(180deg,#131316,#0a0a0c);border:1px solid #3a2320;border-radius:16px;padding:26px 20px;text-align:center;margin-top:26px;box-shadow:0 24px 60px rgba(0,0,0,.7)}
+.oferta .peq{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.32em;color:var(--mut);text-transform:uppercase;display:block;margin-bottom:10px}
+.oferta h3{font-family:'Archivo Black',sans-serif;font-size:20px;text-transform:uppercase;line-height:1.2}
+.oferta p{font-size:12.5px;color:var(--mut);line-height:1.65;max-width:300px;margin:10px auto 18px}
+.oferta p b{color:var(--ink)}
+.bt{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#fff;text-decoration:none;background:var(--red);border-radius:8px;padding:15px 30px;box-shadow:0 10px 30px rgba(224,52,39,.35)}
+.foot{text-align:center;margin-top:36px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:#4c4c52;text-transform:uppercase;line-height:2.2}
+</style></head>
+<body>
+<div class="wrap">
+
+ <div class="top"><span>𓂀 códice oculto</span><span>arquivo · a lista</span></div>
+
+ <header class="hero">
+  <span class="peq">● você pediu · tá aqui</span>
+  <h1>Tem um ladrão<br>no teu armário</h1>
+  <p>Ele não leva dinheiro. Ele leva uma coisa que <b>ninguém devolve</b>. Antes da LISTA, os dois fatos que sustentam tudo:</p>
+ </header>
+
+ <div class="fato"><span class="t">📄 fato 1 · o estudo</span><p>Em <b>julho de 2026</b>, pesquisadores compararam ressonâncias de <b>144 pares de crianças</b>. As que comiam ultraprocessado todo dia tinham regiões do cérebro com <b>volume visivelmente menor</b>. Não é opinião: é imagem de ressonância.</p></div>
+ <div class="fato"><span class="t">📄 fato 2 · o desenho</span><p>A embalagem, a cor, a altura na prateleira do mercado: tudo é <b>projetado pra tua mão pegar sem pensar</b>. Você não escolheu esses produtos. Eles te escolheram.</p></div>
+
+ <header class="hero" style="padding:26px 0 4px">
+  <h1 style="font-size:22px">A LISTA<br><span style="color:var(--red)">do que tirar hoje</span></h1>
+  <p>Os 3 primeiros, de graça. Sem marca (a marca não importa, a <b>categoria</b> é o problema):</p>
+ </header>
+
+ <div class="item"><span class="n">Nº 1</span><b>Salgadinho de pacote</b><p>A combinação sal + gordura + crocância é calibrada em laboratório pro cérebro pedir de novo. <span class="troca">TROCA: pipoca de panela com sal (custa centavos).</span></p></div>
+ <div class="item"><span class="n">Nº 2</span><b>Bebida açucarada de caixinha/lata</b><p>Açúcar líquido entra mais rápido que o de comida: pico e queda que derrubam o foco da criança em sala. <span class="troca">TROCA: água com limão espremido ou fruta batida na hora.</span></p></div>
+ <div class="item"><span class="n">Nº 3</span><b>Biscoito recheado</b><p>Farinha refinada + gordura + recheio doce: o trio exato apontado nos padrões de consumo diário do estudo. <span class="troca">TROCA: pão de queijo caseiro ou banana com aveia.</span></p></div>
+
+ <div class="trava">
+  <div class="item borrado"><span class="n">Nº 4</span><b>████████ ████████</b><p>████████████████████████████████████████████. <span class="troca">TROCA: ██████████████.</span></p></div>
+ </div>
+
+ <div class="gate" id="gate">
+  <h3>🔒 A LISTA completa (12 itens)</h3>
+  <p>+ as 12 trocas baratas + a <b>REGRA DOS 5 INGREDIENTES</b> (o jeito de ler qualquer rótulo em 5 segundos). Deixa teu e-mail e destrava agora:</p>
+  <input type="email" id="gmail" placeholder="teu@email.com" autocomplete="email">
+  <button type="button" id="gbtn">DESTRAVAR A LISTA →</button>
+  <div class="micro">🔒 teu e-mail fica só com a gente · zero spam</div>
+ </div>
+
+ <div id="resto">
+  <div class="item"><span class="n">Nº 4</span><b>Macarrão instantâneo</b><p>O tempero é o problema: uma dose carrega o sódio quase do dia inteiro de uma criança. <span class="troca">TROCA: macarrão comum + alho e óleo (5 min a mais).</span></p></div>
+  <div class="item"><span class="n">Nº 5</span><b>Salsicha e embutidos</b><p>Classificados pela OMS no grupo de risco mais alto entre alimentos processados. <span class="troca">TROCA: frango desfiado feito em lote no domingo.</span></p></div>
+  <div class="item"><span class="n">Nº 6</span><b>Cereal matinal colorido</b><p>Vendido como "café da manhã de criança": é sobremesa com corante. <span class="troca">TROCA: ovo mexido + fruta (proteína segura o foco até o almoço).</span></p></div>
+  <div class="item"><span class="n">Nº 7</span><b>Iogurte de sabor</b><p>O "de morango" muitas vezes nunca viu morango: é açúcar + aroma. <span class="troca">TROCA: iogurte natural + fruta de verdade amassada.</span></p></div>
+  <div class="item"><span class="n">Nº 8</span><b>Suco em pó</b><p>É refresco de laboratório: corante, açúcar e aroma. Zero fruta. <span class="troca">TROCA: a própria fruta (a fibra protege o cérebro do pico).</span></p></div>
+  <div class="item"><span class="n">Nº 9</span><b>Nugget e empanado congelado</b><p>Carne de baixíssima qualidade escondida em farinha e fritura. <span class="troca">TROCA: tirinha de frango empanada em casa (assa em 20 min).</span></p></div>
+  <div class="item"><span class="n">Nº 10</span><b>Bolinho industrializado</b><p>Vida de prateleira de meses = química segurando a maciez. <span class="troca">TROCA: bolo caseiro simples cortado em fatias congeladas.</span></p></div>
+  <div class="item"><span class="n">Nº 11</span><b>Sorvete de pote "família"</b><p>Gordura vegetal hidrogenada colorida: o mais barato é o pior. <span class="troca">TROCA: banana congelada batida (vira creme, criança ama).</span></p></div>
+  <div class="item"><span class="n">Nº 12</span><b>Barrinha "saudável" de cereal</b><p>O lobo em pele de cordeiro: açúcar em 3 nomes diferentes no rótulo. <span class="troca">TROCA: castanhas + uva passa num potinho.</span></p></div>
+
+  <div class="regra">
+   <span class="t">a regra que vale pela lista inteira</span>
+   <b>Regra dos 5 ingredientes</b>
+   <p>Vira o rótulo. <b>Mais de 5 ingredientes</b>, ou UM nome que tua avó não reconheceria na cozinha dela: <b>volta pra prateleira.</b> Cinco segundos, qualquer mercado, pra sempre.</p>
+  </div>
+
+  <div class="oferta">
+   <span class="peq">isso foi UMA página do arquivo</span>
+   <h3>O que mais esconderam?</h3>
+   <p>A lista que você acabou de ler foi montada com o que a indústria é <b>obrigada por lei</b> a revelar no rótulo. Agora imagina o que foi escondido em <b>12 LIVROS INTEIROS</b> que tentaram apagar da história.</p>
+   <a class="bt" href="biblioteca.html?utm_source=dm&utm_campaign=cerebro">ABRIR A BIBLIOTECA OCULTA →</a>
+  </div>
+ </div>
+
+ <div class="foot">𓂀 códice oculto · o arquivo não esquece<br>informação educacional · não substitui orientação médica</div>
+
+</div>
+<script>
+(function(){
+var g=document.getElementById('gate'),r=document.getElementById('resto');
+function abre(){g.style.display='none';document.querySelector('.trava').style.display='none';r.style.display='block';try{localStorage.setItem('cerebro_ok','1')}catch(e){}}
+try{if(localStorage.getItem('cerebro_ok')==='1')abre();}catch(e){}
+document.getElementById('gbtn').addEventListener('click',async function(){
+var em=(document.getElementById('gmail').value||'').trim();
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){document.getElementById('gmail').style.borderColor='#e03427';return;}
+this.textContent='DESTRAVANDO...';
+try{await fetch('https://codice-app-production.up.railway.app/api/webhook/email-captura',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,origem:'cerebro'})});}catch(e){}
+abre();window.scrollTo({top:r.offsetTop-80,behavior:'smooth'});
+});
+})();
+(function(){try{
+var v=localStorage.getItem('cv_id');
+if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('cv_id',v);}
+fetch("https://codice-app-production.up.railway.app/api/webhook/track?page=cerebro&v="+v,{mode:'no-cors',keepalive:true});
+}catch(e){}})();
+</script>
+</body></html>

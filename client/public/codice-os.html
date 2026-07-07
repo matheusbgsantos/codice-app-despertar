@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CÓDICE OS · lista de espera</title>
+<title>Os Agentes · Códice Oculto</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600&family=Archivo+Black&family=Space+Mono&display=swap" rel="stylesheet">
 <style>
@@ -11,15 +11,14 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
 background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
 .wrap{position:relative;z-index:2;max-width:440px;margin:0 auto;padding:0 22px 80px}
 .top{display:flex;justify-content:space-between;padding:18px 2px 0;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.26em;color:var(--dim);text-transform:uppercase}
-.hero{text-align:center;padding:50px 0 26px}
+.hero{text-align:center;padding:48px 0 24px}
 .hero .peq{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.4em;color:var(--red);text-transform:uppercase;display:block;margin-bottom:16px}
-.hero h1{font-family:'Archivo Black',sans-serif;font-size:29px;line-height:1.22;text-transform:uppercase;letter-spacing:.01em}
+.hero h1{font-family:'Archivo Black',sans-serif;font-size:28px;line-height:1.24;text-transform:uppercase;letter-spacing:.01em}
 .hero h1 span{color:var(--red)}
-.hero p{margin:16px auto 0;font-size:14px;color:var(--mut);line-height:1.65;max-width:340px}
+.hero p{margin:16px auto 0;font-size:14px;color:var(--mut);line-height:1.7;max-width:350px}
 .hero p b{color:var(--ink)}
-/* mock da tela */
 .mock{background:#0d0d10;border:1px solid #2a2a30;border-radius:14px;padding:14px;margin:26px 0 8px;box-shadow:0 24px 60px rgba(0,0,0,.7);font-family:'Space Mono',monospace;font-size:10.5px;line-height:2;color:var(--mut);text-align:left}
-.mock .lin b{color:var(--ink)}
+.mock b{color:var(--ink)}
 .mock .voce{color:#8ab4ff}
 .mock .ia{color:#ff9088}
 .mock .cursor{display:inline-block;width:7px;height:13px;background:var(--red);animation:pisca 1s infinite;vertical-align:middle}
@@ -29,19 +28,30 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 .item .ic{font-size:18px;flex-shrink:0}
 .item b{display:block;font-size:13.5px;margin-bottom:2px}
 .item p{font-size:11.5px;color:var(--mut);line-height:1.5}
-.gate{background:linear-gradient(180deg,#131316,#0a0a0c);border:1px solid #3a2320;border-radius:16px;padding:26px 20px;text-align:center;margin-top:24px;box-shadow:0 24px 60px rgba(0,0,0,.7)}
-.gate h3{font-family:'Archivo Black',sans-serif;font-size:18px;text-transform:uppercase}
-.gate .fila{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--verde);text-transform:uppercase;display:block;margin:8px 0 14px}
-.gate input{width:100%;background:#0a0a0c;border:1px solid #2e2e34;border-radius:9px;color:var(--ink);padding:14px;font-size:15px;font-family:'Archivo',sans-serif;text-align:center}
-.gate input:focus{outline:none;border-color:#55555e}
-.gate button{width:100%;margin-top:12px;background:var(--red);color:#fff;border:0;border-radius:10px;padding:17px;font-family:'Archivo Black',sans-serif;font-size:15px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 30px rgba(224,52,39,.35)}
-.gate .micro{font-size:10px;color:var(--dim);margin-top:10px}
-.ok{display:none;text-align:center;background:linear-gradient(180deg,#131316,#0a0a0c);border:1px solid #1f3320;border-radius:16px;padding:28px 20px;margin-top:24px}
-.ok .pos{font-family:'Archivo Black',sans-serif;font-size:34px;color:var(--verde)}
-.ok h4{font-family:'Archivo Black',sans-serif;font-size:16px;text-transform:uppercase;margin:10px 0 8px}
-.ok p{font-size:12.5px;color:var(--mut);line-height:1.65;max-width:320px;margin:0 auto 16px}
-.ok p b{color:var(--ink)}
-.bt2{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#fff;text-decoration:none;background:var(--red);border-radius:8px;padding:14px 26px;box-shadow:0 10px 30px rgba(224,52,39,.35)}
+.oferta{background:linear-gradient(180deg,#131316,#0a0a0c);border:1px solid #3a2320;border-radius:16px;padding:26px 20px;text-align:center;margin-top:26px;box-shadow:0 24px 60px rgba(0,0,0,.7)}
+.oferta .vagas{display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.22em;color:#ffb3ab;text-transform:uppercase;border:1px solid rgba(224,52,39,.4);border-radius:20px;padding:6px 14px;margin-bottom:14px}
+.oferta .vagas i{width:6px;height:6px;border-radius:50%;background:var(--red);animation:pu 1.5s infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.2}}
+.oferta h3{font-family:'Archivo Black',sans-serif;font-size:20px;text-transform:uppercase;line-height:1.2}
+.oferta .preco{margin:14px 0 4px;font-family:'Archivo Black',sans-serif;font-size:32px}
+.oferta .preco small{font-size:14px;color:var(--mut);font-family:'Archivo',sans-serif;font-weight:600}
+.oferta .pix{font-size:12.5px;color:var(--verde);font-weight:600;margin-bottom:6px}
+.oferta .obs{font-size:11px;color:var(--dim);line-height:1.6}
+.oferta .obs b{color:var(--mut)}
+.form{margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 18px;box-shadow:0 18px 44px rgba(0,0,0,.55)}
+.form h4{font-family:'Archivo Black',sans-serif;font-size:16px;text-transform:uppercase;text-align:center;margin-bottom:4px}
+.form .sub{text-align:center;font-size:11.5px;color:var(--mut);margin-bottom:16px;line-height:1.5}
+.form label{display:block;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;margin:14px 0 6px}
+.form input,.form textarea,.form select{width:100%;background:#0a0a0c;border:1px solid #2e2e34;border-radius:9px;color:var(--ink);padding:13px 14px;font-size:15px;font-family:'Archivo',sans-serif;appearance:none}
+.form input:focus,.form textarea:focus,.form select:focus{outline:none;border-color:#55555e}
+.form textarea{resize:none;height:70px}
+.form button{width:100%;margin-top:20px;background:var(--red);color:#fff;border:0;border-radius:10px;padding:17px;font-family:'Archivo Black',sans-serif;font-size:15px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 30px rgba(224,52,39,.35)}
+.form button:disabled{opacity:.6}
+.form .micro{text-align:center;font-size:10px;color:var(--dim);margin-top:10px;line-height:1.6}
+.ok{display:none;text-align:center;padding:30px 10px}
+.ok .e{font-size:40px}
+.ok h4{font-family:'Archivo Black',sans-serif;font-size:18px;text-transform:uppercase;margin:12px 0 8px}
+.ok p{font-size:13px;color:var(--mut);line-height:1.6}
 .foot{text-align:center;margin-top:40px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:#4c4c52;text-transform:uppercase;line-height:2.2}
 </style></head>
 <body>
@@ -50,68 +60,95 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
  <div class="top"><span>𓂀 códice oculto</span><span>acesso antecipado</span></div>
 
  <header class="hero">
-  <span class="peq">𓂀 códice os · vagas limitadas na abertura</span>
-  <h1>Os agentes validados por <span>120 milhões</span> de views.</h1>
+  <span class="peq">● vagas limitadas · turma fundadora</span>
+  <h1>Receba os agentes responsáveis por mais de <span>120 milhões</span> de views.</h1>
   <p>Roteiro, copy, stories, análise do teu mercado e leitura das tuas métricas: <b>a inteligência completa num lugar só</b>. E edição automatizada.</p>
  </header>
 
  <div class="mock">
-  <div class="lin"><span class="voce">você:</span> qual vídeo eu faço hoje?</div>
-  <div class="lin"><span class="ia">códice os:</span> <b>garimpei teu nicho: 3 temas quentes.</b></div>
-  <div class="lin"><span class="ia"></span>o nº1 tem estudo de ontem como prova.</div>
-  <div class="lin"><span class="ia"></span>quer o roteiro no molde dos 8,9M? <span class="cursor"></span></div>
+  <div><span class="voce">você:</span> qual vídeo eu faço hoje?</div>
+  <div><span class="ia">agente:</span> <b>garimpei teu nicho: 3 temas quentes.</b></div>
+  <div><span class="ia"></span>o nº1 tem estudo de ontem como prova.</div>
+  <div><span class="ia"></span>quer o roteiro no molde dos 8,9M? <span class="cursor"></span></div>
  </div>
 
  <div class="itens">
   <div class="item"><span class="ic">✦</span><div><b>Um chat que faz TUDO</b><p>Roteiro, copy, stories, análise do teu mercado e leitura das tuas métricas: a inteligência completa num lugar só.</p></div></div>
   <div class="item"><span class="ic">▶</span><div><b>Processos de um botão</b><p>"Começar a semana" e a tua grade de 7 posts nasce pronta, com temas garimpados da web e prova por link.</p></div></div>
   <div class="item"><span class="ic">🤖</span><div><b>O robô que vende na DM</b><p>Comentou a palavra, recebeu o cartão, caiu na página. O mesmo sistema que entregou 450+ DMs pra mim essa madrugada.</p></div></div>
-  <div class="item"><span class="ic">📊</span><div><b>O funil MEDIDO</b><p>Do comentário ao Pix, cada elo com número. Você nunca mais posta no escuro.</p></div></div>
+  <div class="item"><span class="ic">🎯</span><div><b>Eu, do teu lado</b><p>2 sessões só nós dois + o curso me vendo usar a máquina na prática + meu WhatsApp por 30 dias.</p></div></div>
  </div>
 
- <div class="gate" id="gate">
-  <h3>Entra na fila</h3>
-  <span class="fila" id="fila-n">● carregando a fila…</span>
-  <input type="email" id="gmail" placeholder="teu melhor e-mail" autocomplete="email">
-  <button type="button" id="gbtn">GARANTIR MEU LUGAR →</button>
-  <div class="micro">🔒 aviso quando abrir · preço de fundador pra fila · zero spam</div>
+ <div class="oferta">
+  <span class="vagas"><i></i> 20 vagas fundadoras · depois nunca mais neste preço</span>
+  <h3>Acesso Fundador</h3>
+  <div class="preco">12x R$497 <small>no cartão</small></div>
+  <div class="pix">ou R$4.497 à vista no Pix (economiza R$500)</div>
+  <div class="obs">minha consultoria particular custa <b>R$10.000 (3 horas)</b> · aqui você leva o sistema INTEIRO por menos da metade · turma 2 será R$5.997</div>
  </div>
 
- <div style="text-align:center;margin-top:14px">
-  <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase;margin:18px 0 12px">ou</div>
-  <a href="maquina-viral.html?utm_source=fila&utm_campaign=codice-os-direto" style="display:block;background:linear-gradient(180deg,#131316,#0a0a0c);border:1px solid #3a2320;border-radius:16px;padding:22px 20px;text-decoration:none;color:var(--ink);box-shadow:0 18px 44px rgba(0,0,0,.5)">
-   <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.28em;color:var(--red);text-transform:uppercase;display:block;margin-bottom:8px">⚡ não quer esperar fila?</span>
-   <b style="font-family:'Archivo Black',sans-serif;font-size:16px;text-transform:uppercase;display:block">As 20 vagas fundadoras<br>usam a máquina HOJE</b>
-   <span style="display:block;font-size:11.5px;color:var(--mut);margin-top:8px">comigo do lado por 30 dias · conhecer a turma →</span>
-  </a>
+ <div class="form" id="form">
+  <h4>Aplicar pra uma vaga</h4>
+  <div class="sub">Preenche que eu te chamo no WhatsApp pra conversar. Sem compromisso: a vaga só é tua depois do nosso papo.</div>
+  <form id="apf">
+   <label>Teu nome</label>
+   <input type="text" id="nome" required maxlength="120" placeholder="Nome completo">
+   <label>Teu WhatsApp (com DDD)</label>
+   <input type="tel" id="whatsapp" required maxlength="20" placeholder="(11) 99999-9999">
+   <label>Teu melhor e-mail</label>
+   <input type="email" id="email" required maxlength="160" placeholder="voce@email.com">
+   <label>Você já cria conteúdo?</label>
+   <select id="cria" required>
+    <option value="" disabled selected>escolhe uma opção</option>
+    <option value="zero">Nunca criei, quero começar do jeito certo</option>
+    <option value="posto">Já posto, mas não viralizo</option>
+    <option value="vivo">Já vivo de conteúdo, quero escalar</option>
+   </select>
+   <label>O que você venderia com os vídeos?</label>
+   <select id="vende" required>
+    <option value="" disabled selected>escolhe uma opção</option>
+    <option value="negocio">Tenho produto ou negócio próprio</option>
+    <option value="afiliado">Venderia como afiliado</option>
+    <option value="naosei">Ainda não sei</option>
+   </select>
+   <label>O investimento é 12x de R$497. Se fizer sentido na conversa, você tá pronto(a)?</label>
+   <select id="invest" required>
+    <option value="" disabled selected>escolhe uma opção</option>
+    <option value="pronto">Sim, à vista no Pix</option>
+    <option value="parcelado">Sim, no parcelado</option>
+    <option value="entender">Preciso entender melhor primeiro</option>
+    <option value="agoranao">Agora não tenho como investir</option>
+   </select>
+   <label>Teu momento hoje (1 frase)</label>
+   <textarea id="momento" maxlength="400" placeholder="Ex: tenho uma loja e preciso de vídeo que venda / quero viver de conteúdo / já crio mas não viralizo..."></textarea>
+   <button type="submit" id="btn">QUERO MINHA VAGA →</button>
+   <div class="micro">🔒 Teus dados ficam só comigo. Eu chamo os aplicados por ordem de chegada.</div>
+  </form>
  </div>
 
  <div class="ok" id="ok">
-  <div class="pos" id="pos">#—</div>
-  <h4>Teu lugar está guardado</h4>
-  <p>Você entra com condição de fila quando o Códice OS abrir.<br><br><b>Não quer esperar?</b> As 20 vagas da turma fundadora usam a plataforma ANTES de todo mundo, comigo do lado por 30 dias.</p>
-  <a class="bt2" href="maquina-viral.html?utm_source=fila&utm_campaign=codice-os">CONHECER A TURMA FUNDADORA →</a>
+  <div class="e">✅</div>
+  <h4>Aplicação recebida!</h4>
+  <p>Eu vou te chamar no WhatsApp <b>ainda hoje</b> pra gente conversar sobre a tua vaga. Fica de olho nas mensagens (e nas solicitações). 𓂀</p>
  </div>
 
- <div class="foot">𓂀 códice os · a máquina viral<br>construído por quem opera, não por quem teoriza</div>
+ <div class="foot">𓂀 códice oculto · os agentes<br>construído por quem opera, não por quem teoriza</div>
 
 </div>
+
 <script>
-(function(){
-async function fila(){try{const f=await fetch('https://codice-app-production.up.railway.app/api/webhook/fila').then(r=>r.json());document.getElementById('fila-n').textContent='● '+((f.fila||0))+' pessoas na fila';return f.fila||0;}catch(e){document.getElementById('fila-n').textContent='● fila aberta';return 0;}}
-fila();
-document.getElementById('gbtn').addEventListener('click',async function(){
-var em=(document.getElementById('gmail').value||'').trim();
-if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){document.getElementById('gmail').style.borderColor='#e03427';return;}
-this.textContent='GUARDANDO...';
-try{await fetch('https://codice-app-production.up.railway.app/api/webhook/email-captura',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,origem:'codice-os'})});}catch(e){}
-var n=await fila();
-document.getElementById('pos').textContent='#'+(n>0?n:1);
-document.getElementById('gate').style.display='none';
-document.getElementById('ok').style.display='block';
-window.scrollTo({top:document.getElementById('ok').offsetTop-80,behavior:'smooth'});
+document.getElementById('apf').addEventListener('submit',async function(e){
+e.preventDefault();
+var b=document.getElementById('btn');b.disabled=true;b.textContent='ENVIANDO...';
+try{
+var r=await fetch('https://codice-app-production.up.railway.app/api/webhook/aplicacao',{
+method:'POST',headers:{'Content-Type':'application/json'},
+body:JSON.stringify({nome:document.getElementById('nome').value,whatsapp:document.getElementById('whatsapp').value,email:document.getElementById('email').value,momento:document.getElementById('momento').value,cria:document.getElementById('cria').value,vende:document.getElementById('vende').value,invest:document.getElementById('invest').value})});
+var j=await r.json();
+if(j.ok){document.getElementById('form').style.display='none';document.getElementById('ok').style.display='block';window.scrollTo({top:document.getElementById('ok').offsetTop-80,behavior:'smooth'});}
+else{b.disabled=false;b.textContent='QUERO MINHA VAGA →';alert('Confere os campos e tenta de novo.');}
+}catch(err){b.disabled=false;b.textContent='QUERO MINHA VAGA →';alert('Falha de conexão. Tenta de novo.');}
 });
-})();
 (function(){try{
 var v=localStorage.getItem('cv_id');
 if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('cv_id',v);}

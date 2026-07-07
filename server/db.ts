@@ -1,4 +1,4 @@
-import { eq, and, gte, sql } from "drizzle-orm";
+import { eq, and, gte, sql, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import Database from "better-sqlite3";
 import { existsSync, mkdirSync } from "fs";
@@ -331,7 +331,7 @@ export async function listWebhookLogs(limit: number = 50) {
   return await db
     .select()
     .from(webhookLogs)
-    .orderBy(webhookLogs.createdAt)
+    .orderBy(desc(webhookLogs.createdAt))
     .limit(limit);
 }
 

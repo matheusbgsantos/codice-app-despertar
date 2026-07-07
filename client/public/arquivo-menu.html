@@ -1,7 +1,134 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="utf-8">
-<meta http-equiv="refresh" content="0;url=portal.html">
-<script>location.replace("portal.html"+location.search);</script>
-<title>Redirecionando...</title>
-<style>body{background:#050506;color:#8e8e93;font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;font-size:13px}</style>
-</head><body>abrindo o arquivo...</body></html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Códice Oculto — O Arquivo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Oswald:wght@400;500;600;700&family=PT+Serif:ital@0;1&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c0922f;--gold2:#d4a93f;--white:#ece6d8;--bg:#0a0908}
+body{background:var(--bg);color:var(--white);font-family:'PT Serif',serif;min-height:100vh;padding:32px 18px 50px;overflow-x:hidden}
+.wrap{max-width:480px;margin:0 auto;position:relative;z-index:2}
+.head{text-align:center;margin-bottom:30px}
+.seal{font-size:54px;line-height:1;margin-bottom:10px;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.head h1{font-family:'Cinzel',serif;font-size:26px;letter-spacing:.04em;color:var(--white);margin-bottom:6px}
+.head h1 .g{color:var(--gold2)}
+.head p{font-size:14px;color:#9c8e6c;line-height:1.5;font-style:italic}
+.tag{display:inline-block;font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(192,146,47,.4);border-radius:20px;padding:5px 14px;margin-bottom:16px}
+.card{display:block;text-decoration:none;border:1px solid #2a2418;border-radius:14px;padding:18px 18px;margin-bottom:14px;background:linear-gradient(135deg,rgba(20,17,14,.9),rgba(16,14,12,.95));position:relative;overflow:hidden;transition:border-color .25s,transform .15s}
+.card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.card.feat{border-color:rgba(192,146,47,.6);background:radial-gradient(ellipse at 0% 0%,rgba(192,146,47,.13),transparent 60%),#100e0c;box-shadow:0 10px 34px rgba(0,0,0,.5)}
+.ct{display:flex;align-items:center;gap:14px}
+.ico{flex-shrink:0;width:46px;height:46px;border-radius:10px;background:rgba(192,146,47,.1);border:1px solid rgba(192,146,47,.3);display:flex;align-items:center;justify-content:center;font-size:24px}
+.cinfo{flex:1;min-width:0}
+.cname{font-family:'Oswald',sans-serif;font-weight:600;font-size:17px;color:var(--white);text-transform:uppercase;letter-spacing:.02em;line-height:1.15}
+.cdesc{font-size:13px;color:#9c8e6c;line-height:1.4;margin-top:3px}
+.carr{flex-shrink:0;color:var(--gold);font-size:20px}
+.badge{position:absolute;top:0;right:0;background:var(--gold);color:#1a1408;font-family:'Oswald',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-bottom-left-radius:8px}
+.card.hoje{border-color:rgba(184,29,19,.55);background:radial-gradient(ellipse at 0% 0%,rgba(184,29,19,.12),transparent 60%),#100e0c}
+.card.hoje .ico{background:rgba(184,29,19,.12);border-color:rgba(184,29,19,.4)}
+.badge.red{background:#b81d13;color:#fff}
+.dotv{display:inline-block;width:6px;height:6px;border-radius:50%;background:#fff;margin-right:5px;vertical-align:1px;animation:blinkv 1.6s infinite}
+@keyframes blinkv{0%,100%{opacity:1}50%{opacity:.3}}
+.sep{text-align:center;font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#5a5040;margin:26px 0 14px;display:flex;align-items:center;gap:12px}
+.sep::before,.sep::after{content:"";flex:1;height:1px;background:#2a2418}
+.foot{text-align:center;font-size:12px;color:#5a5040;margin-top:30px;line-height:1.6}
+.foot a{color:var(--gold);text-decoration:none}
+.ember{position:fixed;width:3px;height:3px;background:var(--gold);border-radius:50%;opacity:0;animation:rise 8s linear infinite;z-index:1}
+@keyframes rise{0%{transform:translateY(100vh);opacity:0}10%{opacity:.5}90%{opacity:.3}100%{transform:translateY(-10vh);opacity:0}}
+</style><script type="text/javascript">
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","x9h7c74lg1");
+</script>
+</head>
+<body>
+<span class="ember" style="left:12%;animation-delay:0s"></span>
+<span class="ember" style="left:34%;animation-delay:2.5s"></span>
+<span class="ember" style="left:60%;animation-delay:4.5s"></span>
+<span class="ember" style="left:85%;animation-delay:1.5s"></span>
+
+<div class="wrap">
+ <div class="head">
+  <div class="seal">𓂀</div>
+  <div class="tag">O Arquivo · Acesso Restrito</div>
+  <h1>Códice <span class="g">Oculto</span></h1>
+  <p>Tudo que esconderam de você — num só lugar.</p>
+ </div>
+
+ <!-- ARQUIVO DE HOJE (rotativo: trocar a cada campanha) -->
+ <a class="card hoje" href="enoque-express.html?utm_source=bio&utm_campaign=enoque">
+  <span class="badge red"><span class="dotv"></span>Hoje</span>
+  <div class="ct">
+   <div class="ico">📜</div>
+   <div class="cinfo">
+    <div class="cname">Arquivo Nº 003 · Enoque</div>
+    <div class="cdesc">Pagaram €2,5 milhões pra ler os pergaminhos. O nome da IA do projeto é uma confissão.</div>
+   </div>
+   <div class="carr">→</div>
+  </div>
+ </a>
+
+ <!-- DESTAQUE: Códice (produto principal/novo) -->
+ <a class="card feat" href="codice.html">
+  <span class="badge">Novo</span>
+  <div class="ct">
+   <div class="ico">🗝️</div>
+   <div class="cinfo">
+    <div class="cname">O Códice do Despertar</div>
+    <div class="cdesc">O app de 30 dias personalizado. Sua jornada pra sair da Matrix.</div>
+   </div>
+   <div class="carr">→</div>
+  </div>
+ </a>
+
+ <div class="sep">O Acervo</div>
+
+ <!-- Documentário Enoque -->
+ <a class="card" href="https://pay.kirvano.com/955b5975-a120-4a1a-9f9a-f7dba563ad6d">
+  <div class="ct">
+   <div class="ico">🎬</div>
+   <div class="cinfo">
+    <div class="cname">Documentário Enoque</div>
+    <div class="cdesc">O livro que tiraram da Bíblia — revelado.</div>
+   </div>
+   <div class="carr">→</div>
+  </div>
+ </a>
+
+ <!-- Biblioteca Oculta -->
+ <a class="card" href="biblioteca.html">
+  <div class="ct">
+   <div class="ico">📚</div>
+   <div class="cinfo">
+    <div class="cname">A Biblioteca Oculta</div>
+    <div class="cdesc">12 livros banidos. O que não queriam que você lesse.</div>
+   </div>
+   <div class="carr">→</div>
+  </div>
+ </a>
+
+ <!-- Frequências -->
+ <a class="card" href="frequencia.html">
+  <div class="ct">
+   <div class="ico">🔊</div>
+   <div class="cinfo">
+    <div class="cname">As Frequências</div>
+    <div class="cdesc">O som que religa corpo e mente. App com jornadas.</div>
+   </div>
+   <div class="carr">→</div>
+  </div>
+ </a>
+
+ <div class="foot">
+  ⚠️ Conteúdo de investigação independente.<br>
+  Dúvidas? <a href="mailto:contato@arquivosoculto.com.br">contato@arquivosoculto.com.br</a>
+ </div>
+</div>
+<script>
+(function(){
+  try{
+    var v=localStorage.getItem('cv_id');
+    if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('cv_id',v);}
+    fetch("https://codice-app-production.up.railway.app/api/webhook/track?page=menu&v="+v,{mode:'no-cors',keepalive:true});
+  }catch(e){}
+})();
+</script>
+</body></html>
